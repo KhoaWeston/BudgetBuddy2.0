@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+body, html {
+  font-family: 'Nunito', sans-serif;
+}
+
+.nav-header{
+  padding: 5px;
+  margin: 0px;
+  background-color: skyblue;
+}
+
+.nav-header li{
+  display: inline-block;
+  padding: 10px;
+}
+
+.nav-header li a {
+  color: black;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.input{
+ margin-left: 30%;
+}
+
+.home{
+  margin-left: 30%;
+}
+
+.inputBox {
+  padding: 7px;
+  display: block;
+  border: 1px solid skyblue;
+  width: 300px;
+  margin: 20px;
+}
+
+.appButton {
+  margin: 20px;
+  width: 150px;
+  padding: 10px;
+  background-color: skyblue;
+  border: solid 1px;
+  cursor: pointer;
+}
+
+.nav-footer {
+  position: absolute;
+  bottom: 0;
+  background-color: skyblue;
+  width: 100%;
+  text-align: center;
+}
+
+.nav-header DropdownButton {
+  width: 100px;
+}
