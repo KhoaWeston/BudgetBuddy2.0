@@ -1,0 +1,7 @@
+MERN Stack Application:
+https://www.freecodecamp.org/news/how-to-create-a-react-app-with-a-node-backend-the-complete-guide/
++ MERN STACK tutorial for the Coding Team by Alex Menelli
+
+Login and Register Source:
+https://github.com/judygab/web-dev-projects/blob/main/login-register-form/src/App.js
+
