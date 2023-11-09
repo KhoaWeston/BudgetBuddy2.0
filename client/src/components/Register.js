@@ -12,7 +12,7 @@ export const Register =(props) =>{
     return (
         <div>
             <h2> Register for a BudgetBuddy Account</h2>
-            <form>
+            <form >
                 <label>Username: </label>
                 <input value={username} onChange={(e) => setUserName(e.target.value)}type="Username" placeholder="username" id="username" name="username" />
                 <br></br>

@@ -17,8 +17,6 @@ import Progress from './components/Progress.js';
 import Profile from './components/Profile.js';
 
 function App() {
-
-  
   return (
     <div className="App">
       <BrowserRouter >
