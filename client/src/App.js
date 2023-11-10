@@ -1,11 +1,12 @@
+import { UserProvider } from "./contexts/user.context";
 import React from 'react';
 import './App.css';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
-import Login from "./components/Login.js";
-import Register  from "./components/Register.js";
-import Home from './components/Home.js';
+import PrivateRoute from "./components/PrivateRoute.js";
+import  Login  from "./components/Login.js";
+import Signup from "./components/Register.js";import Home from './components/Home.js';
 import InputExpenses from './components/inputs/InputExpenses.js';
 import InputSavings from './components/inputs/InputSavings.js';
 import InputIncome from './components/inputs/InputIncome.js';
@@ -16,34 +17,35 @@ import Analytics from './components/Analytics.js';
 import Progress from './components/Progress.js';
 import Profile from './components/Profile.js';
 
-function App() {
-  return (
-    <div className="App">
-      <BrowserRouter >
-        <Routes>
-          <Route path="/" element={<Login />} />
-        </Routes>
+// function App() {
+//     return(
+//     <div className="App">
+//       {
+//         <BrowserRouter >
+//         <Routes>
+//           <Route path="/login" element={<Login/>} />
+//           <Route path="/regisyer" element={<Register/>} />
         
-        <Header />
-        <Footer />
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/input-expenses" element={<InputExpenses />} />
-          <Route path="/input-savings" element={<InputSavings />} />
-          <Route path="/input-income" element={<InputIncome />} />
-          <Route path="/input-debt" element={<InputDebt />} />
-          <Route path="/input-reminder" element={<InputReminder />} />
-          <Route path="/input-goal" element={<InputGoal />} />
-          <Route path="/progress" element={<Progress />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/profile" element={<Profile />} />
-        </Routes>
-      </BrowserRouter>
-      
-      {}
-    </div>
-  );
-}
+//           <Route element={<PrivateRoute/>}>
+//           <Header />
+//           <Footer />
+//             <Route path="/" element={<Home />} />
+//             <Route path="/input-expenses" element={<InputExpenses />} />
+//             <Route path="/input-savings" element={<InputSavings />} />
+//             <Route path="/input-income" element={<InputIncome />} />
+//             <Route path="/input-debt" element={<InputDebt />} />
+//             <Route path="/input-reminder" element={<InputReminder />} />
+//             <Route path="/input-goal" element={<InputGoal />} />
+//             <Route path="/progress" element={<Progress />} />
+//             <Route path="/analytics" element={<Analytics />} />
+//             <Route path="/profile" element={<Profile />} />
+//             </Route>
+//         </Routes>
+//         </BrowserRouter>
+//       }   
+//     </div>
+//   );
+// }
 
 // function DropdownItem(props){
 //   return(
@@ -52,5 +54,33 @@ function App() {
 //     </li>
 //   );
 // }
-
+function App() {
+  return (
+    <BrowserRouter>
+      {/* We are wrapping our whole app with UserProvider so that */}
+      {/* our user is accessible through out the app from any page*/}
+      <UserProvider>
+        <Routes>
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/signup" element={<Signup />} />
+          {/* We are protecting our Home Page from unauthenticated */}
+          {/* users by wrapping it with PrivateRoute here. */}
+          <Route element={<PrivateRoute />}>
+             <Route path="/" element={<Home />} />
+             <Route path="/input-expenses" element={<InputExpenses />} />
+             <Route path="/input-savings" element={<InputSavings />} />
+             <Route path="/input-income" element={<InputIncome />} />
+             <Route path="/input-debt" element={<InputDebt />} />
+             <Route path="/input-reminder" element={<InputReminder />} />
+             <Route path="/input-goal" element={<InputGoal />} />
+             <Route path="/progress" element={<Progress />} />
+             <Route path="/analytics" element={<Analytics />} />
+             <Route path="/profile" element={<Profile />} />
+             </Route>
+        </Routes>
+      </UserProvider>
+    </BrowserRouter>
+  );
+ }
+  
 export default App;

@@ -1,28 +1,69 @@
-import React, { useState } from "react";
-
-export const Register =(props) =>{
-    const [password, setPassWord]= useState('');
-    const [username, setUserName] = useState('');
-
-    const handleSubmit=(e) => {
-        e.preventDefault();
-        console.log(username);
-    }
-
-    return (
-        <div>
-            <h2> Register for a BudgetBuddy Account</h2>
-            <form >
-                <label>Username: </label>
-                <input value={username} onChange={(e) => setUserName(e.target.value)}type="Username" placeholder="username" id="username" name="username" />
-                <br></br>
-                <label>Password:  </label>
-                <input value={password} onChange={(e) => setPassWord(e.target.value)} type="assword" placeholder="********" id="password" name="password" />
-                <br></br>
-                <button type="submit">Log In</button>
-            </form>
-            <button onClick={() => props.onFormSwitch('login')}>Already have an account? Login here.</button>
-        </div>
-    )
+import { Button, TextField } from "@mui/material";
+import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/user.context";
+ 
+const Signup = () => {
+ const navigate = useNavigate();
+ const location = useLocation();
+ 
+ // As explained in the Login page.
+ const { emailPasswordSignup } = useContext(UserContext);
+ const [form, setForm] = useState({
+   email: "",
+   password: ""
+ });
+ 
+ // As explained in the Login page.
+ const onFormInputChange = (event) => {
+   const { name, value } = event.target;
+   setForm({ ...form, [name]: value });
+ };
+ 
+ 
+ // As explained in the Login page.
+ const redirectNow = () => {
+   const redirectTo = location.search.replace("?redirectTo=", "");
+   navigate(redirectTo ? redirectTo : "/");
+ }
+ 
+ // As explained in the Login page.
+ const onSubmit = async () => {
+   try {
+     const user = await emailPasswordSignup(form.email, form.password);
+     if (user) {
+       redirectNow();
+     }
+   } catch (error) {
+     alert(error);
+   }
+ };
+ 
+ return <form style={{ display: "flex", flexDirection: "column", maxWidth: "300px", margin: "auto" }}>
+   <h1>Signup for BudgetBuddy</h1>
+   <TextField
+     label="Email"
+     type="email"
+     variant="outlined"
+     name="email"
+     value={form.email}
+     onInput={onFormInputChange}
+     style={{ marginBottom: "1rem" }}
+   />
+   <TextField
+     label="Password"
+     type="password"
+     variant="outlined"
+     name="password"
+     value={form.password}
+     onInput={onFormInputChange}
+     style={{ marginBottom: "1rem" }}
+   />
+   <Button variant="contained" color="primary" onClick={onSubmit}>
+     Signup
+   </Button>
+   <p>Have an account already? <Link to="/login">Login</Link></p>
+ </form>
 }
-
+ 
+export default Signup;
