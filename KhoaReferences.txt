@@ -1,17 +1,19 @@
 SITES: 
-Header - 		https://www.youtube.com/watch?v=M5MqaKUpZk4&list=PL8p2I9GklV44v3vZb2Xlc0HVpJaghCuoN&index=5
+----------------------------
+Header - 		        https://www.youtube.com/watch?v=M5MqaKUpZk4&list=PL8p2I9GklV44v3vZb2Xlc0HVpJaghCuoN&index=5
 Header w/ dropdown - 	https://www.youtube.com/watch?v=_8sfTUAmlCU&t=249s
-idk - 			https://www.youtube.com/watch?v=98BzS5Oz5E4&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE
-idk - 			https://www.youtube.com/watch?v=-42K44A1oMA
+idk - 			        https://www.youtube.com/watch?v=98BzS5Oz5E4&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE
+idk - 			        https://www.youtube.com/watch?v=-42K44A1oMA
 Header navigation - 	https://www.youtube.com/watch?v=7CqJlxBYj-M
-idk - 			https://www.youtube.com/watch?v=mrHNSanmqQ4
-idk - 			https://www.youtube.com/watch?v=FcxjCPeicvU
-IconButton - 		https://www.youtube.com/watch?v=ktjafK4SgWM&t=25125s
-idk - 			https://www.youtube.com/watch?v=P43DW3HUUH8
-Dropdown menu - 	https://www.youtube.com/watch?v=t8JK5bVoVBw
-Dropdown - 		https://react-bootstrap.netlify.app/docs/components/dropdowns#action/3.1
+idk - 			        https://www.youtube.com/watch?v=mrHNSanmqQ4
+idk - 			        https://www.youtube.com/watch?v=FcxjCPeicvU
+IconButton - 		    https://www.youtube.com/watch?v=ktjafK4SgWM&t=25125s
+idk - 			        https://www.youtube.com/watch?v=P43DW3HUUH8
+Dropdown menu - 	    https://www.youtube.com/watch?v=t8JK5bVoVBw
+Dropdown - 		        https://react-bootstrap.netlify.app/docs/components/dropdowns#action/3.1
 Function parameters - 	https://www.voya.com/tool/budget-calculator
-
+Progress bar -          https://www.youtube.com/watch?v=5nq61iIKVDE
 
 Cheka to INSTALL: 
+-----------------------------
 nothing
