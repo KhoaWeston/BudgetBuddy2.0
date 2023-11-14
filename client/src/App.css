@@ -52,15 +52,6 @@ body, html {
   margin: 20px;
 }
 
-.appButton {
-  margin: 20px;
-  width: 150px;
-  padding: 10px;
-  background-color: skyblue;
-  border: solid 1px;
-  cursor: pointer;
-}
-
 .nav-footer {
   position: absolute;
   bottom: 0;

@@ -23,14 +23,15 @@ const Profile=()=>{
         }
     }
     return(
-
-        <div className="container">
+        <div>
             <Header/>
             <Footer/>
-            <div>email: </div>
-            <div>password: </div>
-            <button>Edit Profile</button>
-            <Button variant="contained" onClick={logOut}>Logout</Button>
+            <div className="container">
+                <div>email: </div>
+                <div>password: </div>
+                <button>Edit Profile</button>
+                <Button variant="contained" onClick={logOut}>Logout</Button>
+            </div>
         </div>
     )
 }

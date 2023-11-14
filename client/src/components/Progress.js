@@ -23,15 +23,17 @@ const Progress=()=>{
     }
 
     return(
-        <div className="container">
+        <div>
             <Header/>
             <Footer/>
-            <div className="progress-bar">
-                <div className="progress-bar-fill" style={{ width: `${progress}%`, backgroundColor: getColor() }}></div>
+            <div className="container">
+                <div className="progress-bar">
+                    <div className="progress-bar-fill" style={{ width: `${progress}%`, backgroundColor: getColor() }}></div>
+                </div>
+                <div className="progress-label">{progress}</div>
+                <button onClick={handlebuttonClick}>Progress</button>
+                <button onClick={handlebuttonReset}>Reset</button>
             </div>
-            <div className="progress-label">{progress}</div>
-            <button onClick={handlebuttonClick}>Progress</button>
-            <button onClick={handlebuttonReset}>Reset</button>
         </div>
     )
 }
