@@ -13,3 +13,5 @@ https://github.com/sourabhbagrecha/expengo/blob/master/src/pages/Signup.page.js
 
 
 KHOA INSTALL 
+client 
+ npm install realm-web@1.5.1
