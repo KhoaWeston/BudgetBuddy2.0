@@ -68,9 +68,7 @@ const Login = () => {
           alert("Invalid username/password. Try again!");
       } else {
           alert(error);
-      }
-        
- 
+      } 
    }
  };
  
