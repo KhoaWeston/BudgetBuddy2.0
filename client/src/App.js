@@ -1,8 +1,6 @@
 import { UserProvider } from "./contexts/user.context";
 import React from 'react';
 import './App.css';
-import Header from './components/Header.js';
-import Footer from './components/Footer.js';
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import PrivateRoute from "./components/PrivateRoute.js";
 import  Login  from "./components/Login.js";
