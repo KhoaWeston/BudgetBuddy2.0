@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Header from './Header.js';
+import Footer from './Footer.js';
 
 const Progress=()=>{
     const [progress, setProgress] = useState(0);
@@ -22,6 +24,8 @@ const Progress=()=>{
 
     return(
         <div className="container">
+            <Header/>
+            <Footer/>
             <div className="progress-bar">
                 <div className="progress-bar-fill" style={{ width: `${progress}%`, backgroundColor: getColor() }}></div>
             </div>

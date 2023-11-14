@@ -1,6 +1,10 @@
 import { Button } from '@mui/material'
 import { useContext } from 'react';
 import { UserContext } from '../contexts/user.context';
+import React from "react";
+import Header from './Header.js';
+import Footer from './Footer.js';
+
 
 const Profile=()=>{
     const { logOutUser } = useContext(UserContext);
@@ -19,7 +23,10 @@ const Profile=()=>{
         }
     }
     return(
+
         <div className="container">
+            <Header/>
+            <Footer/>
             <div>email: </div>
             <div>password: </div>
             <button>Edit Profile</button>

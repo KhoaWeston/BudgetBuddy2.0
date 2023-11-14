@@ -1,4 +1,6 @@
 import React,{useState} from "react";
+import Header from '../Header.js';
+import Footer from '../Footer.js';
 
 const InputGoal=()=>{
     const [cost, setCost]=useState("");
@@ -9,6 +11,8 @@ const InputGoal=()=>{
 
     return(
         <div className="input">
+            <Header/>
+            <Footer/>
             <h1>Input goal information</h1>
             <input className="inputBox" type="text" placeholder="Enter Cost" 
             value={cost} onChange={(e)=>setCost(e.target.value)}

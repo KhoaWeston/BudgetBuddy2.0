@@ -7,6 +7,11 @@ https://github.com/judygab/web-dev-projects/blob/main/login-register-form/src/Ap
 
 Login again 
 https://www.mongodb.com/developer/products/atlas/email-password-authentication-react/
+the github for the tutorial follows 
+https://github.com/sourabhbagrecha/expengo/blob/master/src/pages/Signup.page.js
+
 
 
 KHOA INSTALL 
+client 
+ npm install realm-web@1.5.1
