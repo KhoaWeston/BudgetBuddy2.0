@@ -2,34 +2,33 @@ import React, {useState, useEffect, useRef} from 'react';
 import IconButton from '@mui/material/IconButton';
 import PersonIcon from '@mui/icons-material/Person';
 import { Link } from 'react-router-dom';
-//import Dropdown from 'react-bootstrap/Dropdown';
-//import DropdownButton from 'react-bootstrap/DropdownButton';
-
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
 const Header=()=>{
-    const [open, setOpen] = useState(false);
-    let menuRef = useRef();
+    // const [open, setOpen] = useState(false);
+    // let menuRef = useRef();
     
-    useEffect(() => {
-        let handler = (e)=>{
-        if(!menuRef.current.contains(e.target)){
-            setOpen(false);
-            console.log(menuRef.current);
-        }      
-        };
-        document.addEventListener("mousedown", handler);
-        return() =>{
-        document.removeEventListener("mousedown", handler);
-        }
-    });
+    // useEffect(() => {
+    //     let handler = (e)=>{
+    //     if(!menuRef.current.contains(e.target)){
+    //         setOpen(false);
+    //         console.log(menuRef.current);
+    //     }      
+    //     };
+    //     document.addEventListener("mousedown", handler);
+    //     return() =>{
+    //     document.removeEventListener("mousedown", handler);
+    //     }
+    // });
 
     return(
         <header className="nav-header">
             <div>
                 <ul>
                     <li><Link to="/">Home</Link></li>
-                    <div className='menu-container' ref={menuRef}>
+                    {/* <div className='menu-container' ref={menuRef}>
                         <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
                             <l1>Input</l1>
                         </div>
@@ -44,8 +43,8 @@ const Header=()=>{
                                 <DropdownItem text = {"Logout"}/>
                             </ul>
                         </div>
-                    </div>
-                    {/* <li className="dropdown-in">
+                    </div> */}
+                    <li className="dropdown-in">
                         <DropdownButton id="input-dropdown" title="Input">
                             <Dropdown.Item href="/input-expenses">Expenses</Dropdown.Item>
                             <Dropdown.Divider />
@@ -59,7 +58,7 @@ const Header=()=>{
                             <Dropdown.Divider />
                             <Dropdown.Item href="/input-goal">Goals</Dropdown.Item>
                         </DropdownButton>
-                    </li> */}
+                    </li>
                     <li><Link to="/progress">Progress</Link>
                     </li>
                     <li><Link to="/analytics">Analytics</Link></li>
@@ -70,12 +69,12 @@ const Header=()=>{
     )
 }
 
-function DropdownItem(props){
-    return(
-      <li className = 'dropdownItem'>
-        <a> {props.text} </a>
-      </li>
-    );
-  }
+// function DropdownItem(props){
+//     return(
+//       <li className = 'dropdownItem'>
+//         <a> {props.text} </a>
+//       </li>
+//     );
+//   }
 
 export default Header;
