@@ -1,12 +1,20 @@
-import React,{useState} from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from '../Header.js';
 import Footer from '../Footer.js';
 
 const InputExpenses=()=>{
-    const [cost, setCost]=useState("");
-    const [description, setDescription]=useState("");
-    const collectData=()=>{
-        console.warn(cost, description);
+    //const [cost, setCost]=useState("");
+    //const [description, setDescription]=useState("");
+    //const collectData=()=>{
+        //console.warn(cost, description);
+        const {user} = useContext(UserContext);
+        const[form, setForm]=useState({
+            amount:"",
+            category:"",
+            mode:"",
+            title:"",
+            createdATt: new Date()
+        });
     }
 
     return(
