@@ -5,10 +5,10 @@ import { GRAPHQL_ENDPOINT } from "../../contexts/realm/constants";
 import { Button } from '@mui/material';
 import Header from '../Header.js';
 import Footer from '../Footer.js';
-import Select from "react-select";
 
 const InputIncome = () => {
     const { user } = useContext(UserContext);
+    const [selectedperiod, setSelectedperiod]= useState("");
 
     const onFormInputChange = (event) => {
         const { name, value } = event.target;
@@ -22,10 +22,10 @@ const InputIncome = () => {
       createdAt: new Date()
     });
   
-    // GraphQL query to create an debt
-    const createDebtQuery = gql`
-    mutation AddDebt($data: DebtInsertInput!) {
-      insertOneDebt(data: $data) {
+    // GraphQL query to create an Income
+    const createIncomeQuery = gql`
+    mutation AddIncome($data: IncomeInsertInput!) {
+      insertOneIncome(data: $data) {
         _id
       }
     }
@@ -35,7 +35,7 @@ const InputIncome = () => {
     // to create an expense will be passed through queryVariables.
     const queryVariables = {
       data: {
-        period: form.period,
+        period: selectedperiod,
         amount: parseInt(form.amount),
         author: user.id,
         createdAt: form.createdAt
@@ -46,31 +46,16 @@ const InputIncome = () => {
     // an Authorization Header with the request
     const headers = { Authorization: `Bearer ${user._accessToken}` };
 
-    const options=[
-        {value: "Weekly", label: "Weekly"},
-        {value: "Every Other Week", label: "Every Other Week"},
-        {value: "Twice a Month", label: "Twice a Month"},
-        {value: "Once a Month", label: "Once a Month"},
-        {value: "Once a Year", label: "Once a Year"},
-    ];
-
-    const [selectedOption, setSelected]= useState("");
-
-    const handleChange= (selectedOption)=> {
-        setSelected(selectedOption);
-        setForm({ ...form, period: selectedOption.value });
-        console.log("Option Selected:", selectedOption);
-    }
   
     const onSubmit = async (event) => {
       event.preventDefault();
-      const { amount, period } = form;
-      if (amount.length === 0 || !period.selected) {
+      const { amount } = form;
+      if (amount.length === 0 || selectedperiod.valueOf ==="") {
         alert("wrong!");
         return;
       }
       try {
-        await request(GRAPHQL_ENDPOINT, createDebtQuery, queryVariables, headers);
+        await request(GRAPHQL_ENDPOINT, createIncomeQuery, queryVariables, headers);
         alert("Income Added to your database!")
       } catch (error) {
         alert(error)
@@ -87,16 +72,23 @@ const InputIncome = () => {
             <input
               className="inputBox"
               placeholder="Enter income"
-              label="income"
+              label="amount"
               type="text"
               variant="outlined"
-              name="income"
-              value={form.income}
+              name="amount"
+              value={form.amount}
               onChange={onFormInputChange}
               fullWidth
               style={{ marginBottom: "1rem" }} 
             />
-           <Select options={options} value={form.period} onChange={handleChange} autoFocus={true}></Select>
+           <select value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
+            <option value=" ">  </option>
+            <option value="Weekly"> Weekly</option>
+            <option value="Every Other Week"> Every Other Week</option>
+            <option value="Twice a Month"> Twice a Month</option>
+            <option value="Once a Month"> Once a Month</option>
+            <option value="Once a Year"> Once a Year</option>
+           </select>
            <br></br>
             <Button variant="contained" color="primary" onClick={onSubmit} type="submit">
               Submit Debt
