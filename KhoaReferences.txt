@@ -13,7 +13,10 @@ Dropdown menu - 	    https://www.youtube.com/watch?v=t8JK5bVoVBw
 Dropdown - 		        https://react-bootstrap.netlify.app/docs/components/dropdowns#action/3.1
 Function parameters - 	https://www.voya.com/tool/budget-calculator
 Progress bar -          https://www.youtube.com/watch?v=5nq61iIKVDE
+Dropdown Input -        https://www.youtube.com/watch?v=lGyIy3bIzx8
+Bar chart -             https://www.youtube.com/watch?v=GVQ2gXGGREM
 
 Cheka to INSTALL: 
 -----------------------------
-nothing
+npm install chart.js
+npm install --save chart.js react-chartjs-2

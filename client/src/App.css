@@ -36,20 +36,12 @@ body, html {
   color: #61dafb;
 }
 
-.input{
- margin-left: 30%;
-}
-
-.home{
-  margin-left: 30%;
-}
-
 .inputBox {
   padding: 7px;
   display: block;
   border: 1px solid skyblue;
   width: 300px;
-  margin: 20px;
+  margin-top: 20px;
 }
 
 .nav-footer {
@@ -64,3 +56,6 @@ body, html {
   width: 100px;
 }
 
+.appButton {
+  margin-left: 110px;
+}

@@ -13,7 +13,7 @@ const InputExpenses=()=>{
         <div>
             <Header/>
             <Footer/>
-            <div className="input">
+            <form style={{ maxWidth: "500px", margin: "auto" }}>
                 <h1>Input expense information</h1>
                 <input className="inputBox" type="text" placeholder="Enter Cost" 
                 value={cost} onChange={(e)=>setCost(e.target.value)}
@@ -23,8 +23,9 @@ const InputExpenses=()=>{
                 />
                 
                 <button onClick={collectData} className="appButton" type="button">Enter</button>
-            </div>
-        </div>
+            
+            </form>
+       </div>
     )
 }
 export default InputExpenses

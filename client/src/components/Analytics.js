@@ -82,13 +82,53 @@
 import React from "react";
 import Header from './Header.js';
 import Footer from './Footer.js';
+import {
+    Chart as ChartJS, 
+    BarElement,
+    CategoryScale, 
+    LinearScale, // y
+    Tooltip,
+    Legend
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+
+ChartJS.register(
+    BarElement,
+    CategoryScale, 
+    LinearScale, // y
+    Tooltip,
+    Legend
+)
 
 const Analytics=()=>{
+    const data = {
+        labels: ['week 1', 'week 2', 'week 3'],
+        datasets: [
+            {
+                label: '369',
+                data: [69, 420, 21],
+                backgroundColor: 'aqua',
+                borderColor: 'black',
+                borderWidth: 1,
+            }
+        ]
+    }
+    
+    const options = {
+
+    }
+
     return(
         <div>
             <Header/>
             <Footer/>
-            <h1>Display analytics here</h1>
+            <h1><form style={{ maxWidth: "500px", margin: "auto" }}>Display analytics here</form></h1>
+            <div>
+                <Bar
+                    data ={data}
+                    options = {options}
+                ></Bar>
+            </div>
         </div>
     )
 }
