@@ -1,30 +1,103 @@
-import React,{useState} from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/user.context";
+import { gql, request } from "graphql-request";
+import { GRAPHQL_ENDPOINT } from "../../contexts/realm/constants";
+import { Button } from '@mui/material';
 import Header from '../Header.js';
 import Footer from '../Footer.js';
 
-const InputSavings=()=>{
-    const [cost, setCost]=useState("");
-    const [description, setDescription]=useState("");
-    const collectData=()=>{
-        console.warn(cost, description);
-    }
+const InputSavings = () => {
+    const { user } = useContext(UserContext);
 
+    const onFormInputChange = (event) => {
+        const { name, value } = event.target;
+        setForm({ ...form, [name]: value });
+      };
+  
+    // Some prefilled form state
+    const [form, setForm] = useState({
+      amount: "",
+      title: "",
+      createdAt: new Date()
+    });
+  
+    // GraphQL query to create an debt
+    const createDebtQuery = gql`
+    mutation AddSaving($data: SavingInsertInput!) {
+      insertOneSaving(data: $data) {
+        _id
+      }
+    }
+    `;
+  
+    // All the data that needs to be sent to the GraphQL endpoint
+    // to create an expense will be passed through queryVariables.
+    const queryVariables = {
+      data: {
+        title: form.title,
+        amount: parseInt(form.amount),
+        author: user.id,
+        createdAt: form.createdAt
+      }
+    };
+  
+    // To prove that the identity of the user, we are attaching
+    // an Authorization Header with the request
+    const headers = { Authorization: `Bearer ${user._accessToken}` };
+  
+    const onSubmit = async (event) => {
+      event.preventDefault();
+      const { amount, title } = form;
+      if (amount.length === 0 || title.length === 0) {
+        return;
+      }
+      try {
+        await request(GRAPHQL_ENDPOINT, createDebtQuery, queryVariables, headers);
+        alert("Savings Added to your database!")
+      } catch (error) {
+        alert(error)
+      }
+    };
+  
     return(
         <div>
-            <Header/>
-            <Footer/>
-            <form style={{ maxWidth: "500px", margin: "auto" }}>
-                <h1>Input savings information</h1>
-                <input className="inputBox" type="text" placeholder="Enter Cost" 
-                value={cost} onChange={(e)=>setCost(e.target.value)}
-                />
-                <input className="inputBox" type="text" placeholder="Enter Description" 
-                value={description} onChange={(e)=>setDescription(e.target.value)}
-                />
-                
-                <button onClick={collectData} className="appButton" type="button">Enter</button>
-            </form>
+          <Header/>
+          <Footer/>
+          
+          <form onSubmit={onSubmit} style={{ maxWidth: "300px", margin: "auto" }}>
+            <h1>Input Savings Information </h1>
+            <input
+              className="inputBox"
+              placeholder="Enter Title"
+              label="Title"
+              type="text"
+              variant="outlined"
+              name="title"
+              value={form.title}
+              onChange={onFormInputChange}
+              fullWidth
+              style={{ marginBottom: "1rem" }} 
+            />
+            <input
+              className="inputBox"
+              placeholder="Enter Amount"
+              label="Amount"
+              type="number"
+              variant="outlined"
+              name="amount"
+              value={form.amount}
+              onChange={onFormInputChange}
+              fullWidth
+              style={{ marginBottom: "1rem" }} 
+            />
+            <Button variant="contained" color="primary" onClick={onSubmit} type="submit">
+              Submit Savings
+            </Button>
+          </form>
         </div>
-    )
-}
-export default InputSavings
+      );
+    }
+    
+    export default InputSavings;
+    
+    

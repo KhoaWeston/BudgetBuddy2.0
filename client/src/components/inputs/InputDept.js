@@ -16,8 +16,8 @@ const InputDebt = () => {
   
     // Some prefilled form state
     const [form, setForm] = useState({
-      amount: "Enter amount",
-      title: "Enter category",
+      amount: "",
+      title: "",
       createdAt: new Date()
     });
   
@@ -61,34 +61,43 @@ const InputDebt = () => {
   
     return(
         <div>
-            <Header/>
-            <Footer/>
+          <Header/>
+          <Footer/>
+          
+          <form onSubmit={onSubmit} style={{ maxWidth: "300px", margin: "auto" }}>
             <h1>Input Debt Information </h1>
-            <form onSubmit={onSubmit} style={{ maxWidth: "200px", margin: "auto" }}>
-                <input
-                label="Title"
-                type="text"
-                variant="outlined"
-                name="title"
-                value={form.title}
-                onChange={onFormInputChange}
-                fullWidth
-                style={{ marginBottom: "1rem" }} />
-                <input
-                    label="Amount"
-                    type="number"
-                    variant="outlined"
-                    name="amount"
-                    value={form.amount}
-                    onChange={onFormInputChange}
-                    fullWidth
-                    style={{ marginBottom: "1rem" }} />
-                <Button variant="contained" color="primary" onClick={onSubmit} type="submit">
-                    Submit Debt
-                </Button>
-            </form>
+            <input
+              className="inputBox"
+              placeholder="Enter Title"
+              label="Title"
+              type="text"
+              variant="outlined"
+              name="title"
+              value={form.title}
+              onChange={onFormInputChange}
+              fullWidth
+              style={{ marginBottom: "1rem" }} 
+            />
+            <input
+              className="inputBox"
+              placeholder="Enter Amount"
+              label="Amount"
+              type="number"
+              variant="outlined"
+              name="amount"
+              value={form.amount}
+              onChange={onFormInputChange}
+              fullWidth
+              style={{ marginBottom: "1rem" }} 
+            />
+            <Button variant="contained" color="primary" onClick={onSubmit} type="submit">
+              Submit Debt
+            </Button>
+          </form>
         </div>
-    );
-  }
-  
-  export default InputDebt;
+      );
+    }
+    
+    export default InputDebt;
+    
+    

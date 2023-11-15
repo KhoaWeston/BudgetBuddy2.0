@@ -3,13 +3,11 @@ import { UserContext } from "../../contexts/user.context";
 import { gql, request } from "graphql-request";
 import { GRAPHQL_ENDPOINT } from "../../contexts/realm/constants";
 import { Button } from '@mui/material';
-import { useNavigate } from "react-router-dom";
 import Header from '../Header.js';
 import Footer from '../Footer.js';
 
-const CreateExpense = () => {
+const InputExpense = () => {
   const { user } = useContext(UserContext);
-  const navigate = useNavigate();
 
   const onFormInputChange = (event) => {
     const { name, value } = event.target;
@@ -32,6 +30,7 @@ const CreateExpense = () => {
     insertOneExpense(data: $data) {
       _id
     }
+}
   `;
   
 
@@ -41,7 +40,6 @@ const CreateExpense = () => {
     data: {
       title: form.title,
       amount: parseInt(form.amount),
-      // mode: form.mode,
       category: form.category,
       author: user.id,
       createdAt: form.createdAt
@@ -61,8 +59,7 @@ const CreateExpense = () => {
     try {
       await request(GRAPHQL_ENDPOINT, createExpenseQuery, queryVariables, headers);
 
-      // Navigate to the Home page after creating an expense
-      navigate(`/`);
+      alert("Expense Added to your database!")
     } catch (error) {
       alert(error)
     }
@@ -119,5 +116,5 @@ const CreateExpense = () => {
   );
 }
 
-export default CreateExpense;
+export default InputExpense;
 
