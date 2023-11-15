@@ -13,5 +13,4 @@ https://github.com/sourabhbagrecha/expengo/blob/master/src/pages/Signup.page.js
 
 
 KHOA INSTALL 
-client 
- npm i graphql-request @mui/lab @mui/icons-material date-fns
+nothing
