@@ -3,8 +3,9 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import PrivateRoute from "./components/PrivateRoute.js";
-import  Login  from "./components/Login.js";
-import Signup from "./components/Register.js";import Home from './components/Home.js';
+import Login  from "./components/Login.js";
+import Signup from "./components/Register.js";
+import Home from './components/Home.js';
 import InputExpenses from './components/inputs/InputExpenses.js';
 import InputSavings from './components/inputs/InputSavings.js';
 import InputIncome from './components/inputs/InputIncome.js';
@@ -15,43 +16,7 @@ import Analytics from './components/Analytics.js';
 import Progress from './components/Progress.js';
 import Profile from './components/Profile.js';
 
-// function App() {
-//     return(
-//     <div className="App">
-//       {
-//         <BrowserRouter >
-//         <Routes>
-//           <Route path="/login" element={<Login/>} />
-//           <Route path="/regisyer" element={<Register/>} />
-        
-//           <Route element={<PrivateRoute/>}>
-//           <Header />
-//           <Footer />
-//             <Route path="/" element={<Home />} />
-//             <Route path="/input-expenses" element={<InputExpenses />} />
-//             <Route path="/input-savings" element={<InputSavings />} />
-//             <Route path="/input-income" element={<InputIncome />} />
-//             <Route path="/input-debt" element={<InputDebt />} />
-//             <Route path="/input-reminder" element={<InputReminder />} />
-//             <Route path="/input-goal" element={<InputGoal />} />
-//             <Route path="/progress" element={<Progress />} />
-//             <Route path="/analytics" element={<Analytics />} />
-//             <Route path="/profile" element={<Profile />} />
-//             </Route>
-//         </Routes>
-//         </BrowserRouter>
-//       }   
-//     </div>
-//   );
-// }
 
-// function DropdownItem(props){
-//   return(
-//     <li className = 'dropdownItem'>
-//       <a> {props.text} </a>
-//     </li>
-//   );
-// }
 function App() {
   return (
     <BrowserRouter>
@@ -74,11 +39,11 @@ function App() {
              <Route path="/progress" element={<Progress />} />
              <Route path="/analytics" element={<Analytics />} />
              <Route path="/profile" element={<Profile />} />
-             </Route>
+            </Route>
         </Routes>
       </UserProvider>
     </BrowserRouter>
   );
- }
+}
   
 export default App;

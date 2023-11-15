@@ -13,7 +13,7 @@ const InputReminder=()=>{
         <div>
             <Header/>
             <Footer/>
-            <div className="input">
+            <form style={{ maxWidth: "500px", margin: "auto" }}>
                 <h1>Input reminder information</h1>
                 <input className="inputBox" type="text" placeholder="Enter Cost" 
                 value={cost} onChange={(e)=>setCost(e.target.value)}
@@ -23,7 +23,7 @@ const InputReminder=()=>{
                 />
                 
                 <button onClick={collectData} className="appButton" type="button">Enter</button>
-            </div>
+            </form>
         </div>
     )
 }

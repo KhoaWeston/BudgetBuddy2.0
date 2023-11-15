@@ -3,27 +3,32 @@ import Header from '../Header.js';
 import Footer from '../Footer.js';
 
 const InputIncome=()=>{
-    const [cost, setCost]=useState("");
-    const [description, setDescription]=useState("");
+    const [income, setIncome]=useState("");
+    const [period, setPeriod]=useState("");
     const collectData=()=>{
-        console.warn(cost, description);
+        console.warn(income, period);
     }
 
     return(
         <div>
             <Header/>
             <Footer/>
-            <div className="input">
-                <h1>Input income information</h1>
-                <input className="inputBox" type="text" placeholder="Enter Cost" 
-                value={cost} onChange={(e)=>setCost(e.target.value)}
+            <form style={{ maxWidth: "500px", margin: "auto" }}>
+                <h1>Input income information per payment period</h1>
+                <input className="inputBox" type="text" placeholder="Enter income" 
+                value={income} onChange={(e)=>setIncome(e.target.value)}
                 />
-                <input className="inputBox" type="text" placeholder="Enter Description" 
-                value={description} onChange={(e)=>setDescription(e.target.value)}
-                />
+                <select className="inputBox" value={period} onChange={(e)=>setPeriod(e.target.value)}>
+                    <option></option>
+                    <option>Weekly</option>
+                    <option>Every Other Week</option>
+                    <option>Twice a Month</option>
+                    <option>Once a Month</option>
+                    <option>Once a Year</option>
+                </select>
                 
                 <button onClick={collectData} className="appButton" type="button">Enter</button>
-            </div>
+            </form>
         </div>
     )
 }

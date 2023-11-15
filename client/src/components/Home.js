@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <Header/>
       <Footer/>
-      <h1>Welcome to BudgetBuddy</h1>
+      <h1><form style={{ maxWidth: "500px", margin: "auto" }}>Welcome to BudgetBuddy</form></h1>
     </>
   )
 };
