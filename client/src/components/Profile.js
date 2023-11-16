@@ -1,13 +1,18 @@
-import { Button } from '@mui/material'
-import { useContext } from 'react';
+import { Button, TextField } from '@mui/material'
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../contexts/user.context';
 import React from "react";
 import Header from './Header.js';
 import Footer from './Footer.js';
-
+import { App, Credentials } from "realm-web";
+import { APP_ID } from "../contexts/realm/constants.js";
+//import authenticatedUser from '../contexts/user.context.js'
+const app = new App(APP_ID);
 
 const Profile=()=>{
     const { logOutUser } = useContext(UserContext);
+
+
     // This function is called when the user clicks the "Logout" button.
     const logOut = async () => {
         try {
@@ -27,7 +32,21 @@ const Profile=()=>{
             <Header/>
             <Footer/>
             <div className="container">
-                <div>email: </div>
+            <h2> Your Profile</h2>
+            <TextField 
+              //label= "email"
+              className="email"
+              placeholder={app.currentUser.profile.email}
+              fullWidth
+              style={{ marginBottom: "1rem" }} 
+            />
+            <TextField
+                label="Password"
+                type="password"
+                variant="outlined"
+                name="password"
+                style={{ marginBottom: "1rem" }}
+             />
                 <div>password: </div>
                 <button>Edit Profile</button>
                 <Button variant="contained" onClick={logOut}>Logout</Button>
