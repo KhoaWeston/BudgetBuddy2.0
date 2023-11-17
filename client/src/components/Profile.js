@@ -4,13 +4,21 @@ import { UserContext } from '../contexts/user.context';
 import React from "react";
 import Header from './Header.js';
 import Footer from './Footer.js';
-import { App, Credentials } from "realm-web";
+import { App } from "realm-web";
 import { APP_ID } from "../contexts/realm/constants.js";
-//import authenticatedUser from '../contexts/user.context.js'
+
 const app = new App(APP_ID);
 
 const Profile=()=>{
     const { logOutUser } = useContext(UserContext);
+    const [mongovar, setmongovar] = useState("");
+
+    const findVars = async() =>{
+        const expenses = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Expenses');
+        let mongovar = await expenses.findOne({title:"BAH"});
+        setmongovar(mongovar.title)
+    }
+    findVars();
 
 
     // This function is called when the user clicks the "Logout" button.
@@ -41,7 +49,7 @@ const Profile=()=>{
               style={{ marginBottom: "1rem" }} 
             />
             <TextField
-                label="Password"
+                label={app.currentUser.profile.password}
                 type="password"
                 variant="outlined"
                 name="password"
