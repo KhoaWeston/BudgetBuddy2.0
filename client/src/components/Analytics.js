@@ -123,7 +123,14 @@ const Analytics=()=>{
             <Header/>
             <Footer/>
             <h1><form style={{ maxWidth: "500px", margin: "auto" }}>Display analytics here</form></h1>
-            <div>
+            <div 
+                style = {
+                    {
+                    padding: "20px",
+                    height: "55%"
+                    }
+                }
+            >
                 <Bar
                     data ={data}
                     options = {options}

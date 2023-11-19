@@ -18,5 +18,4 @@ Bar chart -             https://www.youtube.com/watch?v=GVQ2gXGGREM
 
 Cheka to INSTALL: 
 -----------------------------
-npm install chart.js
-npm install --save chart.js react-chartjs-2
+nothing

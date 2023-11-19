@@ -6,7 +6,6 @@ body, html {
 
 .nav-header{
   padding: 5px;
-  margin: 0px;
   background-color: skyblue;
 }
 
@@ -50,10 +49,6 @@ body, html {
   background-color: skyblue;
   width: 100%;
   text-align: center;
-}
-
-.nav-header DropdownButton {
-  width: 100px;
 }
 
 .appButton {
