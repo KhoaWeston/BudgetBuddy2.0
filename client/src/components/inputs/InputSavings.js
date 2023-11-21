@@ -8,6 +8,7 @@ import Footer from '../Footer.js';
 
 const InputSavings = () => {
     const { user } = useContext(UserContext);
+    const [selectedsavings, setsavings]= useState("");
 
     const onFormInputChange = (event) => {
         const { name, value } = event.target;
@@ -17,12 +18,12 @@ const InputSavings = () => {
     // Some prefilled form state
     const [form, setForm] = useState({
       amount: "",
-      title: "",
+      category: "",
       createdAt: new Date()
     });
   
     // GraphQL query to create an debt
-    const createDebtQuery = gql`
+    const createSavingsQuery = gql`
     mutation AddSaving($data: SavingInsertInput!) {
       insertOneSaving(data: $data) {
         _id
@@ -34,7 +35,7 @@ const InputSavings = () => {
     // to create an expense will be passed through queryVariables.
     const queryVariables = {
       data: {
-        title: form.title,
+        category: selectedsavings,
         amount: parseInt(form.amount),
         author: user.id,
         createdAt: form.createdAt
@@ -47,12 +48,12 @@ const InputSavings = () => {
   
     const onSubmit = async (event) => {
       event.preventDefault();
-      const { amount, title } = form;
-      if (amount.length === 0 || title.length === 0) {
+      const {amount } = form;
+      if (selectedsavings.valueOf ==="" || amount.length === 0) {
         return;
       }
       try {
-        await request(GRAPHQL_ENDPOINT, createDebtQuery, queryVariables, headers);
+        await request(GRAPHQL_ENDPOINT, createSavingsQuery, queryVariables, headers);
         alert("Savings Added to your database!")
       } catch (error) {
         alert(error)
@@ -63,21 +64,15 @@ const InputSavings = () => {
         <div>
           <Header/>
           <Footer/>
-          
           <form onSubmit={onSubmit} style={{ maxWidth: "300px", margin: "auto" }}>
             <h1>Input Savings Information </h1>
-            <input
-              className="inputBox"
-              placeholder="Enter Title"
-              label="Title"
-              type="text"
-              variant="outlined"
-              name="title"
-              value={form.title}
-              onChange={onFormInputChange}
-              fullWidth
-              style={{ marginBottom: "1rem" }} 
-            />
+            <select value={selectedsavings} onChange={e => setsavings(e.target.value)}>
+              <option value=" ">  </option>
+              <option value="Emergencies"> Emergencies</option>
+              <option value="Retirement">Retirement</option>
+              <option value="Vacation"> Vacation</option>
+              <option value="Other"> Other</option>
+            </select>
             <input
               className="inputBox"
               placeholder="Enter Amount"

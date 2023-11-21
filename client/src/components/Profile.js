@@ -10,16 +10,9 @@ import { APP_ID } from "../contexts/realm/constants.js";
 const app = new App(APP_ID);
 
 const Profile=()=>{
+    //const { callResetPasswordFunction​ } = useContext(UserContext);
     const { logOutUser } = useContext(UserContext);
-    const [mongovar, setmongovar] = useState("");
-
-    const findVars = async() =>{
-        const expenses = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Expenses');
-        let mongovar = await expenses.findOne({title:"BAH"});
-        setmongovar(mongovar.title)
-    }
-    findVars();
-
+    //const expenses = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB');
 
     // This function is called when the user clicks the "Logout" button.
     const logOut = async () => {
@@ -42,14 +35,15 @@ const Profile=()=>{
             <div className="container">
             <h2> Your Profile</h2>
             <TextField 
-              //label= "email"
+              label= {app.currentUser.profile.email}
               className="email"
-              placeholder={app.currentUser.profile.email}
+              //placeholder={app.currentUser.profile.email}
               fullWidth
               style={{ marginBottom: "1rem" }} 
             />
             <TextField
-                label={app.currentUser.profile.password}
+            
+                label="bahhh"
                 type="password"
                 variant="outlined"
                 name="password"

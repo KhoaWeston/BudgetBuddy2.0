@@ -9,8 +9,8 @@ const Progress=()=>{
     const [progress, setProgress] = useState(0);
     const [SUM, setSUM] = useState("");
 
-    const findVars = async() =>{
-        const expenses = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Expenses')
+    const CalculatedProgress = async() =>{
+        const expenses = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Expenses');
         let docnum = await expenses.count();
         let expenseSum = await expenses.findOne();
         let totalexpense = 0;
@@ -19,7 +19,7 @@ const Progress=()=>{
         }
         setProgress(totalexpense);
     }
-    findVars();
+    
 
     const handlebuttonClick = ()=>{
         if (progress < 100){
@@ -47,8 +47,9 @@ const Progress=()=>{
                     <div className="progress-bar-fill" style={{ width: `${progress}%`, backgroundColor: getColor() }}></div>
                 </div>
                 <div className="progress-label">{progress}</div>
-                <button onClick={handlebuttonClick}>Progress</button>
+                <button onClick={CalculatedProgress}>Progress</button>
                 <button onClick={handlebuttonReset}>Reset</button>
+                
             </div>
         </div>
     )
