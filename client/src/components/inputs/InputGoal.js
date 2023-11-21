@@ -3,14 +3,13 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/user.context";
 import { gql, request } from "graphql-request";
 import { GRAPHQL_ENDPOINT } from "../../contexts/realm/constants";
-import { Button } from '@mui/material';
 import Header from '../Header.js';
 import Footer from '../Footer.js';
 
 const InputGoal=()=>{
     const { user } = useContext(UserContext);
     const [selectedgoal, setgoal]= useState("");
-    const [selecteddate, setdate]= useState("");
+    
 
     const onFormInputChange = (event) => {
         const { name, value } = event.target;
@@ -20,8 +19,7 @@ const InputGoal=()=>{
     // Some prefilled form state
     const [form, setForm] = useState({
       amount: "",
-      goal: "",
-      endDate:"",
+      category: "",
       createdAt: new Date()
     });
   
@@ -38,9 +36,8 @@ const InputGoal=()=>{
     // to create an expense will be passed through queryVariables.
     const queryVariables = {
       data: {
-        goal: selectedgoal,
+        category: selectedgoal,
         amount: parseInt(form.amount),
-        endDate: document.getElementById("endDate"),
         author: user.id,
         createdAt: form.createdAt
       }
@@ -91,9 +88,6 @@ const InputGoal=()=>{
                     <option value="Other"> Other</option>
                 </select>
                 <br></br>
-                <text> Accomplish Goal by what Date?</text>
-                <br></br>
-                <input type = "date" id="endDate" />
                 <button onClick={onSubmit} className="appButton" type="button">Enter</button>
             </form>
         </div>
