@@ -19,7 +19,7 @@ const Progress=()=>{
         }
         setProgress(totalexpense);
     }
-    findVars();
+    //findVars();
 
     const handlebuttonClick = ()=>{
         if (progress < 100){

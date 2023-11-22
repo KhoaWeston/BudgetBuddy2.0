@@ -13,14 +13,6 @@ const Profile=()=>{
     const { logOutUser } = useContext(UserContext);
     const [mongovar, setmongovar] = useState("");
 
-    const findVars = async() =>{
-        const expenses = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Expenses');
-        let mongovar = await expenses.findOne({title:"BAH"});
-        setmongovar(mongovar.title)
-    }
-    findVars();
-
-
     // This function is called when the user clicks the "Logout" button.
     const logOut = async () => {
         try {
@@ -54,7 +46,7 @@ const Profile=()=>{
                 variant="outlined"
                 name="password"
                 style={{ marginBottom: "1rem" }}
-             />
+            />
                 <div>password: </div>
                 <button>Edit Profile</button>
                 <Button variant="contained" onClick={logOut}>Logout</Button>
