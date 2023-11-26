@@ -5,6 +5,12 @@ import { gql, request } from "graphql-request";
 import { GRAPHQL_ENDPOINT } from "../../contexts/realm/constants";
 import Header from '../Header.js';
 import Footer from '../Footer.js';
+import { Button } from '@mui/material'
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateField } from '@mui/x-date-pickers/DateField';
+
 
 const InputGoal=()=>{
     const { user } = useContext(UserContext);
@@ -87,8 +93,12 @@ const InputGoal=()=>{
                     <option value="Vacation"> Vacation</option>
                     <option value="Other"> Other</option>
                 </select>
-                <br></br>
-                <button onClick={onSubmit} className="appButton" type="button">Enter</button>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={['DateField']}>
+                    <DateField id="selectDate" label="By Date" style={{ width: "100px"}}/>
+                  </DemoContainer>
+                </LocalizationProvider>
+                <Button variant="contained">Enter</Button>
             </form>
         </div>
     )

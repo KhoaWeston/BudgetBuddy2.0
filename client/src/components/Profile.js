@@ -32,27 +32,31 @@ const Profile=()=>{
         <div>
             <Header/>
             <Footer/>
-            <div className="container">
-            <h2> Your Profile</h2>
-            <TextField 
-              label= {app.currentUser.profile.email}
-              className="email"
-              //placeholder={app.currentUser.profile.email}
-              fullWidth
-              style={{ marginBottom: "1rem" }} 
-            />
-            <TextField
-            
-                label="bahhh"
-                type="password"
-                variant="outlined"
-                name="password"
-                style={{ marginBottom: "1rem" }}
-            />
-                <div>password: </div>
-                <button>Edit Profile</button>
+            <form style={{ flex:1, justifyContent: "center", alignitems:"center", maxWidth: "500px", margin: "auto"}}>
+                <h1> Your Profile</h1>
+                <div>
+                    <u1>email: </u1>
+                    <TextField 
+                    label= {app.currentUser.profile.email}
+                    className="email"
+                    //placeholder={app.currentUser.profile.email}
+                    
+                    style={{ marginBottom: "1rem" }} 
+                    />
+                </div>
+                <div>
+                    <u1>password: </u1>
+                    <TextField
+                        name="password"
+                        label="dunno"
+                        type="password"
+                        variant="outlined"
+                        style={{ marginBottom: "1rem" }}
+                    />
+                </div>
+                {/* <button>Edit Profile</button> */}
                 <Button variant="contained" onClick={logOut}>Logout</Button>
-            </div>
+            </form>
         </div>
     )
 }

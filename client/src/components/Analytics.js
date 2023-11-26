@@ -1,140 +1,62 @@
-// import { useContext, useEffect, useState } from "react";
-// import { Button, Grid } from "@mui/material";
-// import request, { gql } from "graphql-request";
-// import { formatISO, subMonths, endOfToday, startOfDay, endOfDay } from "date-fns";
-// import { UserContext } from "../contexts/user.context";
-// import { GRAPHQL_ENDPOINT } from "../realm/constants";
-// import PageContainer from "../components/PageContainer.component";
-// import CustomDatePicker from "../components/CustomDatePicker.component";
-// import ModeAnalytics from "../components/ModeAnalytics.component";
-// import CategoryAnalytics from "../components/CategoryAnalytics.component";
-
-// const Analytics = () => {
-//   // By default we would like to fetch the analytics for the last 1 month.
-//   // So we will take the fromDate as today minus 1 month and
-//   // the toDate as today.
-//   const today = endOfToday();
-//   const oneMonthAgo = subMonths(today, 1);
-//   const [fromDate, setFromDate] = useState(oneMonthAgo);
-//   const [toDate, setToDate] = useState(today);
-
-//   const { user } = useContext(UserContext);
-//   const [analyticsData, setAnalyticsData] = useState(null);
-
-
-//   const loadAnalytics = async () => {
-
-//     // GraphQL query to fetch mode analytics as well as the category analytics.
-//     const getAnalyticsQuery = gql`
-//       query getAnalytics($query: Filter!) {
-//         modeAnalytics(input: $query) {
-//           modes {
-//             amount
-//             mode
-//           }
-//         }
-//         categoryAnalytics(input: $query) {
-//           categories {
-//             amount
-//             category
-//           }
-//         }
-//       }
-//     `;
-
-//     // Query variables that will be used to perform the analytics from a particular 
-//     // date to a particular date.
-//     const queryVariables = { query: { from: formatISO(startOfDay(fromDate)), to: formatISO(endOfDay(toDate)) } };
-
-//     const headers = { Authorization: `Bearer ${user._accessToken}` };
-
-//     try {
-//       const resp = await request(GRAPHQL_ENDPOINT, getAnalyticsQuery, queryVariables, headers);
-//       const { modeAnalytics: { modes }, categoryAnalytics: { categories } } = resp;
-//       setAnalyticsData({ modes, categories });
-//     } catch (error) {
-//       alert(error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     loadAnalytics(); // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, []);
-
-//   return (
-//     <PageContainer>
-//       <h1>Analytics Home</h1>
-//       <CustomDatePicker label="From" value={fromDate} onChange={setFromDate} style={{ marginRight: "2rem" }} />
-//       <CustomDatePicker label="To" value={toDate} onChange={setToDate} style={{ marginRight: "2rem" }} />
-//       <Button onClick={loadAnalytics} variant="contained" style={{ margin: "0 auto" }} size="large">Refresh</Button>
-//       {analyticsData && <Grid container spacing={3}>
-//         <Grid item xs={12} md={6}>
-//           <ModeAnalytics data={analyticsData.modes} />
-//         </Grid>
-//         <Grid item xs={12} md={6}>
-//           <CategoryAnalytics data={analyticsData.categories} />
-//         </Grid>
-//       </Grid>}
-//     </PageContainer>
-//   );
-// }
-
 import React from "react";
 import Header from './Header.js';
 import Footer from './Footer.js';
-import {
-    Chart as ChartJS, 
-    BarElement,
-    CategoryScale, 
-    LinearScale, // y
-    Tooltip,
-    Legend
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { Button } from '@mui/material'
+import { App } from "realm-web";
+import { APP_ID } from "../contexts/realm/constants.js";
+import ChartsEmbedSDK from '@mongodb-js/charts-embed-dom';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateField } from '@mui/x-date-pickers/DateField';
 
-ChartJS.register(
-    BarElement,
-    CategoryScale, 
-    LinearScale, // y
-    Tooltip,
-    Legend
-)
+const sdk = new ChartsEmbedSDK( {
+    baseUrl: "https://charts.mongodb.com/charts-project-0-qxtjo"
+});
+
+// embed a chart
+const chart1 = sdk.createChart({
+    chartId: '655fc617-5768-4074-84c3-e714d5e34c62',
+    width: "90%",
+    height: 400
+});
+
+
+chart1
+    .render(document.getElementById('chart1'));
+    //.catch(() => window.alert('Chart failed to initialise'));
 
 const Analytics=()=>{
-    const data = {
-        labels: ['week 1', 'week 2', 'week 3'],
-        datasets: [
-            {
-                label: '369',
-                data: [69, 420, 21],
-                backgroundColor: 'aqua',
-                borderColor: 'black',
-                borderWidth: 1,
-            }
-        ]
-    }
-    
-    const options = {
+    const app = new App(APP_ID);
 
+    const changeDate = async()=>{
+        const userID = app.currentUser
+        const fromDateSelect = document.getElementById("fromDateField");
+        const toDateSelect = document.getElementById("toDateField");
+        const fromDate = parseInt(fromDateSelect.value);
+        const toDate = parseInt(toDateSelect.value);
+        //chart1.setFilter( { author: userID })
+        //chart1.setFilter( { createdAt: { $gte: new Date(Date.UTC(fromDate)), $lte: new Date(Date.UTC(toDate)) } } );
     }
 
     return(
         <div>
             <Header/>
             <Footer/>
-            <h1><form style={{ maxWidth: "500px", margin: "auto" }}>Display analytics here</form></h1>
-            <div 
-                style = {
-                    {
-                    padding: "20px",
-                    height: "55%"
-                    }
-                }
-            >
-                <Bar
-                    data ={data}
-                    options = {options}
-                ></Bar>
+            <h1><form style={{ maxWidth: "350px", margin: "auto" }}>Display analytics here</form></h1>
+            <div className="row">
+                <div style={{ flex: "10%"}} >
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DemoContainer components={['DateField','DateField']}>
+                            <DateField id="fromDateField" label="From" style={{ width: "100px", margin: "auto" }}/>
+                            <DateField id="toDateField" label="To" style={{ width: "100px", margin: "auto" }}/>
+                        </DemoContainer>
+                    </LocalizationProvider>
+                    <Button variant="contained" onClick={changeDate} style={{ width: "75px", margin: "auto" }}>Enter</Button>
+                </div>
+                <div style={{ flex: "80%"}}>
+                    <div id="chart1" className="chart"></div>
+                </div>
             </div>
         </div>
     )

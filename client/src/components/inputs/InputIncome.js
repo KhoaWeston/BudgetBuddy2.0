@@ -68,7 +68,7 @@ const InputIncome = () => {
           <Footer/>
           
           <form onSubmit={onSubmit} style={{ maxWidth: "300px", margin: "auto" }}>
-            <h1>Input Expense Information </h1>
+            <h1>Input Income Information </h1>
             <input
               className="inputBox"
               placeholder="Enter income"
