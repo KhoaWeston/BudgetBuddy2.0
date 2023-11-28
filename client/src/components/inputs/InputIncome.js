@@ -91,7 +91,7 @@ const InputIncome = () => {
            </select>
            <br></br>
             <Button variant="contained" color="primary" onClick={onSubmit} type="submit">
-              Submit Debt
+              Submit Income
             </Button>
           </form>
         </div>

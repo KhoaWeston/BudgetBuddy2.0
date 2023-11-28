@@ -149,6 +149,7 @@ h3 span{
 
 .row {
   display: flex;
+  margin-left: 20px;
 }
 
 .column {
