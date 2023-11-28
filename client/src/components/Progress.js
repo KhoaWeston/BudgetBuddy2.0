@@ -33,15 +33,15 @@ const Progress=()=>{
     const getIncome = async()=>{
         const income = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Income');
         const payment = await income.findOne();
-        if (payment.period == "Weekly"){
+        if (payment.period === "Weekly"){
             setIncome(payment.amount*4.3);
-        } else if (payment.period == "Every Other Week"){
+        } else if (payment.period === "Every Other Week"){
             setIncome(payment.amount*2.17);
-        } else if (payment.period == "Twice a Month"){
+        } else if (payment.period === "Twice a Month"){
             setIncome(payment.amount/2);
-        } else if (payment.period == "Once a Month"){
+        } else if (payment.period === "Once a Month"){
             setIncome(payment.amount);
-        } else if (payment.period == "Once a Year"){
+        } else if (payment.period === "Once a Year"){
             setIncome(payment.amount/12);
         } else {
             setIncome(0);
@@ -83,7 +83,7 @@ const Progress=()=>{
             <h2>User Income per month: ${currentIncome}</h2>
             <div className="row">
                 <div className="column">
-                    <div>Recommended Spending according to the 50/30/20 Monthly Budget</div>
+                    <div><b>Recommended Spending according to the 50/30/20 Monthly Budget </b></div>
                     <div>Needs: ${currentIncome*0.5}</div>
                     <div>Wants: ${currentIncome*0.3}</div>
                     <div>Savings: ${currentIncome*0.2}</div>

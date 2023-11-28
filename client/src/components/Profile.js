@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material'
+import { Button, TextField, accordionDetailsClasses, alertClasses } from '@mui/material'
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../contexts/user.context';
 import React from "react";
@@ -10,9 +10,7 @@ import { APP_ID } from "../contexts/realm/constants.js";
 const app = new App(APP_ID);
 
 const Profile=()=>{
-    //const { callResetPasswordFunction​ } = useContext(UserContext);
-    const { logOutUser } = useContext(UserContext);
-    //const expenses = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB');
+    const { logOutUser} = useContext(UserContext);
 
     // This function is called when the user clicks the "Logout" button.
     const logOut = async () => {
@@ -27,7 +25,23 @@ const Profile=()=>{
         } catch (error) {
             alert(error)
         }
+    };
+    const ResetPassword = async () => {
+        try {
+            const email = app.currentUser.profile.email;
+            await app.emailPasswordAuth.sendResetPasswordEmail({email});
+            alert("Reset Password Email has been sent")
+        } catch (error) {
+            alert("Error in sending Reset Password Email")
+        }
     }
+
+    const {resetPassword, result} = useEmailPasswordAuth();
+    const [password, setPassword] = useState('');
+    const performResetPassword = () => {
+     resetPassword({token, tokenId, password});
+    };
+
     return(
         <div>
             <Header/>
@@ -38,9 +52,7 @@ const Profile=()=>{
                     <u1>email: </u1>
                     <TextField 
                     label= {app.currentUser.profile.email}
-                    className="email"
-                    //placeholder={app.currentUser.profile.email}
-                    
+                    className="email"   
                     style={{ marginBottom: "1rem" }} 
                     />
                 </div>
@@ -54,8 +66,8 @@ const Profile=()=>{
                         style={{ marginBottom: "1rem" }}
                     />
                 </div>
-                {/* <button>Edit Profile</button> */}
                 <Button variant="contained" onClick={logOut}>Logout</Button>
+                <Button variant="contained" onClick={ResetPassword}> Reset Password</Button>
             </form>
         </div>
     )
