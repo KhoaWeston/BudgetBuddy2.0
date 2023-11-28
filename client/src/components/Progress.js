@@ -7,10 +7,11 @@ import { APP_ID } from "../contexts/realm/constants.js";
 const Progress=()=>{
     const app = new App(APP_ID);
     const [progress, setProgress] = useState(0);
-    const [actualWant, setActualWant] = useState("");
-    const [actualNeed, setActualNeed] = useState("");
-    const [actualSaving, setActualSaving] = useState("");
-    const [currentIncome, setIncome] = useState("");
+    const [actualWant, setActualWant] = useState(0);
+    const [actualNeed, setActualNeed] = useState(0);
+    const [actualSaving, setActualSaving] = useState(0);
+    const [currentIncome, setIncome] = useState(0);
+    const [goalAmount, setGoalAmount] = useState(0);
 
     const calculateWant = async() =>{
         const expenses = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Expenses');
@@ -45,19 +46,29 @@ const Progress=()=>{
             setIncome(payment.amount/12);
         } else {
             setIncome(0);
-        }
-        
+        } 
     }
     
-    const handlebuttonClick = ()=>{
-        if (progress < 100){
-            setProgress(progress + 20);
-        }
+    const getGoalAmount = async()=>{
+        const goals = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Goals');
+        const goal = await goals.findOne();
+        setGoalAmount(goal.amount)
     }
 
-    const handlebuttonReset=()=>{
-        setProgress(0);
+    const setProgressBar = ()=>{
+        let progressAmount = (actualSaving/goalAmount)*100;
+        setProgress(progressAmount);
     }
+
+    // const handlebuttonClick = ()=>{
+    //     if (progress < 100){
+    //         setProgress(progress + 20);
+    //     }
+    // }
+
+    // const handlebuttonReset=()=>{
+    //     setProgress(0);
+    // }
 
     const getColor=()=>{
         if(progress < 40){
@@ -74,36 +85,43 @@ const Progress=()=>{
         calculateWant();
         calculateNeed();
         calculateSaving();
+        getGoalAmount();
+        setProgressBar();
     }, []);
 
     return(
         <div>
             <Header/>
             <Footer/>
-            <h2>User Income per month: ${currentIncome}</h2>
+            <form style={{ maxWidth: "400px", margin: "auto" }}><h2>User Income per month: ${currentIncome}</h2></form>
             <div className="row">
                 <div className="column">
                     <div>Recommended Spending according to the 50/30/20 Monthly Budget</div>
+                </div>
+                <div className="column">
+                    <div>Actual Monthly Spending</div>
+                </div>
+            </div>
+            <div className="row">
+                <div className="column">
                     <div>Needs: ${currentIncome*0.5}</div>
                     <div>Wants: ${currentIncome*0.3}</div>
                     <div>Savings: ${currentIncome*0.2}</div>
                 </div>
                 <div className="column">
-                    <div>Actual Monthly Spending</div>
                     <div>Wants: ${actualWant}</div>
                     <div>Needs: ${actualNeed}</div>
                     <div>Savings: ${actualSaving}</div>
                 </div>
             </div>
-            
-            <div className="container">
+            <div><form style={{ margin: "50px"}}>
                 <div className="progress-bar">
                     <div className="progress-bar-fill" style={{ width: `${progress}%`, backgroundColor: getColor() }}></div>
                 </div>
-                <div className="progress-label">{progress}</div>
-                <button onClick={handlebuttonClick}>Progress</button>
-                <button onClick={handlebuttonReset}>Reset</button>
-                
+                <div className="progress-label">{progress}% towards your goal!</div>
+                {/* <button onClick={handlebuttonClick}>Progress</button>
+                <button onClick={handlebuttonReset}>Reset</button> */}
+                </form>
             </div>
         </div>
     )

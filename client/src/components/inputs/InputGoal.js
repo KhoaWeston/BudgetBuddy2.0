@@ -15,7 +15,6 @@ import { DateField } from '@mui/x-date-pickers/DateField';
 const InputGoal=()=>{
     const { user } = useContext(UserContext);
     const [selectedgoal, setgoal]= useState("");
-    
 
     const onFormInputChange = (event) => {
         const { name, value } = event.target;
@@ -72,7 +71,7 @@ const InputGoal=()=>{
         <div>
             <Header/>
             <Footer/>
-            <form style={{ maxWidth: "500px", margin: "auto" }}>
+            <form onSubmit={onSubmit} style={{ maxWidth: "500px", margin: "auto" }}>
                 <h1>Input goal information</h1>
                 <input
                     className="inputBox"
@@ -98,7 +97,7 @@ const InputGoal=()=>{
                     <DateField id="selectDate" label="By Date" style={{ width: "100px"}}/>
                   </DemoContainer>
                 </LocalizationProvider>
-                <Button variant="contained">Enter</Button>
+                <Button variant="contained" onClick={onSubmit} >Enter</Button>
             </form>
         </div>
     )
