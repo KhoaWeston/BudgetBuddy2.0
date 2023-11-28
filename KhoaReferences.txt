@@ -1,15 +1,11 @@
 SITES: 
 ----------------------------
-Header - 		        https://www.youtube.com/watch?v=M5MqaKUpZk4&list=PL8p2I9GklV44v3vZb2Xlc0HVpJaghCuoN&index=5
-Header w/ dropdown - 	https://www.youtube.com/watch?v=_8sfTUAmlCU&t=249s
+Header/Footer - 		https://www.youtube.com/watch?v=M5MqaKUpZk4&list=PL8p2I9GklV44v3vZb2Xlc0HVpJaghCuoN&index=5
 Header navigation - 	https://www.youtube.com/watch?v=7CqJlxBYj-M
-IconButton - 		    https://www.youtube.com/watch?v=ktjafK4SgWM&t=25125s
-Dropdown menu - 	    https://www.youtube.com/watch?v=t8JK5bVoVBw
 Dropdown - 		        https://react-bootstrap.netlify.app/docs/components/dropdowns#action/3.1
 Function parameters - 	https://www.voya.com/tool/budget-calculator
 Progress bar -          https://www.youtube.com/watch?v=5nq61iIKVDE
 Dropdown Input -        https://www.youtube.com/watch?v=lGyIy3bIzx8
-Responsive chart -      https://www.chartjs.org/docs/latest/configuration/responsive.html
 Quering MongoDB -       https://www.mongodb.com/docs/realm/sdk/react-native/app-services/query-mongodb/#find-a-single-document
 Summing data -          https://stackoverflow.com/questions/62358365/react-js-get-sum-of-numbers-in-array
 Making columns -        https://www.w3schools.com/howto/howto_css_two_columns.asp

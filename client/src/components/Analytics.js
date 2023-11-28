@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from './Header.js';
 import Footer from './Footer.js';
 import { Button } from '@mui/material'
@@ -21,11 +21,6 @@ const chart1 = sdk.createChart({
     height: 400
 });
 
-
-chart1
-    .render(document.getElementById('chart1'));
-    //.catch(() => window.alert('Chart failed to initialise'));
-
 const Analytics=()=>{
     const app = new App(APP_ID);
 
@@ -38,6 +33,18 @@ const Analytics=()=>{
         //chart1.setFilter( { author: userID })
         //chart1.setFilter( { createdAt: { $gte: new Date(Date.UTC(fromDate)), $lte: new Date(Date.UTC(toDate)) } } );
     }
+    
+    const renderChart =()=>{
+        if (window.location.pathname == "/analytics") {
+            chart1
+                .render(document.getElementById('chart1'))
+                .catch(() => window.alert('Refresh window'));
+        }
+    }
+
+    useEffect(() => {
+        renderChart();
+    }, []);
 
     return(
         <div>

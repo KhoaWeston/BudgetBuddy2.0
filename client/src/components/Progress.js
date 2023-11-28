@@ -6,7 +6,6 @@ import { APP_ID } from "../contexts/realm/constants.js";
 
 const Progress=()=>{
     const app = new App(APP_ID);
-    const [progress, setProgress] = useState(0);
     const [actualWant, setActualWant] = useState(0);
     const [actualNeed, setActualNeed] = useState(0);
     const [actualSaving, setActualSaving] = useState(0);
@@ -55,25 +54,10 @@ const Progress=()=>{
         setGoalAmount(goal.amount)
     }
 
-    const setProgressBar = ()=>{
-        let progressAmount = (actualSaving/goalAmount)*100;
-        setProgress(progressAmount);
-    }
-
-    // const handlebuttonClick = ()=>{
-    //     if (progress < 100){
-    //         setProgress(progress + 20);
-    //     }
-    // }
-
-    // const handlebuttonReset=()=>{
-    //     setProgress(0);
-    // }
-
     const getColor=()=>{
-        if(progress < 40){
+        if((actualSaving / goalAmount *100) < 40){
             return "#ff0000";
-        } else if (progress < 70){
+        } else if ((actualSaving / goalAmount *100) < 70){
             return "#ffa500";
         } else {
             return "#2ecc71";
@@ -86,7 +70,6 @@ const Progress=()=>{
         calculateNeed();
         calculateSaving();
         getGoalAmount();
-        setProgressBar();
     }, []);
 
     return(
@@ -114,13 +97,13 @@ const Progress=()=>{
                     <div>Savings: ${actualSaving}</div>
                 </div>
             </div>
+            
             <div><form style={{ margin: "50px"}}>
+                <div className="progress-label">Your goal is to have ${goalAmount} in your "account". Currently you have ${actualSaving}.</div>
                 <div className="progress-bar">
-                    <div className="progress-bar-fill" style={{ width: `${progress}%`, backgroundColor: getColor() }}></div>
+                    <div className="progress-bar-fill" style={{ width: `${actualSaving / goalAmount *100}%`, backgroundColor: getColor() }}></div>
                 </div>
-                <div className="progress-label">{progress}% towards your goal!</div>
-                {/* <button onClick={handlebuttonClick}>Progress</button>
-                <button onClick={handlebuttonReset}>Reset</button> */}
+                <div className="progress-label">{actualSaving / goalAmount *100}% towards your goal!</div>
                 </form>
             </div>
         </div>
