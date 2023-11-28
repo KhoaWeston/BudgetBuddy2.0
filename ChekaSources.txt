@@ -10,6 +10,10 @@ https://www.mongodb.com/developer/products/atlas/email-password-authentication-r
 the github for the tutorial follows 
 https://github.com/sourabhbagrecha/expengo/blob/master/src/pages/Signup.page.js
 
+Reset password
+https://www.mongodb.com/docs/realm/sdk/node/users/manage-email-password-users/
+https://karoldabrowski.com/blog/getting-parameters-from-url-in-a-react-application/
+
 
 
 KHOA INSTALL 

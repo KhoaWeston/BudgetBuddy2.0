@@ -26,6 +26,7 @@ const Profile=()=>{
             alert(error)
         }
     };
+    
     const ResetPassword = async () => {
         try {
             const email = app.currentUser.profile.email;
@@ -36,11 +37,11 @@ const Profile=()=>{
         }
     }
 
-    const {resetPassword, result} = useEmailPasswordAuth();
-    const [password, setPassword] = useState('');
-    const performResetPassword = () => {
-     resetPassword({token, tokenId, password});
-    };
+    // const {resetPassword, result} = useEmailPasswordAuth();
+    // const [password, setPassword] = useState('');
+    // const performResetPassword = () => {
+    //  resetPassword({token, tokenId, password});
+    // };
 
     return(
         <div>
