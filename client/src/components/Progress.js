@@ -33,15 +33,15 @@ const Progress=()=>{
     const getIncome = async()=>{
         const income = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Income');
         const payment = await income.findOne();
-        if (payment.period == "Weekly"){
+        if (payment.period === "Weekly"){
             setIncome(payment.amount*4.3);
-        } else if (payment.period == "Every Other Week"){
+        } else if (payment.period === "Every Other Week"){
             setIncome(payment.amount*2.17);
-        } else if (payment.period == "Twice a Month"){
+        } else if (payment.period === "Twice a Month"){
             setIncome(payment.amount/2);
-        } else if (payment.period == "Once a Month"){
+        } else if (payment.period === "Once a Month"){
             setIncome(payment.amount);
-        } else if (payment.period == "Once a Year"){
+        } else if (payment.period === "Once a Year"){
             setIncome(payment.amount/12);
         } else {
             setIncome(0);

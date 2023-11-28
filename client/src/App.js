@@ -15,6 +15,7 @@ import InputGoal from './components/inputs/InputGoal.js';
 import Analytics from './components/Analytics.js';
 import Progress from './components/Progress.js';
 import Profile from './components/Profile.js';
+import ResetPass from './components/ResetPass.js';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<Signup />} />
+          {/* <Route path="/resetPassword" element={<ResetPass/>} /> */}
           {/* We are protecting our Home Page from unauthenticated */}
           {/* users by wrapping it with PrivateRoute here. */}
           <Route element={<PrivateRoute />}>
@@ -39,6 +41,7 @@ function App() {
              <Route path="/progress" element={<Progress />} />
              <Route path="/analytics" element={<Analytics />} />
              <Route path="/profile" element={<Profile />} />
+             <Route path="/resetPassword" element={<ResetPass/>} />
             </Route>
         </Routes>
       </UserProvider>
