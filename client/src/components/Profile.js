@@ -1,5 +1,5 @@
-import { Button, TextField, accordionDetailsClasses, alertClasses } from '@mui/material'
-import { useContext, useEffect, useState } from 'react';
+import { Button, TextField} from '@mui/material'
+import { useContext} from 'react';
 import { UserContext } from '../contexts/user.context';
 import React from "react";
 import Header from './Header.js';
@@ -36,13 +36,6 @@ const Profile=()=>{
             alert("Error in sending Reset Password Email")
         }
     }
-
-    // const {resetPassword, result} = useEmailPasswordAuth();
-    // const [password, setPassword] = useState('');
-    // const performResetPassword = () => {
-    //  resetPassword({token, tokenId, password});
-    // };
-
     return(
         <div>
             <Header/>

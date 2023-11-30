@@ -35,7 +35,7 @@ const Analytics=()=>{
     }
     
     const renderChart =()=>{
-        if (window.location.pathname == "/analytics") {
+        if (window.location.pathname === "/analytics") {
             chart1
                 .render(document.getElementById('chart1'))
                 .catch(() => window.alert('Refresh window'));

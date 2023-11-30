@@ -17,7 +17,6 @@ import Progress from './components/Progress.js';
 import Profile from './components/Profile.js';
 import ResetPass from './components/ResetPass.js';
 
-
 function App() {
   return (
     <BrowserRouter>

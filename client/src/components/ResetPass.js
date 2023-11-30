@@ -1,7 +1,6 @@
 import { Button, TextField} from "@mui/material";
-import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { UserContext } from "../contexts/user.context";
+import {useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { App } from "realm-web";
 import { APP_ID } from "../contexts/realm/constants.js";
 
@@ -10,7 +9,6 @@ const app = new App(APP_ID);
 const ResetPass = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { user, fetchUser, emailPasswordLogin } = useContext(UserContext);
 
     const redirectNow = () => {
         const redirectTo = location.search.replace("?redirectTo=", "");

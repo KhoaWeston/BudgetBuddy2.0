@@ -5,11 +5,43 @@ import { useContext, useState} from "react";
 import { UserContext } from "../../contexts/user.context";
 import { gql, request } from "graphql-request";
 import { GRAPHQL_ENDPOINT } from "../../contexts/realm/constants";
-
+import emailjs from '@emailjs/browser';
+import { App } from "realm-web";
+import { APP_ID } from "../../contexts/realm/constants.js";
 
 const InputReminder=()=>{
     const { user } = useContext(UserContext);
     const [selectedperiod, setSelectedperiod]= useState("");
+    const app = new App(APP_ID);
+
+    const startReminders = async() =>{
+    const schedule = require('node-schedule');
+    const scheduledperiod ="";
+    if (selectedperiod.valueOf==="Once a day"){
+      scheduledperiod ='0 0 * * *';
+    }
+    else if(selectedperiod.valueOf==="Every Other day"){
+      scheduledperiod ='0 0 */2 * *';
+    }
+    else if(selectedperiod.valueOf==="Once a Month"){
+      scheduledperiod ='0 0 1 * *';
+    }
+    else {
+      scheduledperiod ='0 0 1 1 *';
+
+    }
+
+    const job = schedule.scheduleJob(scheduledperiod,function(){
+     emailjs.send("BudgetBuddy","template_ep4sf2p",{
+            message: form.description,
+            to_name: app.currentUser.profile.email
+            }, 'e9ffixOE5GbV8xB6_');
+    });
+
+
+    // for (const job in schedule.scheduledJobs) schedule.scheduledJobs[job].cancel();
+    // ^^ for when you want to stop getting emails all the time
+    }  
 
     const onFormInputChange = (event) => {
         const { name, value } = event.target;
@@ -57,6 +89,7 @@ const InputReminder=()=>{
       try {
         await request(GRAPHQL_ENDPOINT, createReminderQuery, queryVariables, headers);
         alert("Reminder Added to your database!")
+        startReminders();
       } catch (error) {
         alert(error)
       }
@@ -80,7 +113,7 @@ const InputReminder=()=>{
                 />
                 <select value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
                     <option value=" ">  </option>
-                    <option value="Once a day"> Weekly</option>
+                    <option value="Once a day"> Once a day</option>
                     <option value="Every Other day"> Every Other Day</option>
                     <option value="Once a Month"> Once a Month</option>
                     <option value="Once a Year"> Once a Year</option>
