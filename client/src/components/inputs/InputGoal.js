@@ -10,9 +10,12 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateField } from '@mui/x-date-pickers/DateField';
+import { App } from "realm-web";
+import { APP_ID } from "../../contexts/realm/constants.js";
 
 
 const InputGoal=()=>{
+    const app = new App(APP_ID);
     const { user } = useContext(UserContext);
     const [selectedgoal, setgoal]= useState("");
 
@@ -56,7 +59,7 @@ const InputGoal=()=>{
     const onSubmit = async (event) => {
       event.preventDefault();
       if (form.amount === 0 || selectedgoal.valueOf ==="") {
-        alert("wrong!");
+        alert("You must enter both fields");
         return;
       }
       try {
@@ -65,6 +68,16 @@ const InputGoal=()=>{
       } catch (error) {
         alert(error)
       }
+    };
+
+    const ChangeGoal = async(event)=>{
+      const goals = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Goals');
+      const goal = await goals.findOne();
+      form.amount = goal.amount;
+      form.category = goal.category;
+      alert("Your current goal states you want to have $" + goal.amount + " in the category: " + goal.category+
+      "\nEnter the category and amount that you want to change your goal to and press Enter Goal");
+      const goal_deleted = await goals.deleteOne();
     };
 
     return(
@@ -92,12 +105,14 @@ const InputGoal=()=>{
                     <option value="Vacation"> Vacation</option>
                     <option value="Other"> Other</option>
                 </select>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <br></br>  <br></br>
+                {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DemoContainer components={['DateField']}>
                     <DateField id="selectDate" label="By Date" style={{ width: "100px"}}/>
                   </DemoContainer>
-                </LocalizationProvider>
-                <Button variant="contained" onClick={onSubmit} >Enter</Button>
+                </LocalizationProvider> */}
+                <Button variant="contained" onClick={onSubmit} >Enter Goal</Button>
+                <Button variant="contained" onClick={ChangeGoal} >Change Goal</Button>
             </form>
         </div>
     )
