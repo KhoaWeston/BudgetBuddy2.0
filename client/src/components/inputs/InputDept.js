@@ -49,6 +49,7 @@ const InputDebt = () => {
       event.preventDefault();
       const { amount, title } = form;
       if (amount.length === 0 || title.length === 0) {
+        alert("You must enter all fields to submit a debt");
         return;
       }
       try {

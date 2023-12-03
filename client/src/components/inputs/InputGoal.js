@@ -54,8 +54,9 @@ const InputGoal=()=>{
   
     const onSubmit = async (event) => {
       event.preventDefault();
-      if (form.amount === 0 || selectedgoal.valueOf ==="") {
-        alert("You must enter both fields");
+      const {amount,category } = form;
+      if (amount === 0 || category.valueOf.length ===0) {
+        alert("You must enter all fields to submit a goal");
         return;
       }
       try {

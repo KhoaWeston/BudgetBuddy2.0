@@ -48,8 +48,9 @@ const InputSavings = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    const {amount } = form;
-    if (selectedsavings.valueOf ==="" || amount.length === 0) {
+    const {amount,category } = form;
+    if (category.valueOf.length ==0 || amount.length === 0) {
+      alert("You must enter all fields to submit a saving");
       return;
     }
     try {
@@ -79,7 +80,7 @@ const InputSavings = () => {
           style={{ marginBottom: "1rem" }} 
         />
         <select className="inputSelect" value={selectedsavings} onChange={e => setsavings(e.target.value)}>
-          <option value="">  </option>
+          <option> </option>
           <option value="Emergencies"> Emergencies</option>
           <option value="Retirement">Retirement</option>
           <option value="Vacation"> Vacation</option>

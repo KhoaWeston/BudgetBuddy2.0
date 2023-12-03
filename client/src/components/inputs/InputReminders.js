@@ -86,8 +86,8 @@ const InputReminder=()=>{
   
     const onSubmit = async (event) => {
       event.preventDefault();
-      if (form.description.length === 0 || selectedperiod.valueOf ==="") {
-        alert("wrong!");
+      if (form.description.length === 0 || selectedperiod.valueOf.length ===0) {
+        alert("You must enter all fields to submit a reminder");
         return;
       }
       try {
