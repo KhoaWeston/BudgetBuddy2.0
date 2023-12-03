@@ -100,8 +100,8 @@ const InputGoal=()=>{
                     <option value="Vacation"> Vacation</option>
                     <option value="Other"> Other</option>
                 </select>
-                {/* <div><input className="inputDate" type="date" id="goal-date" /></div> */}
-                <Button variant="contained" onClick={onSubmit} >Enter</Button>
+                <Button variant="contained" onClick={onSubmit} style={{marginRight:"130px"}}>Enter Goal</Button>
+                <Button variant="contained" onClick={ChangeGoal} >Change Goal</Button>
             </div>
         </div>
     )

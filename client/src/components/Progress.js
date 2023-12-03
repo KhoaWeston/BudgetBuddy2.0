@@ -42,6 +42,10 @@ const Progress=()=>{
 
     const getIncome = async()=>{
         const income = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Income');
+        if (income.count() ===0 ){
+            alert("No income is currently entered...therefore your progress will not be correct");
+            return
+        }
         const payment = await income.findOne();
         if (payment.period === "Weekly"){
             setIncome(payment.amount*4.3);
@@ -60,6 +64,10 @@ const Progress=()=>{
     
     const getGoalAmount = async()=>{
         const goals = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Goals');
+        if (goals.count() ===0 ){
+            alert("No goal is currently entered...therefore your progress will not be correct");
+            return
+        }
         const goal = await goals.findOne();
         setGoalAmount(goal.amount);
         setGoalCat(goal.category);

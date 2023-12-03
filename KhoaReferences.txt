@@ -18,5 +18,4 @@ Filtering Dates -       https://www.youtube.com/watch?v=VXA7cLxKZpQ
 
 Cheka to INSTALL: 
 -----------------------------
-npm install crypto-browserify
-npm install stream
+nothing
