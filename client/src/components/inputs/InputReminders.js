@@ -17,7 +17,7 @@ const InputReminder=()=>{
 
     const startReminders = async() =>{
     const schedule = require('node-schedule');
-    const scheduledperiod ="";
+    let scheduledperiod ="";
     if (selectedperiod.valueOf==="Once a day"){
       scheduledperiod ='0 0 * * *';
     }
@@ -32,17 +32,21 @@ const InputReminder=()=>{
 
     }
 
-    const job = schedule.scheduleJob(scheduledperiod,function(){
+    schedule.scheduleJob(scheduledperiod,function(){
      emailjs.send("BudgetBuddy","template_ep4sf2p",{
             message: form.description,
             to_name: app.currentUser.profile.email
             }, 'e9ffixOE5GbV8xB6_');
     });
 
-
-    // for (const job in schedule.scheduledJobs) schedule.scheduledJobs[job].cancel();
-    // ^^ for when you want to stop getting emails all the time
     }  
+
+    const DeleteReminder=()=>{
+      const schedule = require('node-schedule');
+      for (const job in schedule.scheduledJobs){
+        schedule.scheduledJobs[job].cancel();
+      }
+    }
 
     const onFormInputChange = (event) => {
         const { name, value } = event.target;
@@ -120,9 +124,15 @@ const InputReminder=()=>{
                     <option value="Once a Year"> Once a Year</option>
                 </select> 
                 <br></br>
-                <Button variant="contained" color="primary" onClick={onSubmit} type="submit">
-                  Enter
+                <Button 
+                  variant="contained" 
+                  color="primary" 
+                  onClick={onSubmit} 
+                  type="submit"
+                  style={{ marginRight:"55px"}}>
+                  Enter Reminder
                 </Button>
+                <Button variant="contained" color="primary" onClick={DeleteReminder}>Delete Reminders</Button>
             </form>
         </div>
     )
