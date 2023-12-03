@@ -6,10 +6,6 @@ import { GRAPHQL_ENDPOINT } from "../../contexts/realm/constants";
 import Header from '../Header.js';
 import Footer from '../Footer.js';
 import { Button } from '@mui/material'
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateField } from '@mui/x-date-pickers/DateField';
 import { App } from "realm-web";
 import { APP_ID } from "../../contexts/realm/constants.js";
 
@@ -105,7 +101,8 @@ const InputGoal=()=>{
                     <option value="Other"> Other</option>
                 </select>
                 <div><input className="inputDate" type="date" id="goal-date" /></div>
-                <Button variant="contained" onClick={onSubmit} >Enter</Button>
+                <Button variant="contained" onClick={onSubmit} style={{marginRight:"130px"}}>Enter Goal</Button>
+                <Button variant="contained" onClick={ChangeGoal} >Change Goal</Button>
             </div>
         </div>
     )
