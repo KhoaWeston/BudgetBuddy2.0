@@ -46,6 +46,7 @@ const InputReminder=()=>{
       for (const job in schedule.scheduledJobs){
         schedule.scheduledJobs[job].cancel();
       }
+      alert("Current Reminders have been deleted!")
     }
 
     const onFormInputChange = (event) => {
