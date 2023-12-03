@@ -36,13 +36,6 @@ const Profile=()=>{
             alert("Error in sending Reset Password Email")
         }
     }
-
-    // const {resetPassword, result} = useEmailPasswordAuth();
-    // const [password, setPassword] = useState('');
-    // const performResetPassword = () => {
-    //  resetPassword({token, tokenId, password});
-    // };
-
     return(
         <div>
             <Header/>
@@ -58,17 +51,14 @@ const Profile=()=>{
                     />
                 </div>
                 <div>
-                    <u1>password: </u1>
-                    <TextField
-                        name="password"
-                        label="dunno"
-                        type="password"
-                        variant="outlined"
+                    <Button
+                        variant="contained"
                         style={{ marginBottom: "1rem" }}
-                    />
+                        onClick={ResetPassword}>
+                        Reset Password 
+                    </Button>
                 </div>
                 <Button variant="contained" onClick={logOut}>Logout</Button>
-                <Button variant="contained" onClick={ResetPassword}> Reset Password</Button>
             </form>
         </div>
     )
