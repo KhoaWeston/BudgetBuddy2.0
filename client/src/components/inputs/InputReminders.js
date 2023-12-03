@@ -128,7 +128,7 @@ const InputReminder=()=>{
                   color="primary" 
                   onClick={onSubmit} 
                   type="submit"
-                  style={{ marginRight:"55px"}}>
+                  style={{ marginRight:"50px"}}>
                   Submit Reminder
                 </Button>
                 <Button variant="contained" color="primary" onClick={DeleteReminder}>Delete Reminders</Button>
