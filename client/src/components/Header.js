@@ -27,8 +27,7 @@ const Header=()=>{
                             <Dropdown.Item href="/input-goal">Goals</Dropdown.Item>
                         </DropdownButton>
                     </li>
-                    <li><Link to="/progress">Progress</Link>
-                    </li>
+                    <li><Link to="/progress">Progress</Link></li>
                     <li><Link to="/analytics">Analytics</Link></li>
                     <IconButton><Link to="/profile"><PersonIcon /></Link></IconButton>
                 </ul>

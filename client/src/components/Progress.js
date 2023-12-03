@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Header from './Header.js';
 import Footer from './Footer.js';
+import { Button } from '@mui/material'
 import { App } from "realm-web";
 import { APP_ID } from "../contexts/realm/constants.js";
 
 const Progress=()=>{
     const app = new App(APP_ID);
+    const [goalCat, setGoalCat] = useState("");
+    const [currentGoalProgress, setCurrentGoalProgress] = useState(0);
     const [actualWant, setActualWant] = useState(0);
     const [actualNeed, setActualNeed] = useState(0);
     const [actualSaving, setActualSaving] = useState(0);
@@ -27,7 +30,14 @@ const Progress=()=>{
     const calculateSaving = async() =>{
         const savings = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Savings');
         let saving = await savings.find();        
-        setActualSaving(saving.reduce((a,v)=>a=a+v.amount,0));
+        setActualSaving(saving.reduce((a, v) => a = a + v.amount, 0));
+        let total = 0;
+        for (let i = 0; i < saving.length; i++) {
+            if(saving[i].category === goalCat){
+                total = total + saving[i].amount;
+            }
+        }
+        setCurrentGoalProgress(total);
     }
 
     const getIncome = async()=>{
@@ -51,13 +61,14 @@ const Progress=()=>{
     const getGoalAmount = async()=>{
         const goals = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Goals');
         const goal = await goals.findOne();
-        setGoalAmount(goal.amount)
+        setGoalAmount(goal.amount);
+        setGoalCat(goal.category);
     }
 
     const getColor=()=>{
-        if((actualSaving / goalAmount *100) < 40){
+        if((currentGoalProgress / goalAmount *100) < 40){
             return "#ff0000";
-        } else if ((actualSaving / goalAmount *100) < 70){
+        } else if ((currentGoalProgress / goalAmount *100) < 70){
             return "#ffa500";
         } else {
             return "#2ecc71";
@@ -65,12 +76,12 @@ const Progress=()=>{
     }
 
     useEffect(() => {
+        getGoalAmount();
         getIncome(); 
         calculateWant();
         calculateNeed();
         calculateSaving();
-        getGoalAmount();
-    }, []);
+    });
 
     return(
         <div>
@@ -99,11 +110,12 @@ const Progress=()=>{
             </div>
             
             <div><form style={{ margin: "50px"}}>
-                <div className="progress-label">Your goal is to have ${goalAmount} in your "account". Currently you have ${actualSaving}.</div>
+                <div className="progress-label">Your goal is to have ${goalAmount} in your {goalCat}. Currently you have ${currentGoalProgress}.</div>
                 <div className="progress-bar">
-                    <div className="progress-bar-fill" style={{ width: `${actualSaving / goalAmount *100}%`, backgroundColor: getColor() }}></div>
+                    <div className="progress-bar-fill" style={{ width: `${currentGoalProgress / goalAmount *100}%`, backgroundColor: getColor() }}></div>
                 </div>
-                <div className="progress-label">{actualSaving / goalAmount *100}% towards your goal!</div>
+                <div className="progress-label">{currentGoalProgress / goalAmount *100}% towards your goal!</div>
+                <Button variant="contained" href="/input-goal" style={{ width: "150px" }}>Change Goal</Button>
                 </form>
             </div>
         </div>

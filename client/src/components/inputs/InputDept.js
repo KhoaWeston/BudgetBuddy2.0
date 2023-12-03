@@ -64,7 +64,7 @@ const InputDebt = () => {
           <Header/>
           <Footer/>
           
-          <form onSubmit={onSubmit} style={{ maxWidth: "300px", margin: "auto" }}>
+          <div className="input-container">
             <h1>Input Debt Information </h1>
             <input
               className="inputBox"
@@ -93,7 +93,7 @@ const InputDebt = () => {
             <Button variant="contained" color="primary" onClick={onSubmit} type="submit">
               Submit Debt
             </Button>
-          </form>
+          </div>
         </div>
       );
     }

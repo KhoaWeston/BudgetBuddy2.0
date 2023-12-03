@@ -64,10 +64,10 @@ const InputSavings = () => {
     <div>
       <Header/>
       <Footer/>
-      <form onSubmit={onSubmit} style={{ maxWidth: "300px", margin: "auto" }}>
+      <div className="input-container">
         <h1>Input Savings Information </h1>
-        <select value={selectedsavings} onChange={e => setsavings(e.target.value)}>
-          <option value=" ">  </option>
+        <select style={{width:"415px", height:"30px"}} value={selectedsavings} onChange={e => setsavings(e.target.value)}>
+          <option value="">  </option>
           <option value="Emergencies"> Emergencies</option>
           <option value="Retirement">Retirement</option>
           <option value="Vacation"> Vacation</option>
@@ -88,7 +88,7 @@ const InputSavings = () => {
         <Button variant="contained" color="primary" onClick={onSubmit} type="submit">
           Submit Savings
         </Button>
-      </form>
+      </div>
     </div>
   );
 }

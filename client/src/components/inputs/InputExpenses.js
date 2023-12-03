@@ -70,7 +70,7 @@ const InputExpense = () => {
       <Header/>
       <Footer/>
       
-      <form onSubmit={onSubmit} style={{ maxWidth: "300px", margin: "auto" }}>
+      <div className="input-container">
         <h1>Input Expense Information </h1>
         <input
           className="inputBox"
@@ -111,7 +111,7 @@ const InputExpense = () => {
         <Button variant="contained" color="primary" onClick={onSubmit} type="submit">
           Submit Expense
         </Button>
-      </form>
+      </div>
     </div>
   );
 }

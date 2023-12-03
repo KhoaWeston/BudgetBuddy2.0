@@ -6,10 +6,6 @@ import { GRAPHQL_ENDPOINT } from "../../contexts/realm/constants";
 import Header from '../Header.js';
 import Footer from '../Footer.js';
 import { Button } from '@mui/material'
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateField } from '@mui/x-date-pickers/DateField';
 
 
 const InputGoal=()=>{
@@ -71,7 +67,7 @@ const InputGoal=()=>{
         <div>
             <Header/>
             <Footer/>
-            <form onSubmit={onSubmit} style={{ maxWidth: "500px", margin: "auto" }}>
+            <div className="input-container">
                 <h1>Input goal information</h1>
                 <input
                     className="inputBox"
@@ -84,21 +80,16 @@ const InputGoal=()=>{
                     fullWidth
                     style={{ marginBottom: "1rem" }} 
                 />
-
-                <select value={selectedgoal} onChange={e => setgoal(e.target.value)}>
+                <select className="inputSelect" value={selectedgoal} onChange={e => setgoal(e.target.value)}>
                     <option value=" ">  </option>
                     <option value="Emergencies"> Emergencies</option>
                     <option value="Retirement">Retirement</option>
                     <option value="Vacation"> Vacation</option>
                     <option value="Other"> Other</option>
                 </select>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DemoContainer components={['DateField']}>
-                    <DateField id="selectDate" label="By Date" style={{ width: "100px"}}/>
-                  </DemoContainer>
-                </LocalizationProvider>
+                <div><input className="inputDate" type="date" id="goal-date" /></div>
                 <Button variant="contained" onClick={onSubmit} >Enter</Button>
-            </form>
+            </div>
         </div>
     )
 }

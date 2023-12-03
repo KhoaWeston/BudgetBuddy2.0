@@ -39,8 +39,22 @@ body, html {
   padding: 7px;
   display: block;
   border: 1px solid skyblue;
-  width: 300px;
+  width: 400px;
   margin-top: 20px;
+}
+
+.inputSelect {
+  width: 415px;
+  height: 30px;
+  margin-bottom: 20px; 
+}
+
+.inputDate {
+  width: 150px;
+  height: 30px;
+  font-size: 15px;  
+  text-indent: 2px;
+  margin-bottom: 20px;
 }
 
 .nav-footer {
