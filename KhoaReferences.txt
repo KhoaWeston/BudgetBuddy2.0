@@ -16,6 +16,4 @@ Date Field -            https://mui.com/x/react-date-pickers/date-field/
 
 Cheka to INSTALL: 
 -----------------------------
-npm install @mongodb-js/charts-embed-dom --save
-npm install @mui/x-date-pickers
-npm install dayjs
+nothing

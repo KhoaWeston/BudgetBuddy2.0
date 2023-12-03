@@ -14,6 +14,15 @@ Reset password
 https://www.mongodb.com/docs/realm/sdk/node/users/manage-email-password-users/
 https://karoldabrowski.com/blog/getting-parameters-from-url-in-a-react-application/
 
+sending emails with email js
+https://javascript.plainenglish.io/email-from-your-react-project-w-emailjs-d6af68fa5c17
+
+schedule email
+https://reflectoring.io/schedule-cron-job-in-node/
+
+Finding/deleting queries
+https://www.w3schools.com/nodejs/nodejs_mongodb_update.asp 
+
 
 
 
