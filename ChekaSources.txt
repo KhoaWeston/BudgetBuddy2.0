@@ -23,6 +23,9 @@ https://reflectoring.io/schedule-cron-job-in-node/
 Finding/deleting queries
 https://www.w3schools.com/nodejs/nodejs_mongodb_update.asp 
 
+Seeing if database has neccessary items
+https://stackoverflow.com/questions/37459215/check-if-mongodb-database-is-empty-via-db-collection-count-doesnt-work 
+
 
 
 
