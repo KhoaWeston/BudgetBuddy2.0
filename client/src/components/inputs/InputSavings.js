@@ -49,8 +49,8 @@ const InputSavings = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     const {amount,category } = form;
-    if (category.valueOf.length ==0 || amount.length === 0) {
-      alert("You must enter all fields to submit a saving");
+      if (amount === 0 || selectedsavings.length ==0 ) {
+        alert("You must enter all fields to submit a saving");
       return;
     }
     try {
