@@ -9,8 +9,8 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 const Header=()=>{
     return(
         <header className="nav-header">
-            <div>
-                <ul>
+            <ul className="row">
+                <div style={{ flex: "70%"}}>
                     <li><Link to="/">Home</Link></li>
                     <li className="dropdown-in">
                         <DropdownButton id="input-dropdown" title="Input">
@@ -29,9 +29,9 @@ const Header=()=>{
                     </li>
                     <li><Link to="/progress">Progress</Link></li>
                     <li><Link to="/analytics">Analytics</Link></li>
-                    <IconButton><Link to="/profile"><PersonIcon /></Link></IconButton>
-                </ul>
-            </div>
+                </div>
+                <div style={{ flex: "30%", textAlign:"right", marginRight:"30px", marginTop:"10px"}}><IconButton style={{textAlign:"right"}}><Link to="/profile"><PersonIcon /></Link></IconButton></div>
+            </ul>
         </header>
     )
 }

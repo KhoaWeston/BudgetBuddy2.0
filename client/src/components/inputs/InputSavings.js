@@ -66,13 +66,6 @@ const InputSavings = () => {
       <Footer/>
       <div className="input-container">
         <h1>Input Savings Information </h1>
-        <select style={{width:"415px", height:"30px"}} value={selectedsavings} onChange={e => setsavings(e.target.value)}>
-          <option value="">  </option>
-          <option value="Emergencies"> Emergencies</option>
-          <option value="Retirement">Retirement</option>
-          <option value="Vacation"> Vacation</option>
-          <option value="Other"> Other</option>
-        </select>
         <input
           className="inputBox"
           placeholder="Enter Amount"
@@ -85,6 +78,13 @@ const InputSavings = () => {
           fullWidth
           style={{ marginBottom: "1rem" }} 
         />
+        <select className="inputSelect" value={selectedsavings} onChange={e => setsavings(e.target.value)}>
+          <option value="">  </option>
+          <option value="Emergencies"> Emergencies</option>
+          <option value="Retirement">Retirement</option>
+          <option value="Vacation"> Vacation</option>
+          <option value="Other"> Other</option>
+        </select>
         <Button variant="contained" color="primary" onClick={onSubmit} type="submit">
           Submit Savings
         </Button>

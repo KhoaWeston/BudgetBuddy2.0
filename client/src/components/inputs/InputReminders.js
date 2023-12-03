@@ -17,7 +17,7 @@ const InputReminder=()=>{
 
     const startReminders = async() =>{
     const schedule = require('node-schedule');
-    const scheduledperiod ="";
+    let scheduledperiod ="";
     if (selectedperiod.valueOf==="Once a day"){
       scheduledperiod ='0 0 * * *';
     }
@@ -79,7 +79,6 @@ const InputReminder=()=>{
     // To prove that the identity of the user, we are attaching
     // an Authorization Header with the request
     const headers = { Authorization: `Bearer ${user._accessToken}` };
-
   
     const onSubmit = async (event) => {
       event.preventDefault();
@@ -112,7 +111,7 @@ const InputReminder=()=>{
                     fullWidth
                     style={{ marginBottom: "1rem" }} 
                 />
-                <select style={{width:"415px", height:"30px", marginBottom:"20px"}} value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
+                <select className="inputSelect" value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
                     <option value=" ">  </option>
                     <option value="Once a day"> Once a day</option>
                     <option value="Every Other day"> Every Other Day</option>

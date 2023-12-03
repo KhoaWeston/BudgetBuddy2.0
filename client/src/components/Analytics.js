@@ -64,17 +64,19 @@ const Analytics=()=>{
         <div>
             <Header/>
             <Footer/>
-            <h1><form style={{ maxWidth: "350px", margin: "auto" }}>Display analytics here</form></h1>
+            <h1><form style={{ maxWidth: "350px", margin: "auto" }}>Your Analytics</form></h1>
             <div className="row">
                 <div style={{ flex: "10%"}} >
                     <div>Show data </div>
-                    <label>from: <input className="inputDate" type="date" id="date-from" /></label>
-                    <div><label>to: <input className="inputDate" type="date" id="date-to" /></label></div>
+                    <div style={{ textAlign: "right" }} >
+                        <label>from: <input className="inputDate" type="date" id="date-from" /></label>
+                        <div><label>to: <input className="inputDate" type="date" id="date-to" /></label></div>
+                    </div>    
                     <Button variant="contained" onClick={changeDate} style={{ width: "75px", margin: "auto" }}>Enter</Button> 
                 </div>
                 <div style={{ flex: "80%"}}>
                     <div id="chart1" className="chart"></div>
-                    <Button variant="contained" onClick={refreshChart} style={{ width: "75px", margin: "auto" }}>Refresh</Button>
+                    <Button variant="contained" onClick={refreshChart}>Refresh</Button>
                 </div>
             </div>
         </div>

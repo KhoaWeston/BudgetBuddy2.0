@@ -115,7 +115,7 @@ const Progress=()=>{
                     <div className="progress-bar-fill" style={{ width: `${currentGoalProgress / goalAmount *100}%`, backgroundColor: getColor() }}></div>
                 </div>
                 <div className="progress-label">{currentGoalProgress / goalAmount *100}% towards your goal!</div>
-                <Button variant="contained" href="/input-goal" style={{ width: "150px" }}>Change Goal</Button>
+                <Button variant="contained" href="/input-goal">Change Goal</Button>
                 </form>
             </div>
         </div>

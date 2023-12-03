@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material'
+import { Button } from '@mui/material'
 import { useContext } from 'react';
 import { UserContext } from '../contexts/user.context';
 import React from "react";
@@ -40,26 +40,19 @@ const Profile=()=>{
         <div>
             <Header/>
             <Footer/>
-            <form style={{ flex:1, justifyContent: "center", alignitems:"center", maxWidth: "500px", margin: "auto"}}>
+            <div className="input-container">
                 <h1> Your Profile</h1>
-                <div>
-                    <u1>email: </u1>
-                    <TextField 
-                    label= {app.currentUser.profile.email}
-                    className="email"   
-                    style={{ marginBottom: "1rem" }} 
-                    />
-                </div>
+                <label>Email: {app.currentUser.profile.email} </label>
                 <div>
                     <Button
                         variant="contained"
-                        style={{ marginBottom: "1rem" }}
+                        style={{ marginTop: "20px", marginBottom: "20px"}}
                         onClick={ResetPassword}>
                         Reset Password 
                     </Button>
                 </div>
                 <Button variant="contained" onClick={logOut}>Logout</Button>
-            </form>
+            </div>
         </div>
     )
 }

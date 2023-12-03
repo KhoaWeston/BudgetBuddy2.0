@@ -81,7 +81,7 @@ const InputIncome = () => {
               fullWidth
               style={{ marginBottom: "1rem" }} 
             />
-           <select style={{width:"415px", height:"30px", marginBottom:"20px"}} value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
+           <select className="inputSelect" value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
             <option value=" ">  </option>
             <option value="Weekly"> Weekly</option>
             <option value="Every Other Week"> Every Other Week</option>
