@@ -67,7 +67,7 @@ const InputIncome = () => {
           <Header/>
           <Footer/>
           
-          <form onSubmit={onSubmit} style={{ maxWidth: "300px", margin: "auto" }}>
+          <div className="input-container">
             <h1>Input Income Information </h1>
             <input
               className="inputBox"
@@ -81,7 +81,7 @@ const InputIncome = () => {
               fullWidth
               style={{ marginBottom: "1rem" }} 
             />
-           <select value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
+           <select style={{width:"415px", height:"30px", marginBottom:"20px"}} value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
             <option value=" ">  </option>
             <option value="Weekly"> Weekly</option>
             <option value="Every Other Week"> Every Other Week</option>
@@ -93,7 +93,7 @@ const InputIncome = () => {
             <Button variant="contained" color="primary" onClick={onSubmit} type="submit">
               Submit Income
             </Button>
-          </form>
+          </div>
         </div>
       );
 }

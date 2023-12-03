@@ -5,6 +5,7 @@ import { useContext, useState} from "react";
 import { UserContext } from "../../contexts/user.context";
 import { gql, request } from "graphql-request";
 import { GRAPHQL_ENDPOINT } from "../../contexts/realm/constants";
+import { Button } from '@mui/material';
 import emailjs from '@emailjs/browser';
 import { App } from "realm-web";
 import { APP_ID } from "../../contexts/realm/constants.js";
@@ -98,8 +99,8 @@ const InputReminder=()=>{
         <div>
             <Header/>
             <Footer/>
-            <form style={{ maxWidth: "500px", margin: "auto" }}>
-                <h1>Input reminder information</h1>
+            <form className="input-container">
+                <h1>Input Reminder Information</h1>
                 <input
                     className="inputBox"
                     placeholder="Enter Description "
@@ -111,7 +112,7 @@ const InputReminder=()=>{
                     fullWidth
                     style={{ marginBottom: "1rem" }} 
                 />
-                <select value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
+                <select style={{width:"415px", height:"30px", marginBottom:"20px"}} value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
                     <option value=" ">  </option>
                     <option value="Once a day"> Once a day</option>
                     <option value="Every Other day"> Every Other Day</option>
@@ -119,7 +120,9 @@ const InputReminder=()=>{
                     <option value="Once a Year"> Once a Year</option>
                 </select> 
                 <br></br>
-                <button onClick={onSubmit} className="appButton" type="button">Enter</button>
+                <Button variant="contained" color="primary" onClick={onSubmit} type="submit">
+                  Enter
+                </Button>
             </form>
         </div>
     )

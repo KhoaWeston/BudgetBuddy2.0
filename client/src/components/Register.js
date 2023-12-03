@@ -2,10 +2,7 @@ import { Button, TextField } from "@mui/material";
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/user.context";
-import { App } from "realm-web";
-import { APP_ID } from "../contexts/realm/constants.js";
 
-const app = new App(APP_ID);
  
 const Register = () => {
  const navigate = useNavigate();

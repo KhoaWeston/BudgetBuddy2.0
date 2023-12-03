@@ -12,6 +12,8 @@ Making columns -        https://www.w3schools.com/howto/howto_css_two_columns.as
 Embedding Chart -       https://www.npmjs.com/package/@mongodb-js/charts-embed-dom
 Embedding Chart Demo -  https://www.youtube.com/watch?v=LXUYSDYDnh8
 Date Field -            https://mui.com/x/react-date-pickers/date-field/
+Authenticate Chart -    https://www.mongodb.com/docs/charts/embed-chart-stitch-auth/
+Filtering Dates -       https://www.youtube.com/watch?v=VXA7cLxKZpQ
 
 
 Cheka to INSTALL: 

@@ -84,7 +84,7 @@ const InputGoal=()=>{
         <div>
             <Header/>
             <Footer/>
-            <form onSubmit={onSubmit} style={{ maxWidth: "500px", margin: "auto" }}>
+            <div className="input-container">
                 <h1>Input goal information</h1>
                 <input
                     className="inputBox"
@@ -97,23 +97,16 @@ const InputGoal=()=>{
                     fullWidth
                     style={{ marginBottom: "1rem" }} 
                 />
-
-                <select value={selectedgoal} onChange={e => setgoal(e.target.value)}>
+                <select className="inputSelect" value={selectedgoal} onChange={e => setgoal(e.target.value)}>
                     <option value=" ">  </option>
                     <option value="Emergencies"> Emergencies</option>
                     <option value="Retirement">Retirement</option>
                     <option value="Vacation"> Vacation</option>
                     <option value="Other"> Other</option>
                 </select>
-                <br></br>  <br></br>
-                {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DemoContainer components={['DateField']}>
-                    <DateField id="selectDate" label="By Date" style={{ width: "100px"}}/>
-                  </DemoContainer>
-                </LocalizationProvider> */}
-                <Button variant="contained" onClick={onSubmit} >Enter Goal</Button>
-                <Button variant="contained" onClick={ChangeGoal} >Change Goal</Button>
-            </form>
+                <div><input className="inputDate" type="date" id="goal-date" /></div>
+                <Button variant="contained" onClick={onSubmit} >Enter</Button>
+            </div>
         </div>
     )
 }
