@@ -1,20 +1,12 @@
 import { Button, TextField} from "@mui/material";
 import {useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { App } from "realm-web";
 import { APP_ID } from "../contexts/realm/constants.js";
 
 const app = new App(APP_ID);
  
 const ResetPass = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    const redirectNow = () => {
-        const redirectTo = location.search.replace("?redirectTo=", "");
-        navigate(redirectTo ? redirectTo : "/");
-      };
-
     const [form, setForm] = useState({
         newPass: "",
         newPassCopy: ""
@@ -73,9 +65,7 @@ const ResetPass = () => {
     Reset Password
   </Button>
   <br></br>
-  <Button variant="contained" color="primary" onClick={redirectNow}>
-    Return to Home Screen 
-  </Button>
+  <p><Link to="/login"> Click Here to Login with your new Password</Link></p>
 </form>
 }
  
