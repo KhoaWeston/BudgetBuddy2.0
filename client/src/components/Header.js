@@ -6,6 +6,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
+// Creates a header with tabs that allow the user to navigate to different windows
 const Header=()=>{
     return(
         <header className="nav-header">

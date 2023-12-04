@@ -52,7 +52,6 @@ const InputGoal=()=>{
     // an Authorization Header with the request
     const headers = { Authorization: `Bearer ${user._accessToken}` };
 
-  
     const onSubmit = async (event) => { // the function that will run when submit goal is pressed
       event.preventDefault();
       const {amount } = form;

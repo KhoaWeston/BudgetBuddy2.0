@@ -5,6 +5,7 @@ import khoaImage from '../images/Khoa.jpg';
 import chekaImage from '../images/Cheka.jpg';
 
 
+// Displays home page with summary of project and information about programmers
 export default function Home() {
   return (
     <>

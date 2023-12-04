@@ -18,6 +18,7 @@ import Profile from './components/Profile.js';
 import ResetPass from './components/ResetPass.js';
 import ConfirmUser from './components/confirmUser.js';
 
+// Sets up the routes for each of the app's pages
 function App() {
   return (
     <BrowserRouter>
