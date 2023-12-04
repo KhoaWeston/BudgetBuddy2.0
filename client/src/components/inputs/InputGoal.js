@@ -13,14 +13,15 @@ import { APP_ID } from "../../contexts/realm/constants.js";
 const InputGoal=()=>{
     const app = new App(APP_ID);
     const { user } = useContext(UserContext);
-    const [selectedgoal, setgoal]= useState("");
+    const [selectedgoal, setgoal]= useState(""); // a small function that sets the variable selectedgoal when called
 
+    // This function will be called whenever the user edits the form.
     const onFormInputChange = (event) => {
         const { name, value } = event.target;
         setForm({ ...form, [name]: value });
       };
   
-    // Some prefilled form state
+    // sets the form's variables as null to start 
     const [form, setForm] = useState({
       amount: "",
       category: "",
@@ -52,34 +53,27 @@ const InputGoal=()=>{
     const headers = { Authorization: `Bearer ${user._accessToken}` };
 
   
-    const onSubmit = async (event) => {
+    const onSubmit = async (event) => { // the function that will run when submit goal is pressed
       event.preventDefault();
       const {amount } = form;
-      if (amount === 0 || selectedgoal.length ===0 ) {
+      if (amount === 0 || selectedgoal.length ===0 ) { // error checking that the form values are filled in
         alert("You must enter all fields to submit a goal");
         return;
       }
       try {
-        await request(GRAPHQL_ENDPOINT, createGoalQuery, queryVariables, headers);
-        alert("Goal Added to your database!")
+        await request(GRAPHQL_ENDPOINT, createGoalQuery, queryVariables, headers); // sends the query with the data points to mongodb
+        alert("Goal Added to your database!") // alerts the user if sucessfull
       } catch (error) {
-        alert(error)
+        alert(error) // alerts the user if query fails
       }
     };
 
-    const ChangeGoal = async(event)=>{
-      const goals = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Goals');
-      const goal = await goals.findOne();
-      // form.amount = goal.amount;
-      // form.category = goal.category;
-      // if (!goals.count()){
-      //   alert("you currently have no goals");
-      // }
-      // else{
+    const ChangeGoal = async(event)=>{ // will run when the user pressed change goal
+      const goals = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Goals'); // gathers the collection from mongodb
+      const goal = await goals.findOne(); // finds one goal
         alert("Your current goal states you want to have $" + goal.amount + " in the category: " + goal.category+
-        "\nEnter the category and amount that you want to change your goal to and press Enter Goal");
-        const goal_deleted = await goals.deleteOne();
-      // }
+        "\nEnter the category and amount that you want to change your goal to and press Enter Goal"); // alerts the user of their current goa
+        const goal_deleted = await goals.deleteOne(); // deletes their current goal
     };
 
     return(
@@ -112,4 +106,5 @@ const InputGoal=()=>{
         </div>
     )
 }
+// the form that is displayed when input goal page is called
 export default InputGoal

@@ -9,12 +9,13 @@ import Footer from '../Footer.js';
 const InputDebt = () => {
     const { user } = useContext(UserContext);
 
+    // This function will be called whenever the user edits the form.
     const onFormInputChange = (event) => {
         const { name, value } = event.target;
         setForm({ ...form, [name]: value });
       };
   
-    // Some prefilled form state
+    // sets the form's variables as null to start 
     const [form, setForm] = useState({
       amount: "",
       title: "",
@@ -45,18 +46,18 @@ const InputDebt = () => {
     // an Authorization Header with the request
     const headers = { Authorization: `Bearer ${user._accessToken}` };
   
-    const onSubmit = async (event) => {
+    const onSubmit = async (event) => {// the function that will run when submit debt is pressed
       event.preventDefault();
       const { amount, title } = form;
-      if (amount.length === 0 || title.length === 0) {
+      if (amount.length === 0 || title.length === 0) { // error checking that the form values are filled in
         alert("You must enter all fields to submit a debt");
         return;
       }
       try {
-        await request(GRAPHQL_ENDPOINT, createDebtQuery, queryVariables, headers);
-        alert("Debt Added to your database!")
+        await request(GRAPHQL_ENDPOINT, createDebtQuery, queryVariables, headers); // sends the query with the data points to mongodb
+        alert("Debt Added to your database!") // alerts the user if sucessfull
       } catch (error) {
-        alert(error)
+        alert(error)// alerts the user if query fails
       }
     };
   
@@ -98,7 +99,7 @@ const InputDebt = () => {
         </div>
       );
     }
-    
+  // the form that is displayed when input debt page is called
     export default InputDebt;
     
     

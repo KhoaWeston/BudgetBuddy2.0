@@ -10,7 +10,7 @@ const app = new App(APP_ID);
 export const UserContext = createContext();
  
 export const UserProvider = ({ children }) => {
- const [user, setUser] = useState(null);
+ const [user, setUser] = useState(null); // sets the user when the function is called
  
  // Function to log in user into our App Service app using their email & password
  const emailPasswordLogin = async (email, password) => {

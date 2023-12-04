@@ -7,7 +7,7 @@ import { APP_ID } from "../contexts/realm/constants.js";
 const app = new App(APP_ID);
  
 const ResetPass = () => {
-    const [form, setForm] = useState({
+    const [form, setForm] = useState({ // sets the form's variables as null to start 
         newPass: "",
         newPassCopy: ""
       });
@@ -18,25 +18,25 @@ const ResetPass = () => {
         setForm({ ...form, [name]: value });
       };
 
- const onSubmit = async (event) => {
+ const onSubmit = async (event) => { // runs when the user presses the submit button
     event.preventDefault();
-    const { newPassCopy, newPass } = form;
-    if (newPassCopy.length === 0 || newPass.length === 0 || newPass.valueOf !== newPassCopy.valueOf) {
-      alert("Your Passwords do not match, please try again!");
+    const { newPassCopy, newPass } = form; // takes the variables from the form
+    if (newPassCopy.length === 0 || newPass.length === 0 || newPass.valueOf !== newPassCopy.valueOf) { // error checking to ensure the values are not null and match
+      alert("Your Passwords do not match, please try again!"); // alerts the user if they do not match
       return;
     }
     try {
-        const queryParams = new URLSearchParams(window.location.search);
-        const token = queryParams.get('token');
-        const tokenId = queryParams.get('tokenId');
+        const queryParams = new URLSearchParams(window.location.search); // pulls the current url
+        const token = queryParams.get('token'); // puts the url token variable into a node.js variable
+        const tokenId = queryParams.get('tokenId'); // puts the url token id variables into a node.js variable
 
-        await app.emailPasswordAuth.resetPassword({
+        await app.emailPasswordAuth.resetPassword({ // a mongoDB function that resets the password
             password: newPass,
             token,
             tokenId,
           });
-          alert("Password has been changed");
-    } catch (error) {
+          alert("Password has been changed"); // outputs an alert to the screen saying password has been changed
+    } catch (error) { // if successful, it will output the error to the screen 
       alert(error)
     }
   };
@@ -67,6 +67,6 @@ const ResetPass = () => {
   <br></br>
   <p><Link to="/login"> Click Here to Login with your new Password</Link></p>
 </form>
-}
+} // form that will output to the screen when the user runs the reset password
  
 export default ResetPass;

@@ -5,38 +5,38 @@ import { UserContext } from "../contexts/user.context";
 
  
 const Register = () => {
- const navigate = useNavigate();
+ const navigate = useNavigate(); // used in the redirect function 
  const location = useLocation();
  
- // As explained in the Login page.
+ 
  const { emailPasswordSignup } = useContext(UserContext);
- const [form, setForm] = useState({
+ const [form, setForm] = useState({ // sets the form's variables as null to start 
    email: "",
    password: ""
  });
  
- // As explained in the Login page.
+// This function will be called whenever the user edits the form.
  const onFormInputChange = (event) => {
    const { name, value } = event.target;
    setForm({ ...form, [name]: value });
  };
  
  
- // As explained in the Login page.
+ // will redirect the user to the home screen after they sign in
  const redirectNow = () => {
    const redirectTo = location.search.replace("?redirectTo=", "");
    navigate(redirectTo ? redirectTo : "/");
  }
  
- // As explained in the Login page.
+ // runs when the user presses the submit button
  const onSubmit = async () => {
    try {
-     const user = await emailPasswordSignup(form.email, form.password);
+     const user = await emailPasswordSignup(form.email, form.password); // mongodb function that will sign up the user
      if (user) {
-       redirectNow();
+       redirectNow(); // if they are a user then it will redirect them to the home screen
      }
    } catch (error) {
-     alert(error);
+     alert(error); // if not a user gives them an error alert
    }
  };
  
@@ -63,8 +63,8 @@ const Register = () => {
    <Button variant="contained" color="primary" onClick={onSubmit}>
      Signup
    </Button>
-   <p>Have an account already? <Link to="/login">Login</Link></p>
+   <p>Have an account already? <Link to="/login">Login</Link></p> 
  </form>
 }
- 
+ // form that appears then the register app is called
 export default Register;
