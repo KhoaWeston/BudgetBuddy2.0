@@ -65,7 +65,7 @@ const ResetPass = () => {
     Reset Password
   </Button>
   <br></br>
-  <p><Link to="/login"> Click Here to Login with your new Password</Link></p>
+  <p><Link to="/"> Click Here to return to Home</Link></p>
 </form>
 } // form that will output to the screen when the user runs the reset password
  
