@@ -11,7 +11,7 @@ import { APP_ID } from "../../contexts/realm/constants.js";
 
 
 const InputGoal=()=>{
-    const app = new App(APP_ID);
+    const app = new App(APP_ID); // Creating a Realm App Instance
     const { user } = useContext(UserContext);
     const [selectedgoal, setgoal]= useState(""); // a small function that sets the variable selectedgoal when called
 

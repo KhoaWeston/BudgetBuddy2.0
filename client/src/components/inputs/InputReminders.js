@@ -13,7 +13,7 @@ import { APP_ID } from "../../contexts/realm/constants.js";
 const InputReminder=()=>{
     const { user } = useContext(UserContext);
     const [selectedperiod, setSelectedperiod]= useState(""); // a small function that sets the variable selectedperiod when called
-    const app = new App(APP_ID);
+    const app = new App(APP_ID); // Creating a Realm App Instance
 
     const startReminders = async() =>{ // sets up the the reminders to be executed
     const schedule = require('node-schedule');

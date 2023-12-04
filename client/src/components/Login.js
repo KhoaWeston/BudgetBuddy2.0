@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/user.context";
  
 const Login = () => {
- const navigate = useNavigate();
+ const navigate = useNavigate(); // used in redirectNow()
  const location = useLocation();
  
 
