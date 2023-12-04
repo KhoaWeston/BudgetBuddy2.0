@@ -1,11 +1,12 @@
-import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Button} from "@mui/material";
+import { Link} from "react-router-dom";
 import { App } from "realm-web";
 import { APP_ID } from "../contexts/realm/constants.js";
 
 const app = new App(APP_ID);
 
 const ConfirmUser = () => {
+
  const onSubmit = async (event) => {
     event.preventDefault();
     const queryParams = new URLSearchParams(window.location.search);

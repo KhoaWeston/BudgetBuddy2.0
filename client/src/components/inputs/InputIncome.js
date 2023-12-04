@@ -49,9 +49,9 @@ const InputIncome = () => {
   
     const onSubmit = async (event) => {
       event.preventDefault();
-      const { amount } = form;
-      if (amount.length === 0 || selectedperiod.valueOf ==="") {
-        alert("wrong!");
+      const { amount,period } = form;
+      if (amount.length === 0 || period.valueOf.length ===0) {
+        alert("You must enter all fields to submit a income");
         return;
       }
       try {
@@ -82,7 +82,7 @@ const InputIncome = () => {
               style={{ marginBottom: "1rem" }} 
             />
            <select className="inputSelect" value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
-            <option value=" ">  </option>
+            <option>  </option>
             <option value="Weekly"> Weekly</option>
             <option value="Every Other Week"> Every Other Week</option>
             <option value="Twice a Month"> Twice a Month</option>

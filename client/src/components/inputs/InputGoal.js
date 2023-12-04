@@ -54,8 +54,9 @@ const InputGoal=()=>{
   
     const onSubmit = async (event) => {
       event.preventDefault();
-      if (form.amount === 0 || selectedgoal.valueOf ==="") {
-        alert("You must enter both fields");
+      const {amount } = form;
+      if (amount === 0 || selectedgoal.length ===0 ) {
+        alert("You must enter all fields to submit a goal");
         return;
       }
       try {
@@ -69,11 +70,16 @@ const InputGoal=()=>{
     const ChangeGoal = async(event)=>{
       const goals = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Goals');
       const goal = await goals.findOne();
-      form.amount = goal.amount;
-      form.category = goal.category;
-      alert("Your current goal states you want to have $" + goal.amount + " in the category: " + goal.category+
-      "\nEnter the category and amount that you want to change your goal to and press Enter Goal");
-      const goal_deleted = await goals.deleteOne();
+      // form.amount = goal.amount;
+      // form.category = goal.category;
+      // if (!goals.count()){
+      //   alert("you currently have no goals");
+      // }
+      // else{
+        alert("Your current goal states you want to have $" + goal.amount + " in the category: " + goal.category+
+        "\nEnter the category and amount that you want to change your goal to and press Enter Goal");
+        const goal_deleted = await goals.deleteOne();
+      // }
     };
 
     return(
@@ -100,7 +106,7 @@ const InputGoal=()=>{
                     <option value="Vacation"> Vacation</option>
                     <option value="Other"> Other</option>
                 </select>
-                <Button variant="contained" onClick={onSubmit} style={{marginRight:"130px"}}>Enter Goal</Button>
+                <Button variant="contained" onClick={onSubmit} style={{marginRight:"125px"}}>Submit Goal</Button>
                 <Button variant="contained" onClick={ChangeGoal} >Change Goal</Button>
             </div>
         </div>

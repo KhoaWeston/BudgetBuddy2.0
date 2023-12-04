@@ -54,6 +54,7 @@ const InputExpense = () => {
     event.preventDefault();
     const { amount, category, title } = form;
     if (amount.length === 0 || category.length === 0 || title.length === 0) {
+      alert("You must enter all fields to submit a expense");
       return;
     }
     try {

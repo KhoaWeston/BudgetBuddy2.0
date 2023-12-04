@@ -46,6 +46,7 @@ const InputReminder=()=>{
       for (const job in schedule.scheduledJobs){
         schedule.scheduledJobs[job].cancel();
       }
+      alert("Current Reminders have been deleted!")
     }
 
     const onFormInputChange = (event) => {
@@ -86,8 +87,8 @@ const InputReminder=()=>{
   
     const onSubmit = async (event) => {
       event.preventDefault();
-      if (form.description.length === 0 || selectedperiod.valueOf ==="") {
-        alert("wrong!");
+      if (form.description.length === 0 || selectedperiod.valueOf.length ===0) {
+        alert("You must enter all fields to submit a reminder");
         return;
       }
       try {
@@ -128,8 +129,8 @@ const InputReminder=()=>{
                   color="primary" 
                   onClick={onSubmit} 
                   type="submit"
-                  style={{ marginRight:"55px"}}>
-                  Enter Reminder
+                  style={{ marginRight:"50px"}}>
+                  Submit Reminder
                 </Button>
                 <Button variant="contained" color="primary" onClick={DeleteReminder}>Delete Reminders</Button>
             </form>
