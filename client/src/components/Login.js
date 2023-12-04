@@ -7,12 +7,10 @@ const Login = () => {
  const navigate = useNavigate();
  const location = useLocation();
  
- // We are consuming our user-management context to
- // get & set the user details here
+
  const { user, fetchUser, emailPasswordLogin } = useContext(UserContext);
  
- // We are using React's "useState" hook to keep track
- //  of the form values.
+ // sets the form's variables as null to start 
  const [form, setForm] = useState({
    email: "",
    password: ""
@@ -24,23 +22,18 @@ const Login = () => {
    setForm({ ...form, [name]: value });
  };
  
- // This function will redirect the user to the
- // appropriate page once the authentication is done.
+ // this function will redirect the user to the home screen
  const redirectNow = () => {
    const redirectTo = location.search.replace("?redirectTo=", "");
    navigate(redirectTo ? redirectTo : "/");
  }
  
- // Once a user logs in to our app, we don’t want to ask them for their
- // credentials again every time the user refreshes or revisits our app, 
- // so we are checking if the user is already logged in and
- // if so we are redirecting the user to the home page.
- // Otherwise we will do nothing and let the user to login.
+ // Once a user logs in to our app, we don’t want to ask them for their information everytime they switch pages
+ // so this makes sure we don't ask them everytime
  const loadUser = async () => {
    if (!user) {
      const fetchedUser = await fetchUser();
-     if (fetchedUser) {
-       // Redirecting them once fetched.
+     if (fetchedUser) { // if they are logged in it will redirect them
        redirectNow();
      }
    }
@@ -50,22 +43,19 @@ const Login = () => {
  // Hence this is helping us in verifying whether the user is already logged in
  // or not.
  useEffect(() => {
-   loadUser(); // eslint-disable-next-line react-hooks/exhaustive-deps
+   loadUser(); 
  }, []);
  
- // This function gets fired when the user clicks on the "Login" button.
+ // This function runs when the user hits login
  const onSubmit = async (event) => {
    try {
-     // Here we are passing user details to our emailPasswordLogin
-     // function that we imported from our realm/authentication.js
-     // to validate the user credentials and log in the user into our App.
-     const user = await emailPasswordLogin(form.email, form.password);
+     const user = await emailPasswordLogin(form.email, form.password); // logins in the userwith mongodb function
      if (user) {
        redirectNow();
      }
    } catch (error) {
        if (error.statusCode === 401) {
-          alert("Invalid username/password. Try again!");
+          alert("Invalid username/password. Try again!"); // if they are not a user it will tell them this
       } else {
           alert(error);
       } 
@@ -98,5 +88,5 @@ const Login = () => {
    <p>Don't have an account? <Link to="/signup">Signup</Link></p>
  </form>
 }
- 
+ // the form that is displayed when the login screen is clicked
 export default Login;

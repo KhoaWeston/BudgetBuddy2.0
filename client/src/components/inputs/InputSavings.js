@@ -8,14 +8,15 @@ import Footer from '../Footer.js';
 
 const InputSavings = () => {
   const { user } = useContext(UserContext);
-  const [selectedsavings, setsavings]= useState("");
+  const [selectedsavings, setsavings]= useState(""); // a small function that sets the variable selected savings when called
 
+  // This function will be called whenever the user edits the form.
   const onFormInputChange = (event) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
   };
 
-  // Some prefilled form state
+  // sets the form's variables as null to start 
   const [form, setForm] = useState({
     amount: "",
     category: "",
@@ -46,18 +47,18 @@ const InputSavings = () => {
   // an Authorization Header with the request
   const headers = { Authorization: `Bearer ${user._accessToken}` };
 
-  const onSubmit = async (event) => {
+  const onSubmit = async (event) => { // this function will be called when the user hits submit saving
     event.preventDefault();
-    const {amount, category } = form;
-      if (amount === 0 || selectedsavings.length === 0 ) {
+    const {amount } = form; // pulls amount variable from the form
+      if (amount === 0 || selectedsavings.length ==0 ) { // error checking to make sure values are not null
         alert("You must enter all fields to submit a saving");
       return;
     }
     try {
-      await request(GRAPHQL_ENDPOINT, createSavingsQuery, queryVariables, headers);
-      alert("Savings Added to your database!")
+      await request(GRAPHQL_ENDPOINT, createSavingsQuery, queryVariables, headers); // will send the request to mongodb
+      alert("Savings Added to your database!") // if it works it will alert the user
     } catch (error) {
-      alert(error)
+      alert(error) // if it doesn't work it will alert the user the error
     }
   };
   
@@ -93,7 +94,7 @@ const InputSavings = () => {
     </div>
   );
 }
-  
+  // the form that is displayed when the input savings screen is clicked on
   export default InputSavings;
     
     

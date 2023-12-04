@@ -28,11 +28,11 @@ const Profile=()=>{
         }
     };
     
-    const ResetPassword = async () => {
+    const ResetPassword = async () => { // this function will run when the reset Password button is pressed
         try {
-            const email = app.currentUser.profile.email;
-            await app.emailPasswordAuth.sendResetPasswordEmail({email});
-            alert("Reset Password Email has been sent")
+            const email = app.currentUser.profile.email; // takes the current user's email
+            await app.emailPasswordAuth.sendResetPasswordEmail({email}); // mongoDB function that send them an email
+            alert("Reset Password Email has been sent") // alerts the user that the email has been sent
         } catch (error) {
             alert("Error in sending Reset Password Email")
         }
@@ -70,4 +70,5 @@ const Profile=()=>{
         </div>
     )
 }
+// the form that will display when the profile page is called
 export default Profile
