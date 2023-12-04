@@ -9,16 +9,16 @@ import Footer from '../Footer.js';
 const InputExpense = () => {
   const { user } = useContext(UserContext);
 
+  // This function will be called whenever the user edits the form.
   const onFormInputChange = (event) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
   };
   
-  // Some prefilled form state
+  // sets the form's variables as null to start 
   const [form, setForm] = useState({
     amount: "",
     category: "",
-    //mode: "Credit Card",
     title: "",
     createdAt: new Date()
   });
@@ -50,19 +50,19 @@ const InputExpense = () => {
   // an Authorization Header with the request
   const headers = { Authorization: `Bearer ${user._accessToken}` };
   
-  const onSubmit = async (event) => {
+  const onSubmit = async (event) => { // the function that will run when submit expense is pressed
     event.preventDefault();
     const { amount, category, title } = form;
-    if (amount.length === 0 || category.length === 0 || title.length === 0) {
+    if (amount.length === 0 || category.length === 0 || title.length === 0) { // error checking that the form values are filled in
       alert("You must enter all fields to submit a expense");
       return;
     }
     try {
-      await request(GRAPHQL_ENDPOINT, createExpenseQuery, queryVariables, headers);
+      await request(GRAPHQL_ENDPOINT, createExpenseQuery, queryVariables, headers); // sends the query with the data points to mongodb
 
-      alert("Expense Added to your database!")
+      alert("Expense Added to your database!") // alerts the user if sucessfull
     } catch (error) {
-      alert(error)
+      alert(error) // alerts the user if query fails
     }
   };
   
@@ -116,6 +116,6 @@ const InputExpense = () => {
     </div>
   );
 }
-
+// the form that is displayed when input expense page is called
 export default InputExpense;
 
