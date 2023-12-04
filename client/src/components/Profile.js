@@ -42,7 +42,7 @@ const Profile=()=>{
         try {
             setEmail(app.currentUser.profile.email);
         } catch (error) {
-            alert("Reload the page (Ctrl+R)")
+            //alert("Reload the page (Ctrl+R)")
         }
     }
 
