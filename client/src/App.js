@@ -29,7 +29,7 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route path="/confirmUser" element={<ConfirmUser/>}/>
-          {/* <Route path="/resetPassword" element={<ResetPass/>} /> */}
+          <Route path="/resetPassword" element={<ResetPass/>} />
           {/* We are protecting our Home Page from unauthenticated */}
           {/* users by wrapping it with PrivateRoute here. */}
           <Route element={<PrivateRoute />}>
@@ -43,7 +43,6 @@ function App() {
              <Route path="/progress" element={<Progress />} />
              <Route path="/analytics" element={<Analytics />} />
              <Route path="/profile" element={<Profile />} />
-             <Route path="/resetPassword" element={<ResetPass/>} />
             </Route>
         </Routes>
       </UserProvider>

@@ -3,7 +3,7 @@ import { Link} from "react-router-dom";
 import { App } from "realm-web";
 import { APP_ID } from "../contexts/realm/constants.js";
 
-const app = new App(APP_ID); 
+const app = new App(APP_ID); // Creating a Realm App Instance
 
 const ConfirmUser = () => {
 

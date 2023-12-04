@@ -4,7 +4,7 @@ import { Link} from "react-router-dom";
 import { App } from "realm-web";
 import { APP_ID } from "../contexts/realm/constants.js";
 
-const app = new App(APP_ID);
+const app = new App(APP_ID); // Creating a Realm App Instance
  
 const ResetPass = () => {
     const [form, setForm] = useState({ // sets the form's variables as null to start 
@@ -65,7 +65,7 @@ const ResetPass = () => {
     Reset Password
   </Button>
   <br></br>
-  <p><Link to="/login"> Click Here to Login with your new Password</Link></p>
+  <p><Link to="/"> Click Here to return to Home</Link></p>
 </form>
 } // form that will output to the screen when the user runs the reset password
  
