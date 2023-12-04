@@ -6,7 +6,7 @@ import { App } from "realm-web";
 import { APP_ID } from "../contexts/realm/constants.js";
 
 const Progress=()=>{
-    const app = new App(APP_ID);
+    const app = new App(APP_ID); // Creating a Realm App Instance
     const [goalCat, setGoalCat] = useState("");
     const [currentGoalProgress, setCurrentGoalProgress] = useState(0);
     const [actualWant, setActualWant] = useState(0);

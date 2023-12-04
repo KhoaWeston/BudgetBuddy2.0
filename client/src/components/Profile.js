@@ -7,7 +7,7 @@ import Footer from './Footer.js';
 import { App } from "realm-web";
 import { APP_ID } from "../contexts/realm/constants.js";
 
-const app = new App(APP_ID);
+const app = new App(APP_ID); // Creating a Realm App Instance
 
 const Profile=()=>{
     const { logOutUser} = useContext(UserContext);

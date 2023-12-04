@@ -8,7 +8,7 @@ import ChartsEmbedSDK, { getRealmUserToken } from '@mongodb-js/charts-embed-dom'
 //import { UserContext } from "../contexts/user.context";
 //import { ObjectId } from 'mongodb';
 
-const app = new App(APP_ID);
+const app = new App(APP_ID); // Creating a Realm App Instance
 
 const sdk = new ChartsEmbedSDK( {
     baseUrl: "https://charts.mongodb.com/charts-project-0-qxtjo",

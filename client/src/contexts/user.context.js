@@ -6,13 +6,12 @@ import { APP_ID } from "./realm/constants";
 const app = new App(APP_ID);
  
 // Creating a user context to manage and access all the user related functions
-// across different components and pages.
 export const UserContext = createContext();
  
 export const UserProvider = ({ children }) => {
  const [user, setUser] = useState(null); // sets the user when the function is called
  
- // Function to log in user into our App Service app using their email & password
+ // Function to log in user into BugetBuddy using their email and  password
  const emailPasswordLogin = async (email, password) => {
    const credentials = Credentials.emailPassword(email, password);
    const authenticatedUser = await app.logIn(credentials);
@@ -20,7 +19,7 @@ export const UserProvider = ({ children }) => {
    return authenticatedUser;
  };
  
- // Function to sign up user into our App Service app using their email & password
+ // Function to sign up user into BugetBuddy  using their email and password
  const emailPasswordSignup = async (email, password) => {
    try {
      await app.emailPasswordAuth.registerUser(email, password);
@@ -32,13 +31,12 @@ export const UserProvider = ({ children }) => {
    }
  };
  
- // Function to fetch the user (if the user is already logged in) from local storage
+ // Function to fetch the user (if the user is already logged in)
  const fetchUser = async () => {
    if (!app.currentUser) return false;
    try {
      await app.currentUser.refreshCustomData();
      // Now, if we have a user, we are setting it to our user context
-     // so that we can use it in our app across different components.
      setUser(app.currentUser);
      return app.currentUser;
    } catch (error) {
@@ -46,7 +44,7 @@ export const UserProvider = ({ children }) => {
    }
  }
  
- // Function to logout user from our App Services app
+ // Function to logout user from BudgetBuddy
  const logOutUser = async () => {
    if (!app.currentUser) return false;
    try {
