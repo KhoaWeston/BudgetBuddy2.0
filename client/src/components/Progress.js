@@ -14,36 +14,53 @@ const Progress=()=>{
     const [actualSaving, setActualSaving] = useState(0);
     const [currentIncome, setIncome] = useState(0);
     const [goalAmount, setGoalAmount] = useState(0);
-
+    const today = new Date()
+    const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate())
+    
     // Sums all the user's expenses in the database
     const calculateWant = async() =>{
         const expenses = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Expenses');
-        let expense = await expenses.find();        
-        setActualWant(expense.reduce((a,v)=>a=a+v.amount,0));
+        const expense = await expenses.find();        
+        let total = 0;
+        for (let i = 0; i < expense.length; i++) {
+            if(expense[i].createdAt > oneMonthAgo){
+                total = total + expense[i].amount;
+            }
+        }
+        setActualWant(total);
     }
 
     // Sums all the user's debts in the database
     const calculateNeed = async() =>{
         const debts = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Debts');
-        let debt = await debts.find();        
-        setActualNeed(debt.reduce((a,v)=>a=a+v.amount,0));
+        const debt = await debts.find();        
+        let total = 0;
+        for (let i = 0; i < debt.length; i++) {
+            if(debt[i].createdAt > oneMonthAgo){
+                total = total + debt[i].amount;
+            }
+        }
+        setActualNeed(total);
     }
 
     // Sums the user's savings from all categories
-    
+    // Also sums the user's savings from category matching the user's goal
     const calculateSaving = async() =>{
         const savings = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Savings');
-        let saving = await savings.find();        
-        setActualSaving(saving.reduce((a, v) => a = a + v.amount, 0));
+        const saving = await savings.find();        
         
-        // Also sums the user's savings from category matching the user's goal
         let total = 0;
+        let specificTotal = 0;
         for (let i = 0; i < saving.length; i++) {
             if(saving[i].category === goalCat){
+                specificTotal = specificTotal + saving[i].amount;
+            }
+            if(saving[i].createdAt > oneMonthAgo){
                 total = total + saving[i].amount;
             }
         }
-        setCurrentGoalProgress(total);
+        setActualSaving(total);
+        setCurrentGoalProgress(specificTotal);
     }
 
     // Calculates the user's income in amount per month
@@ -99,7 +116,7 @@ const Progress=()=>{
         calculateNeed();
         calculateSaving();
     });
-
+    
     return(
         <div>
             <Header/>
