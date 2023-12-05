@@ -74,12 +74,12 @@ const InputIncome = () => {
               className="inputBox"
               placeholder="Enter income"
               label="amount"
-              type="text"
+              type="number"
               variant="outlined"
               name="amount"
               value={form.amount}
               onChange={onFormInputChange}
-              fullWidth
+              fullwidth
               style={{ marginBottom: "1rem" }} 
             />
            <select className="inputSelect" value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>

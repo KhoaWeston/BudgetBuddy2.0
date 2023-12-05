@@ -14,6 +14,7 @@ Embedding Chart Demo -  https://www.youtube.com/watch?v=LXUYSDYDnh8
 Date Field -            https://mui.com/x/react-date-pickers/date-field/
 Authenticate Chart -    https://www.mongodb.com/docs/charts/embed-chart-stitch-auth/
 Filtering Dates -       https://www.youtube.com/watch?v=VXA7cLxKZpQ
+Responsive Height -     https://blog.logrocket.com/developing-responsive-layouts-with-react-hooks/ 
 
 
 Cheka to INSTALL: 

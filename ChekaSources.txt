@@ -34,7 +34,6 @@ https://www.mongodb.com/docs/realm/sdk/node/users/manage-email-password-users/#c
 
 
 KHOA INSTALL 
-npm install node-schedule
-
+nothing
 
 

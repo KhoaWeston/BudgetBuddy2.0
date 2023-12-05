@@ -65,7 +65,7 @@ const Progress=()=>{
                 setIncome(0);
             } 
         }catch(error){
-            alert("No income is currently entered...therefore your progress will not be correct");
+            alert("No income is currently entered... therefore your progress will not be correct");
         }    
     }
     
@@ -77,7 +77,7 @@ const Progress=()=>{
             setGoalAmount(goal.amount);
             setGoalCat(goal.category);
         }catch(error){
-            alert("No goal is currently entered...therefore your progress will not be correct");
+            alert("No goal is currently entered... therefore your progress will not be correct");
         }
     }
 

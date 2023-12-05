@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from './Header.js';
 import Footer from './Footer.js';
 import { Button } from '@mui/material';
@@ -8,24 +8,11 @@ import ChartsEmbedSDK, { getRealmUserToken } from '@mongodb-js/charts-embed-dom'
 //import { UserContext } from "../contexts/user.context";
 //import { ObjectId } from 'mongodb';
 
+
 const app = new App(APP_ID); // Creating a Realm App Instance
 
-// Embeds a chart for users that are logged in
-const sdk = new ChartsEmbedSDK( {
-    baseUrl: "https://charts.mongodb.com/charts-project-0-qxtjo",
-    autoRefresh: true,
-    getUserToken: () => getRealmUserToken(app),
-});
-
-// Formats embedded chart 
-const chart1 = sdk.createChart({
-    chartId: '655fc617-5768-4074-84c3-e714d5e34c62',
-    width: "90%",
-    height: 400,
-});
-
-
 const Analytics=()=>{
+    const [chartHeight, setChartHeight] = useState(window.innerHeight);
     // const { user } = useContext(UserContext);
     // const userID1 = app.currentUser.id;
     // const userID2 = user.id;
@@ -33,14 +20,28 @@ const Analytics=()=>{
     // console.log(userID1);
     // console.log(userID2);
     // console.log({$toObjectId: "5ab9cbfa31c2ab715d42129e"});
+    
+    // Embeds a chart for users that are logged in
+    const sdk = new ChartsEmbedSDK( {
+        baseUrl: "https://charts.mongodb.com/charts-project-0-qxtjo",
+        autoRefresh: true,
+        getUserToken: () => getRealmUserToken(app),
+    });
 
+    // Formats embedded chart 
+    const chart1 = sdk.createChart({
+        chartId: '655fc617-5768-4074-84c3-e714d5e34c62',
+        width: "90%",
+        height: chartHeight/2,
+    });
+    
     // Filters chart entries between dates entered by user
     const changeDate = async()=>{
         const fromDateSelect = document.getElementById("date-from");
         const toDateSelect = document.getElementById("date-to");
         const fromDate = new Date(fromDateSelect.value);
         const toDate = new Date(toDateSelect.value);
-        chart1.setFilter({ createdAt: { $gte: fromDate,  $lt: toDate }});
+        chart1.setFilter({ createdAt: { $gte: fromDate,  $lt: toDate }});        
     }
     
     // Renders the chart when user is on specific page
@@ -56,12 +57,18 @@ const Analytics=()=>{
     const refreshChart =()=>{
         // console.log({$toObjectId: userID2} );
         // chart1.setFilter({ author: {$toObjectId: userID1} });
-        chart1.refresh();
+        
     }
 
     useEffect(() => {
         renderChart();
-    }, []);
+        const handleWindowResize = () => {
+            // Set the height in state
+            setChartHeight(window.innerHeight);
+        }
+        window.addEventListener("resize", handleWindowResize);
+        return () => window.removeEventListener("resize", handleWindowResize);
+    });
 
     return(
         <div>
@@ -79,7 +86,7 @@ const Analytics=()=>{
                 </div>
                 <div style={{ flex: "80%"}}>
                     <div id="chart1" className="chart"></div>
-                    <Button variant="contained" onClick={refreshChart}>Refresh</Button>
+                    <Button variant="contained" onClick={refreshChart}>Butt</Button>
                 </div>
             </div>
         </div>

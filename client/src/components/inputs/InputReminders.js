@@ -118,7 +118,7 @@ const InputReminder=()=>{
                     style={{ marginBottom: "1rem" }} 
                 />
                 <select className="inputSelect" value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
-                    <option value=" ">  </option>
+                    <option>  </option>
                     <option value="Once a day"> Once a day</option>
                     <option value="Every Other day"> Every Other Day</option>
                     <option value="Once a Month"> Once a Month</option>

@@ -72,7 +72,7 @@ const InputGoal=()=>{
       try{
         const goal = await goals.findOne(); // finds one goal
         alert("Your current goal states you want to have $" + goal.amount + " in the category: " + goal.category+
-        "\nEnter the category and amount that you want to change your goal to and press Enter Goal"); // alerts the user of their current goa
+        "\nEnter the category and amount that you want to change your goal to and press Enter Goal"); // alerts the user of their current goal
         const goal_deleted = await goals.deleteOne(); // deletes their current goal
       }catch (error){
         alert("You have no goals at the moment")
@@ -89,12 +89,12 @@ const InputGoal=()=>{
                 <input
                     className="inputBox"
                     placeholder="Enter Amount "
-                    type="text"
+                    type="number"
                     variant="outlined"
                     name="amount"
                     value={form.amount}
                     onChange={onFormInputChange}
-                    fullWidth
+                    fullwidth
                     style={{ marginBottom: "1rem" }} 
                 />
                 <select className="inputSelect" value={selectedgoal} onChange={e => setgoal(e.target.value)}>
