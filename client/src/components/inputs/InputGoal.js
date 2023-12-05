@@ -73,9 +73,10 @@ const InputGoal=()=>{
         const goal = await goals.findOne(); // finds one goal
         alert("Your current goal states you want to have $" + goal.amount + " in the category: " + goal.category+
         "\nEnter the category and amount that you want to change your goal to and press Enter Goal"); // alerts the user of their current goa
-        const goal_deleted = await goals.deleteOne(); // deletes their current goal
+         await goals.deleteOne(); // deletes their current goal
       }catch (error){
-        alert("You have no goals at the moment")
+          alert("You have no goals at the moment");
+        
       }
       
     };
