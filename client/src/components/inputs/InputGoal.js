@@ -69,10 +69,15 @@ const InputGoal=()=>{
 
     const ChangeGoal = async(event)=>{ // will run when the user pressed change goal
       const goals = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Goals'); // gathers the collection from mongodb
-      const goal = await goals.findOne(); // finds one goal
+      try{
+        const goal = await goals.findOne(); // finds one goal
         alert("Your current goal states you want to have $" + goal.amount + " in the category: " + goal.category+
         "\nEnter the category and amount that you want to change your goal to and press Enter Goal"); // alerts the user of their current goa
         const goal_deleted = await goals.deleteOne(); // deletes their current goal
+      }catch (error){
+        alert("You have no goals at the moment")
+      }
+      
     };
 
     return(

@@ -47,36 +47,36 @@ const Progress=()=>{
     // Calculates the user's income in amount per month
     const getIncome = async()=>{
         const income = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Income');
-        if (income.count() ===0 ){
+        try{
+            const payment = await income.findOne();
+            if (payment.period === "Weekly"){
+                setIncome(payment.amount*4.3);
+            } else if (payment.period === "Every Other Week"){
+                setIncome(payment.amount*2.17);
+            } else if (payment.period === "Twice a Month"){
+                setIncome(payment.amount/2);
+            } else if (payment.period === "Once a Month"){
+                setIncome(payment.amount);
+            } else if (payment.period === "Once a Year"){
+                setIncome(payment.amount/12);
+            } else {
+                setIncome(0);
+            } 
+        }catch(error){
             alert("No income is currently entered...therefore your progress will not be correct");
-            return
-        }
-        const payment = await income.findOne();
-        if (payment.period === "Weekly"){
-            setIncome(payment.amount*4.3);
-        } else if (payment.period === "Every Other Week"){
-            setIncome(payment.amount*2.17);
-        } else if (payment.period === "Twice a Month"){
-            setIncome(payment.amount/2);
-        } else if (payment.period === "Once a Month"){
-            setIncome(payment.amount);
-        } else if (payment.period === "Once a Year"){
-            setIncome(payment.amount/12);
-        } else {
-            setIncome(0);
-        } 
+        }    
     }
     
     // Stores the user's goal amount and what category
     const getGoalAmount = async()=>{
         const goals = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Goals');
-        if (goals.count() ===0 ){
+        try{
+            const goal = await goals.findOne();
+            setGoalAmount(goal.amount);
+            setGoalCat(goal.category);
+        }catch(error){
             alert("No goal is currently entered...therefore your progress will not be correct");
-            return
         }
-        const goal = await goals.findOne();
-        setGoalAmount(goal.amount);
-        setGoalCat(goal.category);
     }
 
     // Changes the color of the progress bar depending on percentage
