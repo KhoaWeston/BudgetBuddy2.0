@@ -30,11 +30,13 @@ const Progress=()=>{
     }
 
     // Sums the user's savings from all categories
-    // Also sums the user's savings from category matching the goal
+    
     const calculateSaving = async() =>{
         const savings = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Savings');
         let saving = await savings.find();        
         setActualSaving(saving.reduce((a, v) => a = a + v.amount, 0));
+        
+        // Also sums the user's savings from category matching the user's goal
         let total = 0;
         for (let i = 0; i < saving.length; i++) {
             if(saving[i].category === goalCat){

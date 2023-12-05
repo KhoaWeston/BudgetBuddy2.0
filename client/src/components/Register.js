@@ -40,7 +40,7 @@ const Register = () => {
    }
  };
  
- return <form style={{ display: "flex", flexDirection: "column", maxWidth: "300px", margin: "auto" }}>
+ return <form style={{ display: "flex", flexDirection: "column", maxWidth: "360px", margin: "auto", marginTop:"100px" }}>
    <h1>Signup for BudgetBuddy</h1>
    <TextField
      label="Email"

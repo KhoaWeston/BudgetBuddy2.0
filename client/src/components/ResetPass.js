@@ -41,32 +41,35 @@ const ResetPass = () => {
     }
   };
 
-  return <form style={{ display: "flex", flexDirection: "column", maxWidth: "300px", margin: "auto" }}>
-  <h1>Reset Password to BudgetBuddy</h1>
-  <TextField
-    label="Password"
-    type="text"
-    variant="outlined"
-    name= "newPass"
-    value={form.newPass}
-    onChange={onFormInputChange}
-    style={{ marginBottom: "1rem" }}
-  />
-  <TextField
-    label="Re-enter Password"
-    type="text"
-    variant="outlined"
-    name="newPassCopy"
-    value={form.newPassCopy}
-    onChange={onFormInputChange}
-    style={{ marginBottom: "1rem" }}
-  />
-  <Button variant="contained" color="primary" onClick={onSubmit}>
-    Reset Password
-  </Button>
-  <br></br>
-  <p><Link to="/"> Click Here to return to Home</Link></p>
-</form>
+  return(
+    <div>
+      <h1 style={{maxWidth: "500px", margin: "auto", marginTop:"150px", marginBottom:"20px"}}>Reset Password to BudgetBuddy</h1>
+      <form style={{ display: "flex", flexDirection: "column", maxWidth: "350px", margin: "auto"}}>
+        <TextField
+          label="Password"
+          type="password"
+          variant="outlined"
+          name= "newPass"
+          value={form.newPass}
+          onChange={onFormInputChange}
+          style={{ marginBottom: "1rem" }}
+        />
+        <TextField
+          label="Re-enter Password"
+          type="password"
+          variant="outlined"
+          name="newPassCopy"
+          value={form.newPassCopy}
+          onChange={onFormInputChange}
+          style={{ marginBottom: "1rem" }}
+        />
+        <Button variant="contained" color="primary" onClick={onSubmit}>
+          Reset Password
+        </Button>
+        <p><Link to="/"> Click Here to return to Home</Link></p>
+      </form>
+    </div>
+  );
 } // form that will output to the screen when the user runs the reset password
  
 export default ResetPass;

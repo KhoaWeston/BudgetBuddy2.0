@@ -21,13 +21,16 @@ const ConfirmUser = () => {
       }   
   };
 
-  return <form style={{ display: "flex", flexDirection: "column", maxWidth: "300px", margin: "auto" }}> 
-  <h1>Confirm your BudgetBuddy Account</h1> 
-  <Button variant="contained" color="primary" onClick={onSubmit}>
-    Submit Account
-  </Button>
-  <br></br>
-  <p>Sign Into your account now! <Link to="/login"> Click Here to Login</Link></p>
-</form>
+  return(
+    <div>
+      <h1 style={{maxWidth: "520px", margin: "auto", marginTop:"200px", marginBottom:"20px"}}>Confirm your BudgetBuddy Account</h1>
+      <form style={{ display: "flex", flexDirection: "column", maxWidth: "360px", margin: "auto" }}> 
+        <Button variant="contained" color="primary" onClick={onSubmit}>
+          Confirm Account
+        </Button>
+        <p>Sign Into your account now! <Link to="/login"> Click Here to Login</Link></p>
+      </form>
+    </div>
+  );
 }// ^^ returns a form that will have a header and a button... this is what is display to the screen when the user is on the corfirm page
 export default ConfirmUser;

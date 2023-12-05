@@ -6,7 +6,6 @@ import { UserContext } from "../contexts/user.context";
 const Login = () => {
  const navigate = useNavigate(); // used in redirectNow()
  const location = useLocation();
- 
 
  const { user, fetchUser, emailPasswordLogin } = useContext(UserContext);
  
@@ -44,7 +43,7 @@ const Login = () => {
  // or not.
  useEffect(() => {
    loadUser(); 
- }, []);
+ });
  
  // This function runs when the user hits login
  const onSubmit = async (event) => {
@@ -62,7 +61,7 @@ const Login = () => {
    }
  };
  
- return <form style={{ display: "flex", flexDirection: "column", maxWidth: "350px", margin: "auto", marginTop:"100px"}}>
+ return <form style={{ display: "flex", flexDirection: "column", maxWidth: "360px", margin: "auto", marginTop:"100px"}}>
    <h1>Login to BudgetBuddy</h1>
    <TextField
      label="Email"
