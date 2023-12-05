@@ -21,7 +21,7 @@ const ResetPass = () => {
  const onSubmit = async (event) => { // runs when the user presses the submit button
     event.preventDefault();
     const { newPassCopy, newPass } = form; // takes the variables from the form
-    if (newPassCopy.length === 0 || newPass.length === 0 || newPass.valueOf !== newPassCopy.valueOf) { // error checking to ensure the values are not null and match
+    if (newPassCopy.length === 0 || newPass.length === 0 || newPass !== newPassCopy) { // error checking to ensure the values are not null and match
       alert("Your Passwords do not match, please try again!"); // alerts the user if they do not match
       return;
     }
