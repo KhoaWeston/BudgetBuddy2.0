@@ -1,5 +1,5 @@
 import { Button } from '@mui/material'
-import { useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../contexts/user.context';
 import React from "react";
 import Header from './Header.js';
@@ -10,7 +10,8 @@ import { APP_ID } from "../contexts/realm/constants.js";
 const app = new App(APP_ID); // Creating a Realm App Instance
 
 const Profile=()=>{
-    const { logOutUser} = useContext(UserContext);
+    const { logOutUser } = useContext(UserContext);
+    const [userEmail, setEmail] = useState("");
 
     // This function is called when the user clicks the "Logout" button.
     const logOut = async () => {
@@ -36,13 +37,26 @@ const Profile=()=>{
             alert("Error in sending Reset Password Email")
         }
     }
+
+    const getUserEmail = async () => {
+        try {
+            setEmail(app.currentUser.profile.email);
+        } catch (error) {
+            //alert("Reload the page (Ctrl+R)")
+        }
+    }
+
+    useEffect(() => {
+        getUserEmail();
+    });
+
     return(
         <div>
             <Header/>
             <Footer/>
             <div className="input-container">
                 <h1> Your Profile</h1>
-                <label>Email: {app.currentUser.profile.email} </label>
+                <label>Email: {userEmail} </label>
                 <div>
                     <Button
                         variant="contained"

@@ -15,18 +15,22 @@ const Progress=()=>{
     const [currentIncome, setIncome] = useState(0);
     const [goalAmount, setGoalAmount] = useState(0);
 
+    // Sums all the user's expenses in the database
     const calculateWant = async() =>{
         const expenses = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Expenses');
         let expense = await expenses.find();        
         setActualWant(expense.reduce((a,v)=>a=a+v.amount,0));
     }
 
+    // Sums all the user's debts in the database
     const calculateNeed = async() =>{
         const debts = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Debts');
         let debt = await debts.find();        
         setActualNeed(debt.reduce((a,v)=>a=a+v.amount,0));
     }
 
+    // Sums the user's savings from all categories
+    // Also sums the user's savings from category matching the goal
     const calculateSaving = async() =>{
         const savings = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Savings');
         let saving = await savings.find();        
@@ -40,6 +44,7 @@ const Progress=()=>{
         setCurrentGoalProgress(total);
     }
 
+    // Calculates the user's income in amount per month
     const getIncome = async()=>{
         const income = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Income');
         if (income.count() ===0 ){
@@ -62,6 +67,7 @@ const Progress=()=>{
         } 
     }
     
+    // Stores the user's goal amount and what category
     const getGoalAmount = async()=>{
         const goals = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Goals');
         if (goals.count() ===0 ){
@@ -73,6 +79,7 @@ const Progress=()=>{
         setGoalCat(goal.category);
     }
 
+    // Changes the color of the progress bar depending on percentage
     const getColor=()=>{
         if((currentGoalProgress / goalAmount *100) < 40){
             return "#ff0000";

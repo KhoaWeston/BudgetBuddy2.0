@@ -10,13 +10,14 @@ import ChartsEmbedSDK, { getRealmUserToken } from '@mongodb-js/charts-embed-dom'
 
 const app = new App(APP_ID); // Creating a Realm App Instance
 
+// Embeds a chart for users that are logged in
 const sdk = new ChartsEmbedSDK( {
     baseUrl: "https://charts.mongodb.com/charts-project-0-qxtjo",
     autoRefresh: true,
     getUserToken: () => getRealmUserToken(app),
 });
 
-// embed a chart
+// Formats embedded chart 
 const chart1 = sdk.createChart({
     chartId: '655fc617-5768-4074-84c3-e714d5e34c62',
     width: "90%",
@@ -33,15 +34,16 @@ const Analytics=()=>{
     // console.log(userID2);
     // console.log({$toObjectId: "5ab9cbfa31c2ab715d42129e"});
 
+    // Filters chart entries between dates entered by user
     const changeDate = async()=>{
         const fromDateSelect = document.getElementById("date-from");
         const toDateSelect = document.getElementById("date-to");
         const fromDate = new Date(fromDateSelect.value);
         const toDate = new Date(toDateSelect.value);
         chart1.setFilter({ createdAt: { $gte: fromDate,  $lt: toDate }});
-        
     }
     
+    // Renders the chart when user is on specific page
     const renderChart =()=>{
         if (window.location.pathname === "/analytics") {
             chart1
@@ -50,6 +52,7 @@ const Analytics=()=>{
         }
     }
 
+    // Refreshes the chart for new entries
     const refreshChart =()=>{
         // console.log({$toObjectId: userID2} );
         // chart1.setFilter({ author: {$toObjectId: userID1} });

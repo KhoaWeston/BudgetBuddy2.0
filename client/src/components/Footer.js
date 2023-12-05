@@ -1,9 +1,10 @@
 import React from 'react';
 
+// Creates footer that stays at bottom of the page
 const Footer=()=>{
     return(
         <div className="nav-footer">
-            <h3>Budget Buddy</h3>
+            <h3>2023 BudgetBuddy</h3>
         </div>
     )
 }
