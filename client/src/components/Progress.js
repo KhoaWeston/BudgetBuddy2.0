@@ -29,7 +29,7 @@ const Progress=()=>{
                 total = total + expense[i].amount;
             }
         }
-        setActualWant(total);
+        setActualWant(total.toFixed(2));
     }
 
     // Sums all the user's debts in the database
@@ -42,7 +42,7 @@ const Progress=()=>{
                 total = total + debt[i].amount;
             }
         }
-        setActualNeed(total);
+        setActualNeed(total.toFixed(2));
     }
 
     // Sums the user's savings from all categories
@@ -61,8 +61,8 @@ const Progress=()=>{
                 total = total + saving[i].amount;
             }
         }
-        setActualSaving(total);
-        setCurrentGoalProgress(specificTotal);
+        setActualSaving(total.toFixed(2));
+        setCurrentGoalProgress(specificTotal.toFixed(2));
     }
 
     // Calculates the user's income in amount per month
@@ -71,20 +71,20 @@ const Progress=()=>{
         try{
             const payment = await income.findOne();
             if (payment.period === "Weekly"){
-                setIncome(payment.amount*4.3);
+                setIncome((payment.amount*4.3).toFixed(2));
             } else if (payment.period === "Every Other Week"){
-                setIncome(payment.amount*2.17);
+                setIncome((payment.amount*2.17).toFixed(2));
             } else if (payment.period === "Twice a Month"){
-                setIncome(payment.amount/2);
+                setIncome((payment.amount/2).toFixed(2));
             } else if (payment.period === "Once a Month"){
-                setIncome(payment.amount);
+                setIncome((payment.amount).toFixed(2));
             } else if (payment.period === "Once a Year"){
-                setIncome(payment.amount/12);
+                setIncome((payment.amount/12).toFixed(2));
             } else {
                 setIncome(0);
             } 
         }catch(error){
-            if(ctr_income === 0){
+            if(ctr_income < 1){
                 alert("No income is currently entered... therefore your progress will not be correct");
                 ctr_income++;
             }
@@ -96,21 +96,22 @@ const Progress=()=>{
         const goals = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Goals');
         try{
             const goal = await goals.findOne();
-            setGoalAmount(goal.amount);
+            setGoalAmount((goal.amount).toFixed(2));
             setGoalCat(goal.category);
         }catch(error){
-            if(ctr_goal === 0){
+            if(ctr_goal < 1){
                 alert("No goal is currently entered... therefore your progress will not be correct");
                 ctr_goal++;
             }
         }
     }
 
+    const progress_num = (currentGoalProgress / goalAmount *100);
     // Changes the color of the progress bar depending on percentage
     const getColor=()=>{
-        if((currentGoalProgress / goalAmount *100) < 40){
+        if(progress_num < 40){
             return "#ff0000";
-        } else if ((currentGoalProgress / goalAmount *100) < 70){
+        } else if (progress_num < 70){
             return "#ffa500";
         } else {
             return "#2ecc71";
@@ -140,9 +141,9 @@ const Progress=()=>{
             </div>
             <div className="row">
                 <div className="column">
-                    <div>Needs: ${currentIncome*0.5}</div>
-                    <div>Wants: ${currentIncome*0.3}</div>
-                    <div>Savings: ${currentIncome*0.2}</div>
+                    <div>Needs: ${(currentIncome*0.5).toFixed(2)}</div>
+                    <div>Wants: ${(currentIncome*0.3).toFixed(2)}</div>
+                    <div>Savings: ${(currentIncome*0.2).toFixed(2)}</div>
                 </div>
                 <div className="column">
                     <div>Wants: ${actualWant}</div>
@@ -154,9 +155,9 @@ const Progress=()=>{
             <div><form style={{ margin: "50px"}}>
                 <div className="progress-label">Your goal is to have ${goalAmount} in your {goalCat}. Currently you have ${currentGoalProgress}.</div>
                 <div className="progress-bar">
-                    <div className="progress-bar-fill" style={{ maxWidth: "100%", width: `${currentGoalProgress / goalAmount *100}%`, backgroundColor: getColor() }}></div>
+                    <div className="progress-bar-fill" style={{ maxWidth: "100%", width: `${progress_num}%`, backgroundColor: getColor() }}></div>
                 </div>
-                <div className="progress-label">{currentGoalProgress / goalAmount *100}% towards your goal!</div>
+                <div className="progress-label">{progress_num.toFixed(0)}% towards your goal!</div>
                 <Button variant="contained" href="/input-goal">Change Goal</Button>
                 </form>
             </div>
