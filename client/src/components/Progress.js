@@ -14,36 +14,55 @@ const Progress=()=>{
     const [actualSaving, setActualSaving] = useState(0);
     const [currentIncome, setIncome] = useState(0);
     const [goalAmount, setGoalAmount] = useState(0);
-
+    const today = new Date();
+    const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+    let ctr_goal = 0;
+    let ctr_income = 0;
+    
     // Sums all the user's expenses in the database
     const calculateWant = async() =>{
         const expenses = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Expenses');
-        let expense = await expenses.find();        
-        setActualWant(expense.reduce((a,v)=>a=a+v.amount,0));
+        const expense = await expenses.find();        
+        let total = 0;
+        for (let i = 0; i < expense.length; i++) {
+            if(expense[i].createdAt > oneMonthAgo){
+                total = total + expense[i].amount;
+            }
+        }
+        setActualWant(total.toFixed(2));
     }
 
     // Sums all the user's debts in the database
     const calculateNeed = async() =>{
         const debts = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Debts');
-        let debt = await debts.find();        
-        setActualNeed(debt.reduce((a,v)=>a=a+v.amount,0));
+        const debt = await debts.find();        
+        let total = 0;
+        for (let i = 0; i < debt.length; i++) {
+            if(debt[i].createdAt > oneMonthAgo){
+                total = total + debt[i].amount;
+            }
+        }
+        setActualNeed(total.toFixed(2));
     }
 
     // Sums the user's savings from all categories
-    
+    // Also sums the user's savings from category matching the user's goal
     const calculateSaving = async() =>{
         const savings = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Savings');
-        let saving = await savings.find();        
-        setActualSaving(saving.reduce((a, v) => a = a + v.amount, 0));
+        const saving = await savings.find();        
         
-        // Also sums the user's savings from category matching the user's goal
         let total = 0;
+        let specificTotal = 0;
         for (let i = 0; i < saving.length; i++) {
             if(saving[i].category === goalCat){
+                specificTotal = specificTotal + saving[i].amount;
+            }
+            if(saving[i].createdAt > oneMonthAgo){
                 total = total + saving[i].amount;
             }
         }
-        setCurrentGoalProgress(total);
+        setActualSaving(total.toFixed(2));
+        setCurrentGoalProgress(specificTotal.toFixed(2));
     }
 
     // Calculates the user's income in amount per month
@@ -52,20 +71,23 @@ const Progress=()=>{
         try{
             const payment = await income.findOne();
             if (payment.period === "Weekly"){
-                setIncome(payment.amount*4.3);
+                setIncome((payment.amount*4.3).toFixed(2));
             } else if (payment.period === "Every Other Week"){
-                setIncome(payment.amount*2.17);
+                setIncome((payment.amount*2.17).toFixed(2));
             } else if (payment.period === "Twice a Month"){
-                setIncome(payment.amount/2);
+                setIncome((payment.amount/2).toFixed(2));
             } else if (payment.period === "Once a Month"){
-                setIncome(payment.amount);
+                setIncome((payment.amount).toFixed(2));
             } else if (payment.period === "Once a Year"){
-                setIncome(payment.amount/12);
+                setIncome((payment.amount/12).toFixed(2));
             } else {
                 setIncome(0);
             } 
         }catch(error){
-            alert("No income is currently entered... therefore your progress will not be correct");
+            if(ctr_income < 1){
+                alert("No income is currently entered... therefore your progress will not be correct");
+                ctr_income++;
+            }
         }    
     }
     
@@ -74,18 +96,22 @@ const Progress=()=>{
         const goals = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Goals');
         try{
             const goal = await goals.findOne();
-            setGoalAmount(goal.amount);
+            setGoalAmount((goal.amount).toFixed(2));
             setGoalCat(goal.category);
         }catch(error){
-            alert("No goal is currently entered... therefore your progress will not be correct");
+            if(ctr_goal < 1){
+                alert("No goal is currently entered... therefore your progress will not be correct");
+                ctr_goal++;
+            }
         }
     }
 
+    const progress_num = (currentGoalProgress / goalAmount *100);
     // Changes the color of the progress bar depending on percentage
     const getColor=()=>{
-        if((currentGoalProgress / goalAmount *100) < 40){
+        if(progress_num < 40){
             return "#ff0000";
-        } else if ((currentGoalProgress / goalAmount *100) < 70){
+        } else if (progress_num < 70){
             return "#ffa500";
         } else {
             return "#2ecc71";
@@ -99,7 +125,7 @@ const Progress=()=>{
         calculateNeed();
         calculateSaving();
     });
-
+    
     return(
         <div>
             <Header/>
@@ -115,9 +141,9 @@ const Progress=()=>{
             </div>
             <div className="row">
                 <div className="column">
-                    <div>Needs: ${currentIncome*0.5}</div>
-                    <div>Wants: ${currentIncome*0.3}</div>
-                    <div>Savings: ${currentIncome*0.2}</div>
+                    <div>Needs: ${(currentIncome*0.5).toFixed(2)}</div>
+                    <div>Wants: ${(currentIncome*0.3).toFixed(2)}</div>
+                    <div>Savings: ${(currentIncome*0.2).toFixed(2)}</div>
                 </div>
                 <div className="column">
                     <div>Wants: ${actualWant}</div>
@@ -129,9 +155,9 @@ const Progress=()=>{
             <div><form style={{ margin: "50px"}}>
                 <div className="progress-label">Your goal is to have ${goalAmount} in your {goalCat}. Currently you have ${currentGoalProgress}.</div>
                 <div className="progress-bar">
-                    <div className="progress-bar-fill" style={{ width: `${currentGoalProgress / goalAmount *100}%`, backgroundColor: getColor() }}></div>
+                    <div className="progress-bar-fill" style={{ maxWidth: "100%", width: `${progress_num}%`, backgroundColor: getColor() }}></div>
                 </div>
-                <div className="progress-label">{currentGoalProgress / goalAmount *100}% towards your goal!</div>
+                <div className="progress-label">{progress_num.toFixed(0)}% towards your goal!</div>
                 <Button variant="contained" href="/input-goal">Change Goal</Button>
                 </form>
             </div>

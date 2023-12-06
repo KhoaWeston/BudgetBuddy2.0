@@ -12,7 +12,7 @@ const app = new App(APP_ID); // Creating a Realm App Instance
 const Analytics=()=>{
     const { user } = useContext(UserContext);
     const [chartHeight, setChartHeight] = useState(window.innerHeight);
-
+    
     // Embeds a chart for users that are logged in
     const sdk = new ChartsEmbedSDK( {
         baseUrl: "https://charts.mongodb.com/charts-project-0-qxtjo",
@@ -34,7 +34,8 @@ const Analytics=()=>{
         const toDateSelect = document.getElementById("date-to");
         const fromDate = new Date(fromDateSelect.value);
         const toDate = new Date(toDateSelect.value);
-        chart1.setFilter({ createdAt: { $gte: fromDate,  $lt: toDate }});        
+        chart1.setFilter({ createdAt: { $gte: fromDate,  $lt: toDate }});
+        chart1.setFilter({author: {'$oid': user.id}});
     }
     
     // Renders the chart when user is on specific page
@@ -44,13 +45,6 @@ const Analytics=()=>{
                 .render(document.getElementById('chart1'))
                 .catch(() => window.alert('Reload the page (Ctrl+R)'));
         }
-    }
-
-    // Refreshes the chart for new entries
-    const refreshChart =()=>{
-        // console.log({$toObjectId: userID2} );
-        // chart1.setFilter({ author: {$toObjectId: userID1} });
-        
     }
 
     useEffect(() => {
@@ -79,9 +73,9 @@ const Analytics=()=>{
                 </div>
                 <div style={{ flex: "80%"}}>
                     <div id="chart1" className="chart"></div>
-                    <Button variant="contained" onClick={refreshChart}>Butt</Button>
                 </div>
             </div>
+            
         </div>
     )
 }
