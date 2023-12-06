@@ -14,8 +14,10 @@ const Progress=()=>{
     const [actualSaving, setActualSaving] = useState(0);
     const [currentIncome, setIncome] = useState(0);
     const [goalAmount, setGoalAmount] = useState(0);
-    const today = new Date()
-    const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate())
+    const today = new Date();
+    const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+    let ctr_goal = 0;
+    let ctr_income = 0;
     
     // Sums all the user's expenses in the database
     const calculateWant = async() =>{
@@ -82,7 +84,10 @@ const Progress=()=>{
                 setIncome(0);
             } 
         }catch(error){
-            alert("No income is currently entered... therefore your progress will not be correct");
+            if(ctr_income === 0){
+                alert("No income is currently entered... therefore your progress will not be correct");
+                ctr_income++;
+            }
         }    
     }
     
@@ -94,7 +99,10 @@ const Progress=()=>{
             setGoalAmount(goal.amount);
             setGoalCat(goal.category);
         }catch(error){
-            alert("No goal is currently entered... therefore your progress will not be correct");
+            if(ctr_goal === 0){
+                alert("No goal is currently entered... therefore your progress will not be correct");
+                ctr_goal++;
+            }
         }
     }
 
@@ -146,7 +154,7 @@ const Progress=()=>{
             <div><form style={{ margin: "50px"}}>
                 <div className="progress-label">Your goal is to have ${goalAmount} in your {goalCat}. Currently you have ${currentGoalProgress}.</div>
                 <div className="progress-bar">
-                    <div className="progress-bar-fill" style={{ width: `${currentGoalProgress / goalAmount *100}%`, backgroundColor: getColor() }}></div>
+                    <div className="progress-bar-fill" style={{ maxWidth: "100%", width: `${currentGoalProgress / goalAmount *100}%`, backgroundColor: getColor() }}></div>
                 </div>
                 <div className="progress-label">{currentGoalProgress / goalAmount *100}% towards your goal!</div>
                 <Button variant="contained" href="/input-goal">Change Goal</Button>

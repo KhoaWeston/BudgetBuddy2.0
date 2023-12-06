@@ -18,18 +18,14 @@ const InputReminder=()=>{
     const startReminders = async() =>{ // sets up the the reminders to be executed
     const schedule = require('node-schedule');
     let scheduledperiod ="";
-    if (selectedperiod.valueOf==="Once a day"){ // setting the string to the time period we want the reminders to run on
+    if (selectedperiod ==="Once a day"){ // setting the string to the time period we want the reminders to run on
       scheduledperiod ='0 0 * * *';
-    }
-    else if(selectedperiod.valueOf==="Every Other day"){
+    } else if(selectedperiod ==="Every Other day"){
       scheduledperiod ='0 0 */2 * *';
-    }
-    else if(selectedperiod.valueOf==="Once a Month"){
+    } else if(selectedperiod ==="Once a Month"){
       scheduledperiod ='0 0 1 * *';
-    }
-    else {
+    } else {
       scheduledperiod ='0 0 1 1 *'; // once a year
-
     }
 
     schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an email at the scheduled period
@@ -88,7 +84,8 @@ const InputReminder=()=>{
   
     const onSubmit = async (event) => { // the function that will run when submit reminders is pressed
       event.preventDefault();
-      if (form.description.length === 0 || selectedperiod.valueOf.length ===0) { // error checking that the form values are filled in
+      console.log(selectedperiod.length);
+      if (form.description.length === 0 || selectedperiod.length === 0) { // error checking that the form values are filled in
         alert("You must enter all fields to submit a reminder");
         return;
       }

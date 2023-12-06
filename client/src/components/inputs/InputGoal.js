@@ -55,7 +55,7 @@ const InputGoal=()=>{
     const onSubmit = async (event) => { // the function that will run when submit goal is pressed
       event.preventDefault();
       const {amount } = form;
-      if (amount === 0 || selectedgoal.length ===0 ) { // error checking that the form values are filled in
+      if (amount.length === 0 || selectedgoal.length ===0 ) { // error checking that the form values are filled in
         alert("You must enter all fields to submit a goal");
         return;
       }
@@ -72,7 +72,7 @@ const InputGoal=()=>{
       try{
         const goal = await goals.findOne(); // finds one goal
         alert("Your current goal states you want to have $" + goal.amount + " in the category: " + goal.category+
-        "\nEnter the category and amount that you want to change your goal to and press Enter Goal"); // alerts the user of their current goa
+        "\nEnter the category and amount that you want to change your goal to and press Submit Goal"); // alerts the user of their current goa
          await goals.deleteOne(); // deletes their current goal
       }catch (error){
           alert("You have no goals at the moment");
