@@ -50,8 +50,8 @@ const InputIncome = () => {
   
     const onSubmit = async (event) => {  // the function that will run when submit income is pressed
       event.preventDefault();
-      const { amount,period } = form;
-      if (amount.length === 0 || period.valueOf.length ===0) { // error checking that the form values are filled in
+      const { amount } = form;
+      if (amount.length === 0 || selectedperiod.length ===0) { // error checking that the form values are filled in
         alert("You must enter all fields to submit a income");
         return;
       }

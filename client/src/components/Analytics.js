@@ -12,14 +12,13 @@ const app = new App(APP_ID); // Creating a Realm App Instance
 const Analytics=()=>{
     const { user } = useContext(UserContext);
     const [chartHeight, setChartHeight] = useState(window.innerHeight);
- 
-    
-        // Embeds a chart for users that are logged in
-        const sdk = new ChartsEmbedSDK( {
-            baseUrl: "https://charts.mongodb.com/charts-project-0-qxtjo",
-            autoRefresh: true,
-            getUserToken: () => getRealmUserToken(app),
-        });
+
+    // Embeds a chart for users that are logged in
+    const sdk = new ChartsEmbedSDK( {
+        baseUrl: "https://charts.mongodb.com/charts-project-0-qxtjo",
+        autoRefresh: true,
+        getUserToken: () => getRealmUserToken(app),
+    });
 
     // Formats embedded chart 
     const chart1 = sdk.createChart({

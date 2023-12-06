@@ -50,9 +50,9 @@ const InputSavings = () => {
   const onSubmit = async (event) => { // this function will be called when the user hits submit saving
     event.preventDefault();
     const {amount } = form; // pulls amount variable from the form
-      if (amount === 0 || selectedsavings.length === 0 ) { // error checking to make sure values are not null
+      if (amount.length === 0 || selectedsavings.length === 0 ) { // error checking to make sure values are not null
         alert("You must enter all fields to submit a saving");
-      return;
+        return;
     }
     try {
       await request(GRAPHQL_ENDPOINT, createSavingsQuery, queryVariables, headers); // will send the request to mongodb
