@@ -30,8 +30,9 @@ confirm Email address
 https://www.mongodb.com/community/forums/t/email-confirmation-script-for-user-authentication-via-email-address/13905/13
 https://www.mongodb.com/docs/realm/sdk/node/users/manage-email-password-users/#confirm-a-new-user-s-email-address 
 
-
-
+to send text messages 
+https://www.youtube.com/watch?v=YDAS4M_5D9o
+still using email js just send it phone numbers instead
 
 KHOA INSTALL 
 nothing

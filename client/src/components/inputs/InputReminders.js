@@ -13,6 +13,7 @@ import { APP_ID } from "../../contexts/realm/constants.js";
 const InputReminder=()=>{
     const { user } = useContext(UserContext);
     const [selectedperiod, setSelectedperiod]= useState(""); // a small function that sets the variable selectedperiod when called
+    const [remindertype,setType]=useState("");
     const app = new App(APP_ID); // Creating a Realm App Instance
 
     const startReminders = async() =>{ // sets up the the reminders to be executed
@@ -28,12 +29,43 @@ const InputReminder=()=>{
       scheduledperiod ='0 0 1 1 *'; // once a year
     }
 
-    schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an email at the scheduled period
-     emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the email to a user
-            message: form.description,
-            to_name: app.currentUser.profile.email
-            }, 'e9ffixOE5GbV8xB6_');
-    });
+    if (remindertype==="Email"){ // will send a reminder in the version they want
+      schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an email at the scheduled period
+        emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the email to a user
+               message: form.description,
+               to_name: app.currentUser.profile.email
+               }, 'e9ffixOE5GbV8xB6_');
+       });
+    }else if ( remindertype==="Text"){
+      var txtnum = window.prompt("Enter the phone number to receive Text Messages"); // asks the user for their phone number
+      txtnum=txtnum + "@vtext.com"; // currently will only send texts to verizon numbers
+      schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an text at the scheduled period
+        emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the text to a user
+              message: form.description,
+              to_name: txtnum,
+              }, 'e9ffixOE5GbV8xB6_');
+        });
+    }
+    else{
+      // same code as the above options.. just in one place
+      schedule.scheduleJob(scheduledperiod,function(){  
+        emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
+               message: form.description,
+               to_name: app.currentUser.profile.email
+               }, 'e9ffixOE5GbV8xB6_');
+       });
+
+      var txtnum = window.prompt("Enter the phone number to receive Text Messages");
+      txtnum=txtnum + "@vtext.com"; 
+      schedule.scheduleJob(scheduledperiod,function(){  
+        emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
+              message: form.description,
+              to_name: txtnum,
+              }, 'e9ffixOE5GbV8xB6_');
+        });
+    }
+
+
 
     }  
 
@@ -120,6 +152,12 @@ const InputReminder=()=>{
                     <option value="Every Other day"> Every Other Day</option>
                     <option value="Once a Month"> Once a Month</option>
                     <option value="Once a Year"> Once a Year</option>
+                </select> 
+                <select className="inputSelect" value={remindertype} onChange={e => setType(e.target.value)}>
+                    <option>  </option>
+                    <option value="Email"> Email</option>
+                    <option value="Text"> Text Message</option>
+                    <option value="Both"> Both Email and Text</option>
                 </select> 
                 <br></br>
                 <Button 
