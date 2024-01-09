@@ -34,8 +34,7 @@ const Analytics=()=>{
         const toDateSelect = document.getElementById("date-to");
         const fromDate = new Date(fromDateSelect.value);
         const toDate = new Date(toDateSelect.value);
-        chart1.setFilter({ createdAt: { $gte: fromDate,  $lt: toDate }});
-        chart1.setFilter({author: {'$oid': user.id}});
+        chart1.setFilter({author: {'$oid': user.id}, createdAt: { $gte: fromDate,  $lt: toDate }});
     }
     
     // Renders the chart when user is on specific page
