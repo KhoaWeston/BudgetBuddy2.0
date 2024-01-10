@@ -12,6 +12,7 @@ const app = new App(APP_ID); // Creating a Realm App Instance
 const Analytics=()=>{
     const { user } = useContext(UserContext);
     const [chartHeight, setChartHeight] = useState(window.innerHeight);
+    const [chartType, setChartType]= useState("chart1");
     
     // Embeds a chart for users that are logged in
     const sdk = new ChartsEmbedSDK( {
@@ -28,21 +29,40 @@ const Analytics=()=>{
         filter: {"author":{'$oid': user.id}} // filters the chart by user
     });
 
+    const chart2 = sdk.createChart({
+        chartId: '659df7a6-a1ec-4b3d-86bd-2e08470b3220',
+        width: "90%",
+        height: chartHeight/2,
+        filter: {"author":{'$oid': user.id}} // filters the chart by user
+    });
+
     // Filters chart entries between dates entered by user
     const changeDate = async()=>{
         const fromDateSelect = document.getElementById("date-from");
         const toDateSelect = document.getElementById("date-to");
         const fromDate = new Date(fromDateSelect.value);
         const toDate = new Date(toDateSelect.value);
-        chart1.setFilter({author: {'$oid': user.id}, createdAt: { $gte: fromDate,  $lt: toDate }});
+        if(chartType === "chart1"){
+            chart1.setFilter({author: {'$oid': user.id}, createdAt: { $gte: fromDate,  $lt: toDate }});
+        }else{
+            chart2.setFilter({author: {'$oid': user.id}, createdAt: { $gte: fromDate,  $lt: toDate }});
+        }
     }
-    
+
+
     // Renders the chart when user is on specific page
     const renderChart =()=>{
         if (window.location.pathname === "/analytics") {
-            chart1
-                .render(document.getElementById('chart1'))
-                .catch(() => window.alert('Reload the page (Ctrl+R)'));
+            if(chartType === "chart1"){
+                chart1
+                    .render(document.getElementById('chart1'))
+                    .catch(() => window.alert('Reload the page (Ctrl+R)'));
+            }else{
+                chart2
+                    .render(document.getElementById('chart2'))
+                    .catch(() => window.alert('Reload the page (Ctrl+R)'));
+            }
+            
         }
     }
 
@@ -63,6 +83,11 @@ const Analytics=()=>{
             <h1><form style={{ maxWidth: "350px", margin: "auto" }}>Your Analytics</form></h1>
             <div className="row">
                 <div style={{ flex: "10%"}} >
+                    <div>Select Chart Type: </div>
+                    <select className="inputType" value={chartType} onChange={e => setChartType(e.target.value)}>
+                        <option value="chart1"> Bar</option>
+                        <option value="chart2">Donut</option>
+                    </select>
                     <div>Show data </div>
                     <div style={{ textAlign: "right" }} >
                         <label>from: <input className="inputDate" type="date" id="date-from" /></label>
@@ -71,7 +96,7 @@ const Analytics=()=>{
                     <Button variant="contained" onClick={changeDate} style={{ width: "75px", margin: "auto" }}>Enter</Button> 
                 </div>
                 <div style={{ flex: "80%"}}>
-                    <div id="chart1" className="chart"></div>
+                    <div id={chartType} className="chart"></div>
                 </div>
             </div>
             

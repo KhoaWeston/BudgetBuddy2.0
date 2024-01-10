@@ -31,7 +31,7 @@ const Header=()=>{
                     <li><Link to="/progress">Progress</Link></li>
                     <li><Link to="/analytics">Analytics</Link></li>
                 </div>
-                <div style={{ flex: "30%", textAlign:"right", marginRight:"30px", marginTop:"10px"}}><IconButton style={{textAlign:"right"}}><Link to="/profile"><PersonIcon /></Link></IconButton></div>
+                <div style={{ flex: "30%", textAlign:"right", marginRight:"30px", marginTop:"10px"}}><label>Welcome </label><IconButton style={{textAlign:"right"}}><Link to="/profile"><PersonIcon /></Link></IconButton></div>
             </ul>
         </header>
     )
