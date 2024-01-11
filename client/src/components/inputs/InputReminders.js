@@ -13,6 +13,8 @@ import { APP_ID } from "../../contexts/realm/constants.js";
 const InputReminder=()=>{
     const { user } = useContext(UserContext);
     const [selectedperiod, setSelectedperiod]= useState(""); // a small function that sets the variable selectedperiod when called
+    const [txtnum, setTxtNum]= useState("");
+    const [provider, setProvider]= useState("");
     const [remindertype,setType]=useState("");
     const app = new App(APP_ID); // Creating a Realm App Instance
 
@@ -127,10 +129,12 @@ const InputReminder=()=>{
       }
     };
 
-    function change(elem) {
+    function change(elem) { // keeps phone number inputs hidden until they choose text
       if(elem === "Text" || elem === "Both"){
         document.getElementById("hiddendrop").style.display = 'block';
+        document.getElementById("hiddendrop1").style.display = 'block';
       } else {
+        document.getElementById("hiddendrop1").style.display = 'none';
         document.getElementById("hiddendrop").style.display = 'none';
       }
     };
@@ -165,12 +169,24 @@ const InputReminder=()=>{
                     <option value="Text"> Text Message</option>
                     <option value="Both"> Both Email and Text</option>
                 </select> 
-                <br></br>
-                <select className="inputSelect" id="hiddendrop" style={{display: "none"}}>
-                    <option value="" disable selected hidden>Select a provider </option>
-                    <option value="Verizon"> Verizon</option>
-                    <option value="AT&T"> AT&T</option>
-                    <option value="T-Mobile"> T-Mobile</option>
+                <input 
+                    className="inputBox"
+                    placeholder="Enter Phone Number (as ********** NO dashes) "
+                    id="hiddendrop1"
+                    type="text"
+                    variant="outlined"
+                    name="number"
+                    value={form.number}
+                    onChange={e => setTxtNum(e.target.value)}
+                    fullWidth
+                    style={{display: "none"}}
+                />
+                <select className="inputSelect" id="hiddendrop" style={{display: "none"}} onChange={e => {setProvider(e.target.value);}}>
+                    <option>  </option>
+                    <option value="@vtext.com"> Verizon</option>
+                    <option value="@txt.att.net"> AT&T</option>
+                    <option value="@tmomail.net"> T-Mobile</option>
+                    <option value="@messaging.sprintpcs.com"> Sprint</option>
                 </select>
                 <Button 
                   variant="contained" 
