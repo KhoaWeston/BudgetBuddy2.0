@@ -64,9 +64,6 @@ const InputReminder=()=>{
               }, 'e9ffixOE5GbV8xB6_');
         });
     }
-
-
-
     }  
 
     const DeleteReminder=()=>{ // will delete all reminders for the user
@@ -129,6 +126,15 @@ const InputReminder=()=>{
         alert(error) // alerts the user if query fails
       }
     };
+
+    function change(elem) {
+      if(elem === "Text"){
+        document.getElementById("hiddendrop").style.display = 'block';
+      } else {
+        document.getElementById("hiddendrop").style.display = 'none';
+      }
+    };
+    
     return(
         <div>
             <Header/>
@@ -153,13 +159,19 @@ const InputReminder=()=>{
                     <option value="Once a Month"> Once a Month</option>
                     <option value="Once a Year"> Once a Year</option>
                 </select> 
-                <select className="inputSelect" value={remindertype} onChange={e => setType(e.target.value)}>
+                <select className="inputSelect" value={remindertype} onChange={e => {setType(e.target.value); change(e.target.value)}}>
                     <option>  </option>
                     <option value="Email"> Email</option>
                     <option value="Text"> Text Message</option>
                     <option value="Both"> Both Email and Text</option>
                 </select> 
                 <br></br>
+                <select className="inputSelect" id="hiddendrop" style={{display: "none"}}>
+                    <option>  </option>
+                    <option value="Verizon"> Verizon</option>
+                    <option value="AT&T"> AT&T</option>
+                    <option value="T-Mobile"> T-Mobile</option>
+                </select>
                 <Button 
                   variant="contained" 
                   color="primary" 
