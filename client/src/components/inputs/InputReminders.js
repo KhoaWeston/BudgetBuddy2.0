@@ -13,6 +13,8 @@ import { APP_ID } from "../../contexts/realm/constants.js";
 const InputReminder=()=>{
     const { user } = useContext(UserContext);
     const [selectedperiod, setSelectedperiod]= useState(""); // a small function that sets the variable selectedperiod when called
+    const [txtnum, setTxtNum]= useState("");
+    const [provider, setProvider]= useState("");
     const [remindertype,setType]=useState("");
     const app = new App(APP_ID); // Creating a Realm App Instance
 
@@ -20,7 +22,7 @@ const InputReminder=()=>{
     const schedule = require('node-schedule');
     let scheduledperiod ="";
     if (selectedperiod ==="Once a day"){ // setting the string to the time period we want the reminders to run on
-      scheduledperiod ='* * * * *';
+      scheduledperiod ='0 0 * * *';
     } else if(selectedperiod ==="Every Other day"){
       scheduledperiod ='0 0 */2 * *';
     } else if(selectedperiod ==="Once a Month"){
@@ -37,34 +39,16 @@ const InputReminder=()=>{
                }, 'e9ffixOE5GbV8xB6_');
        });
     }else if ( remindertype==="Text"){
-      var txtnum = window.prompt("Enter the phone number to receive Text Messages (enter as ********** NO DASHES)"); // asks the user for their phone number
-      
-      var provider = window.prompt("Enter your phone provider (available options: Verizon, AT&T, T-Mobile, Sprint");
-      if (provider == "Verizon"){
-        txtnum=txtnum + "@vtext.com"; // send texts to verizon numbers
-        alert("Your Message has been added to the database!");
-      }else if (provider == "AT&T"){
-      txtnum=txtnum + "@txt.att.net"; // AT&T numbers
-      alert("Your Message has been added to the database!");
-      }else if (provider == "T-Mobile"){
-      txtnum=txtnum + "@tmomail.net"; // T-Mobile numbers
-      alert("Your Message has been added to the database!");
-      }else if (provider == "Sprint"){
-      txtnum=txtnum + "@messaging.sprintpcs.com"; // Sprint numbers
-      alert("Your Message has been added to the database!");
-      }
-      else{
-        alert("Sorry, we do not have that service provider at the moment, please choose email instead!")
-      }
-
+      var email = txtnum+provider;
       schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an text at the scheduled period
         emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the text to a user
               message: form.description,
-              to_name: txtnum,
+              to_name: email,
               }, 'e9ffixOE5GbV8xB6_');
         });
     }
     else{
+      var email = txtnum+provider;
       // same code as the above options.. just in one place
       schedule.scheduleJob(scheduledperiod,function(){  
         emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
@@ -72,31 +56,11 @@ const InputReminder=()=>{
                to_name: app.currentUser.profile.email
                }, 'e9ffixOE5GbV8xB6_');
        });
-
-      var txtnum = window.prompt("Enter the phone number to receive Text Messages");
-
-      var provider = window.prompt("Enter your phone provider (available options: Verizon, AT&T, T-Mobile, Sprint");
-      if (provider == "Verizon"){
-        txtnum=txtnum + "@vtext.com"; // send texts to verizon numbers
-        alert("Your Message has been added to the database!");
-      }else if (provider == "AT&T"){
-      txtnum=txtnum + "@txt.att.net"; // AT&T numbers
-      alert("Your Message has been added to the database!");
-      }else if (provider == "T-Mobile"){
-      txtnum=txtnum + "@tmomail.net"; // T-Mobile numbers
-      alert("Your Message has been added to the database!");
-      }else if (provider == "Sprint"){
-      txtnum=txtnum + "@messaging.sprintpcs.com"; // Sprint numbers
-      alert("Your Message has been added to the database!");
-      }
-      else{
-        alert("Sorry, we do not have that service provider at the moment, please choose email instead!")
-      }
       
       schedule.scheduleJob(scheduledperiod,function(){  
         emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
               message: form.description,
-              to_name: txtnum,
+              to_name: email,
               }, 'e9ffixOE5GbV8xB6_');
         });
     }
@@ -156,17 +120,19 @@ const InputReminder=()=>{
       }
       try {
         await request(GRAPHQL_ENDPOINT, createReminderQuery, queryVariables, headers); // sends the query with the data points to mongodb
-        //alert("Reminder Added to your database!") // alerts the user if sucessful
+        alert("Reminder Added to your database!") // alerts the user if sucessful
         startReminders(); // executes the function that will start reminders
       } catch (error) {
         alert(error) // alerts the user if query fails
       }
     };
 
-    function change(elem) {
-      if(elem === "Text"){
+    function change(elem) { // keeps phone number inputs hidden until they choose text
+      if(elem === "Text" || elem === "Both"){
         document.getElementById("hiddendrop").style.display = 'block';
+        document.getElementById("hiddendrop1").style.display = 'block';
       } else {
+        document.getElementById("hiddendrop1").style.display = 'none';
         document.getElementById("hiddendrop").style.display = 'none';
       }
     };
@@ -201,12 +167,24 @@ const InputReminder=()=>{
                     <option value="Text"> Text Message</option>
                     <option value="Both"> Both Email and Text</option>
                 </select> 
-                <br></br>
-                <select className="inputSelect" id="hiddendrop" style={{display: "none"}}>
+                <input 
+                    className="inputBox"
+                    placeholder="Enter Phone Number (as ********** NO dashes) "
+                    id="hiddendrop1"
+                    type="text"
+                    variant="outlined"
+                    name="number"
+                    value={form.number}
+                    onChange={e => setTxtNum(e.target.value)}
+                    fullWidth
+                    style={{display: "none"}}
+                />
+                <select className="inputSelect" id="hiddendrop" style={{display: "none"}} onChange={e => {setProvider(e.target.value);}}>
                     <option>  </option>
-                    <option value="Verizon"> Verizon</option>
-                    <option value="AT&T"> AT&T</option>
-                    <option value="T-Mobile"> T-Mobile</option>
+                    <option value="@vtext.com"> Verizon</option>
+                    <option value="@txt.att.net"> AT&T</option>
+                    <option value="@tmomail.net"> T-Mobile</option>
+                    <option value="@messaging.sprintpcs.com"> Sprint</option>
                 </select>
                 <Button 
                   variant="contained" 
