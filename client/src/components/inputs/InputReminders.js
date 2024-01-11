@@ -17,53 +17,53 @@ const InputReminder=()=>{
     const app = new App(APP_ID); // Creating a Realm App Instance
 
     const startReminders = async() =>{ // sets up the the reminders to be executed
-    const schedule = require('node-schedule');
-    let scheduledperiod ="";
-    if (selectedperiod ==="Once a day"){ // setting the string to the time period we want the reminders to run on
-      scheduledperiod ='0 0 * * *';
-    } else if(selectedperiod ==="Every Other day"){
-      scheduledperiod ='0 0 */2 * *';
-    } else if(selectedperiod ==="Once a Month"){
-      scheduledperiod ='0 0 1 * *';
-    } else {
-      scheduledperiod ='0 0 1 1 *'; // once a year
-    }
-
-    if (remindertype==="Email"){ // will send a reminder in the version they want
-      schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an email at the scheduled period
-        emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the email to a user
-               message: form.description,
-               to_name: app.currentUser.profile.email
-               }, 'e9ffixOE5GbV8xB6_');
-       });
-    }else if ( remindertype==="Text"){
+      const schedule = require('node-schedule');
+      let scheduledperiod ="";
       var txtnum = window.prompt("Enter the phone number to receive Text Messages"); // asks the user for their phone number
-      txtnum=txtnum + "@vtext.com"; // currently will only send texts to verizon numbers
-      schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an text at the scheduled period
-        emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the text to a user
-              message: form.description,
-              to_name: txtnum,
-              }, 'e9ffixOE5GbV8xB6_');
-        });
-    }
-    else{
-      // same code as the above options.. just in one place
-      schedule.scheduleJob(scheduledperiod,function(){  
-        emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
-               message: form.description,
-               to_name: app.currentUser.profile.email
-               }, 'e9ffixOE5GbV8xB6_');
-       });
 
-      var txtnum = window.prompt("Enter the phone number to receive Text Messages");
-      txtnum=txtnum + "@vtext.com"; 
-      schedule.scheduleJob(scheduledperiod,function(){  
-        emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
-              message: form.description,
-              to_name: txtnum,
-              }, 'e9ffixOE5GbV8xB6_');
+
+      if (selectedperiod ==="Once a day"){ // setting the string to the time period we want the reminders to run on
+        scheduledperiod ='0 0 * * *';
+      } else if(selectedperiod ==="Every Other day"){
+        scheduledperiod ='0 0 */2 * *';
+      } else if(selectedperiod ==="Once a Month"){
+        scheduledperiod ='0 0 1 * *';
+      } else {
+        scheduledperiod ='0 0 1 1 *'; // once a year
+      }
+
+      if (remindertype==="Email"){ // will send a reminder in the version they want
+        schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an email at the scheduled period
+          emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the email to a user
+                message: form.description,
+                to_name: app.currentUser.profile.email
+                }, 'e9ffixOE5GbV8xB6_');
         });
-    }
+      }else if ( remindertype==="Text"){
+        txtnum=txtnum + "@vtext.com"; // currently will only send texts to verizon numbers
+        schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an text at the scheduled period
+          emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the text to a user
+                message: form.description,
+                to_name: txtnum,
+                }, 'e9ffixOE5GbV8xB6_');
+          });
+      }else{
+        // same code as the above options.. just in one place
+        schedule.scheduleJob(scheduledperiod,function(){  
+          emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
+                message: form.description,
+                to_name: app.currentUser.profile.email
+                }, 'e9ffixOE5GbV8xB6_');
+        });
+
+        txtnum=txtnum + "@vtext.com"; 
+        schedule.scheduleJob(scheduledperiod,function(){  
+          emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
+                message: form.description,
+                to_name: txtnum,
+                }, 'e9ffixOE5GbV8xB6_');
+          });
+      }
     }  
 
     const DeleteReminder=()=>{ // will delete all reminders for the user
@@ -128,7 +128,7 @@ const InputReminder=()=>{
     };
 
     function change(elem) {
-      if(elem === "Text"){
+      if(elem === "Text" || elem === "Both"){
         document.getElementById("hiddendrop").style.display = 'block';
       } else {
         document.getElementById("hiddendrop").style.display = 'none';
@@ -152,22 +152,22 @@ const InputReminder=()=>{
                     fullWidth
                     style={{ marginBottom: "1rem" }} 
                 />
-                <select className="inputSelect" value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
-                    <option>  </option>
+                <select required className="inputSelect" value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
+                    <option value="" disable selected hidden>Select a period </option>
                     <option value="Once a day"> Once a day</option>
                     <option value="Every Other day"> Every Other Day</option>
                     <option value="Once a Month"> Once a Month</option>
                     <option value="Once a Year"> Once a Year</option>
                 </select> 
-                <select className="inputSelect" value={remindertype} onChange={e => {setType(e.target.value); change(e.target.value)}}>
-                    <option>  </option>
+                <select required className="inputSelect" value={remindertype} onChange={e => {setType(e.target.value); change(e.target.value)}}>
+                    <option value="" disable selected hidden>Select a type </option>
                     <option value="Email"> Email</option>
                     <option value="Text"> Text Message</option>
                     <option value="Both"> Both Email and Text</option>
                 </select> 
                 <br></br>
                 <select className="inputSelect" id="hiddendrop" style={{display: "none"}}>
-                    <option>  </option>
+                    <option value="" disable selected hidden>Select a provider </option>
                     <option value="Verizon"> Verizon</option>
                     <option value="AT&T"> AT&T</option>
                     <option value="T-Mobile"> T-Mobile</option>

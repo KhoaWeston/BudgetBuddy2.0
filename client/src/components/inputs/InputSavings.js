@@ -80,8 +80,8 @@ const InputSavings = () => {
           fullWidth
           style={{ marginBottom: "1rem" }} 
         />
-        <select className="inputSelect" value={selectedsavings} onChange={e => setsavings(e.target.value)}>
-          <option> </option>
+        <select required className="inputSelect" value={selectedsavings} onChange={e => setsavings(e.target.value)}>
+          <option value="" disable selected hidden>Select a category </option>
           <option value="Emergencies"> Emergencies</option>
           <option value="Retirement">Retirement</option>
           <option value="Vacation"> Vacation</option>

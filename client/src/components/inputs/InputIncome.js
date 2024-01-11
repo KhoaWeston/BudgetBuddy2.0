@@ -82,8 +82,8 @@ const InputIncome = () => {
               fullwidth
               style={{ marginBottom: "1rem" }} 
             />
-           <select className="inputSelect" value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
-            <option>  </option>
+           <select required className="inputSelect" value={selectedperiod} onChange={e => setSelectedperiod(e.target.value)}>
+            <option value="" disable selected hidden>Select a period </option>
             <option value="Weekly"> Weekly</option>
             <option value="Every Other Week"> Every Other Week</option>
             <option value="Twice a Month"> Twice a Month</option>
