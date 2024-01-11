@@ -20,7 +20,7 @@ const InputReminder=()=>{
     const schedule = require('node-schedule');
     let scheduledperiod ="";
     if (selectedperiod ==="Once a day"){ // setting the string to the time period we want the reminders to run on
-      scheduledperiod ='0 0 * * *';
+      scheduledperiod ='* * * * *';
     } else if(selectedperiod ==="Every Other day"){
       scheduledperiod ='0 0 */2 * *';
     } else if(selectedperiod ==="Once a Month"){
@@ -37,8 +37,26 @@ const InputReminder=()=>{
                }, 'e9ffixOE5GbV8xB6_');
        });
     }else if ( remindertype==="Text"){
-      var txtnum = window.prompt("Enter the phone number to receive Text Messages"); // asks the user for their phone number
-      txtnum=txtnum + "@vtext.com"; // currently will only send texts to verizon numbers
+      var txtnum = window.prompt("Enter the phone number to receive Text Messages (enter as ********** NO DASHES)"); // asks the user for their phone number
+      
+      var provider = window.prompt("Enter your phone provider (available options: Verizon, AT&T, T-Mobile, Sprint");
+      if (provider == "Verizon"){
+        txtnum=txtnum + "@vtext.com"; // send texts to verizon numbers
+        alert("Your Message has been added to the database!");
+      }else if (provider == "AT&T"){
+      txtnum=txtnum + "@txt.att.net"; // AT&T numbers
+      alert("Your Message has been added to the database!");
+      }else if (provider == "T-Mobile"){
+      txtnum=txtnum + "@tmomail.net"; // T-Mobile numbers
+      alert("Your Message has been added to the database!");
+      }else if (provider == "Sprint"){
+      txtnum=txtnum + "@messaging.sprintpcs.com"; // Sprint numbers
+      alert("Your Message has been added to the database!");
+      }
+      else{
+        alert("Sorry, we do not have that service provider at the moment, please choose email instead!")
+      }
+
       schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an text at the scheduled period
         emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the text to a user
               message: form.description,
@@ -56,7 +74,25 @@ const InputReminder=()=>{
        });
 
       var txtnum = window.prompt("Enter the phone number to receive Text Messages");
-      txtnum=txtnum + "@vtext.com"; 
+
+      var provider = window.prompt("Enter your phone provider (available options: Verizon, AT&T, T-Mobile, Sprint");
+      if (provider == "Verizon"){
+        txtnum=txtnum + "@vtext.com"; // send texts to verizon numbers
+        alert("Your Message has been added to the database!");
+      }else if (provider == "AT&T"){
+      txtnum=txtnum + "@txt.att.net"; // AT&T numbers
+      alert("Your Message has been added to the database!");
+      }else if (provider == "T-Mobile"){
+      txtnum=txtnum + "@tmomail.net"; // T-Mobile numbers
+      alert("Your Message has been added to the database!");
+      }else if (provider == "Sprint"){
+      txtnum=txtnum + "@messaging.sprintpcs.com"; // Sprint numbers
+      alert("Your Message has been added to the database!");
+      }
+      else{
+        alert("Sorry, we do not have that service provider at the moment, please choose email instead!")
+      }
+      
       schedule.scheduleJob(scheduledperiod,function(){  
         emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
               message: form.description,
@@ -123,7 +159,7 @@ const InputReminder=()=>{
       }
       try {
         await request(GRAPHQL_ENDPOINT, createReminderQuery, queryVariables, headers); // sends the query with the data points to mongodb
-        alert("Reminder Added to your database!") // alerts the user if sucessful
+        //alert("Reminder Added to your database!") // alerts the user if sucessful
         startReminders(); // executes the function that will start reminders
       } catch (error) {
         alert(error) // alerts the user if query fails
