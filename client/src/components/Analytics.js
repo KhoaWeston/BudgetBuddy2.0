@@ -21,7 +21,7 @@ const Analytics=()=>{
         getUserToken: () => getRealmUserToken(app),
     });
 
-    // Formats embedded chart 
+    // Formats embedded bar chart 
     const chart1 = sdk.createChart({
         chartId: '655fc617-5768-4074-84c3-e714d5e34c62',
         width: "90%",
@@ -29,10 +29,11 @@ const Analytics=()=>{
         filter: {"author":{'$oid': user.id}} // filters the chart by user
     });
 
+    // Formats embedded donut chart
     const chart2 = sdk.createChart({
         chartId: '659df7a6-a1ec-4b3d-86bd-2e08470b3220',
         width: "90%",
-        height: chartHeight/2,
+        height: chartHeight/1.8,
         filter: {"author":{'$oid': user.id}} // filters the chart by user
     });
 
