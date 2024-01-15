@@ -129,30 +129,33 @@ const Progress=()=>{
     return(
         <div className="app-container">
             <Header/>
-            <form style={{ maxWidth: "400px", margin: "auto" }}><h2>User Income per month: ${currentIncome}</h2></form>
-            <div className="row">
-                <div className="column">
-                    <div>Recommended Spending according to the 50/30/20 Monthly Budget</div>
+            <h1><form style={{ maxWidth: "500px", margin: "auto", textAlign:"center"}}>User Progress</form></h1>
+            <div className="comp-container" style={{margin:"20px"}}>
+                <h2 style={{marginLeft:"20px", marginTop:"0px", marginBottom:"5px"}}>User Income per Month: ${currentIncome}</h2>
+                <div className="row">
+                    <div className="column">
+                        <h3>Recommended Spending According to the 50/30/20 Monthly Budget:</h3>
+                    </div>
+                    <div className="column">
+                        <h3>Actual Monthly Spending:</h3>
+                    </div>
                 </div>
-                <div className="column">
-                    <div>Actual Monthly Spending</div>
+                <div className="row">
+                    <div className="column">
+                        <div>Needs: ${(currentIncome*0.5).toFixed(2)}</div>
+                        <div>Wants: ${(currentIncome*0.3).toFixed(2)}</div>
+                        <div>Savings: ${(currentIncome*0.2).toFixed(2)}</div>
+                    </div>
+                    <div className="column">
+                        <div>Wants: ${actualWant}</div>
+                        <div>Needs: ${actualNeed}</div>
+                        <div>Savings: ${actualSaving}</div>
+                    </div>
                 </div>
             </div>
-            <div className="row">
-                <div className="column">
-                    <div>Needs: ${(currentIncome*0.5).toFixed(2)}</div>
-                    <div>Wants: ${(currentIncome*0.3).toFixed(2)}</div>
-                    <div>Savings: ${(currentIncome*0.2).toFixed(2)}</div>
-                </div>
-                <div className="column">
-                    <div>Wants: ${actualWant}</div>
-                    <div>Needs: ${actualNeed}</div>
-                    <div>Savings: ${actualSaving}</div>
-                </div>
-            </div>
-            
-            <div><form style={{ margin: "50px"}}>
-                <div className="progress-label">Your goal is to have ${goalAmount} in your {goalCat}. Currently you have ${currentGoalProgress}.</div>
+            <div><form className="comp-container" style={{ margin: "20px", padding: "10px", textAlign:"center"}}>
+                <h2 style={{marginLeft:"20px", marginTop:"0px", marginBottom:"5px"}}>Goal Progress Bar:</h2>
+                <div className="progress-label">Your goal is to have ${goalAmount} in your {goalCat}. You currently have ${currentGoalProgress}.</div>
                 <div className="progress-bar">
                     <div className="progress-bar-fill" style={{ maxWidth: "100%", width: `${progress_num}%`, backgroundColor: getColor() }}></div>
                 </div>

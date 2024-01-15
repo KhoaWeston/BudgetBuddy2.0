@@ -130,8 +130,8 @@ const InputReminder=()=>{
 
     function change(elem) { // keeps phone number inputs hidden until they choose text
       if(elem === "Text" || elem === "Both"){
-        document.getElementById("hiddendrop").style.display = 'block';
-        document.getElementById("hiddendrop1").style.display = 'block';
+        document.getElementById("hiddendrop").style.display = 'inline';
+        document.getElementById("hiddendrop1").style.display = 'inline';
       } else {
         document.getElementById("hiddendrop1").style.display = 'none';
         document.getElementById("hiddendrop").style.display = 'none';

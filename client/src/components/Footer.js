@@ -4,7 +4,7 @@ import React from 'react';
 const Footer=()=>{
     return(
         <div className="nav-footer">
-            <h3>2024 BudgetBuddy</h3>
+            <h2>2024 BudgetBuddy</h2>
         </div>
     )
 }

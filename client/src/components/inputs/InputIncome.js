@@ -70,7 +70,7 @@ const InputIncome = () => {
             <h1>Input Income Information </h1>
             <input
               className="inputBox"
-              placeholder="Enter income"
+              placeholder="Enter Income"
               label="amount"
               type="number"
               variant="outlined"

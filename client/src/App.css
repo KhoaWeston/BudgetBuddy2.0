@@ -37,13 +37,13 @@ body, html {
 
 .inputBox {
   padding: 7px;
-  display: block;
   border: 1px solid skyblue;
   width: 400px;
   margin-top: 0px;
 }
 
 .inputSelect {
+  border: 1px solid skyblue;
   width: 415px;
   height: 30px;
   margin-bottom: 20px; 
@@ -74,4 +74,10 @@ body, html {
   width: 150px;
   height: 30px;
   margin-bottom: 20px;
+}
+
+.comp-container {
+  box-shadow: 0px 2px 8px -3px rgb(104, 104, 104);
+  border-radius: 25px;
+  padding: 15px;
 }

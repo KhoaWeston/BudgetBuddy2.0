@@ -97,7 +97,7 @@ const InputExpense = () => {
         />
         <input
           className="inputBox"
-          placeholder="Enter category"
+          placeholder="Enter Category"
           label="Category"
           type="text"
           variant="outlined"

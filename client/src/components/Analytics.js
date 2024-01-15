@@ -12,7 +12,7 @@ const app = new App(APP_ID); // Creating a Realm App Instance
 const Analytics=()=>{
     const { user } = useContext(UserContext);
     const [chartHeight, setChartHeight] = useState(window.innerHeight);
-    const [chartType, setChartType]= useState("chart1");
+    const [chartType, setChartType]= useState("chart2");
     
     // Embeds a chart for users that are logged in
     const sdk = new ChartsEmbedSDK( {
@@ -81,22 +81,26 @@ const Analytics=()=>{
     return(
         <div className="app-container">
             <Header/>
-            <h1><form style={{ maxWidth: "350px", margin: "auto" }}>Your Analytics</form></h1>
+            <h1><form style={{ maxWidth: "350px", margin: "auto", textAlign:"center"}}>Your Analytics</form></h1>
             <div className="row">
                 <div style={{ flex: "10%"}} >
-                    <div>Select Chart Type: </div>
-                    <select className="inputType" value={chartType} onChange={e => setChartType(e.target.value)}>
-                        <option value="chart1"> Bar</option>
-                        <option value="chart2">Donut</option>
-                    </select>
-                    <div>Show data </div>
-                    <div style={{ textAlign: "right" }} >
-                        <label>from: <input className="inputDate" type="date" id="date-from" /></label>
-                        <div><label>to: <input className="inputDate" type="date" id="date-to" /></label></div>
-                    </div>    
-                    <Button variant="contained" onClick={changeDate} style={{ width: "75px", margin: "auto" }}>Enter</Button> 
+                    <div className="comp-container" style={{marginBottom:"20px"}}>
+                        <div>Select Chart Type: </div>
+                        <select className="inputType" value={chartType} onChange={e => setChartType(e.target.value)}>
+                            <option value="chart2">Donut</option>
+                            <option value="chart1"> Bar</option>
+                        </select>
+                    </div>
+                    <div className="comp-container">
+                        <div>Show data </div>
+                        <div style={{ textAlign: "right" }} >
+                            <label>from: <input className="inputDate" type="date" id="date-from" /></label>
+                            <div><label>to: <input className="inputDate" type="date" id="date-to" /></label></div>
+                        </div>    
+                        <div style={{ textAlign:"center"}}><Button variant="contained" onClick={changeDate} style={{ width: "75px"}}>Enter</Button></div> 
+                    </div>
                 </div>
-                <div style={{ flex: "80%"}}>
+                <div style={{ marginLeft:"50px", flex: "75%"}}>
                     <div id={chartType} className="chart"></div>
                 </div>
             </div>
