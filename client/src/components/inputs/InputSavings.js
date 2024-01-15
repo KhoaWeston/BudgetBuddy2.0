@@ -63,9 +63,8 @@ const InputSavings = () => {
   };
   
   return(
-    <div>
+    <div className="app-container">
       <Header/>
-      <Footer/>
       <div className="input-container">
         <h1>Input Savings Information </h1>
         <input
@@ -91,6 +90,7 @@ const InputSavings = () => {
           Submit Savings
         </Button>
       </div>
+      <Footer/>
     </div>
   );
 }

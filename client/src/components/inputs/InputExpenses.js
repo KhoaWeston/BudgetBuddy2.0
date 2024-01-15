@@ -67,10 +67,8 @@ const InputExpense = () => {
   };
   
   return(
-    <div>
+    <div className="app-container">
       <Header/>
-      <Footer/>
-      
       <div className="input-container">
         <h1>Input Expense Information </h1>
         <input
@@ -113,6 +111,7 @@ const InputExpense = () => {
           Submit Expense
         </Button>
       </div>
+      <Footer/>
     </div>
   );
 }

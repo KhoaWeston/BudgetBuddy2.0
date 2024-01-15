@@ -19,52 +19,50 @@ const InputReminder=()=>{
     const app = new App(APP_ID); // Creating a Realm App Instance
 
     const startReminders = async() =>{ // sets up the the reminders to be executed
-      const schedule = require('node-schedule');
-      let scheduledperiod ="";
-      var txtnum = window.prompt("Enter the phone number to receive Text Messages"); // asks the user for their phone number
+    const schedule = require('node-schedule');
+    let scheduledperiod ="";
+    if (selectedperiod ==="Once a day"){ // setting the string to the time period we want the reminders to run on
+      scheduledperiod ='0 0 * * *';
+    } else if(selectedperiod ==="Every Other day"){
+      scheduledperiod ='0 0 */2 * *';
+    } else if(selectedperiod ==="Once a Month"){
+      scheduledperiod ='0 0 1 * *';
+    } else {
+      scheduledperiod ='0 0 1 1 *'; // once a year
+    }
 
-
-      if (selectedperiod ==="Once a day"){ // setting the string to the time period we want the reminders to run on
-        scheduledperiod ='0 0 * * *';
-      } else if(selectedperiod ==="Every Other day"){
-        scheduledperiod ='0 0 */2 * *';
-      } else if(selectedperiod ==="Once a Month"){
-        scheduledperiod ='0 0 1 * *';
-      } else {
-        scheduledperiod ='0 0 1 1 *'; // once a year
-      }
-
-      if (remindertype==="Email"){ // will send a reminder in the version they want
-        schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an email at the scheduled period
-          emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the email to a user
-                message: form.description,
-                to_name: app.currentUser.profile.email
-                }, 'e9ffixOE5GbV8xB6_');
+    if (remindertype==="Email"){ // will send a reminder in the version they want
+      schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an email at the scheduled period
+        emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the email to a user
+               message: form.description,
+               to_name: app.currentUser.profile.email
+               }, 'e9ffixOE5GbV8xB6_');
+       });
+    }else if ( remindertype==="Text"){
+      var email = txtnum+provider;
+      schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an text at the scheduled period
+        emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the text to a user
+              message: form.description,
+              to_name: email,
+              }, 'e9ffixOE5GbV8xB6_');
         });
-      }else if ( remindertype==="Text"){
-        txtnum=txtnum + "@vtext.com"; // currently will only send texts to verizon numbers
-        schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an text at the scheduled period
-          emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the text to a user
-                message: form.description,
-                to_name: txtnum,
-                }, 'e9ffixOE5GbV8xB6_');
-          });
-      }else{
-        // same code as the above options.. just in one place
-        schedule.scheduleJob(scheduledperiod,function(){  
-          emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
-                message: form.description,
-                to_name: app.currentUser.profile.email
-                }, 'e9ffixOE5GbV8xB6_');
+    }
+    else{
+      var email = txtnum+provider;
+      // same code as the above options.. just in one place
+      schedule.scheduleJob(scheduledperiod,function(){  
+        emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
+               message: form.description,
+               to_name: app.currentUser.profile.email
+               }, 'e9ffixOE5GbV8xB6_');
+       });
+      
+      schedule.scheduleJob(scheduledperiod,function(){  
+        emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
+              message: form.description,
+              to_name: email,
+              }, 'e9ffixOE5GbV8xB6_');
         });
-
-        txtnum=txtnum + "@vtext.com"; 
-        schedule.scheduleJob(scheduledperiod,function(){  
-          emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
-                message: form.description,
-                to_name: txtnum,
-                }, 'e9ffixOE5GbV8xB6_');
-          });
       }
     }  
 
@@ -113,6 +111,7 @@ const InputReminder=()=>{
     // an Authorization Header with the request
     const headers = { Authorization: `Bearer ${user._accessToken}` };
   
+    // TODO: Add more error checking
     const onSubmit = async (event) => { // the function that will run when submit reminders is pressed
       event.preventDefault();
       console.log(selectedperiod.length);
@@ -140,10 +139,9 @@ const InputReminder=()=>{
     };
     
     return(
-        <div>
+        <div className="app-container">
             <Header/>
-            <Footer/>
-            <form className="input-container">
+            <div className="input-container">
                 <h1>Input Reminder Information</h1>
                 <input
                     className="inputBox"
@@ -179,10 +177,10 @@ const InputReminder=()=>{
                     value={form.number}
                     onChange={e => setTxtNum(e.target.value)}
                     fullWidth
-                    style={{display: "none"}}
+                    style={{display: "none", marginBottom:"20px"}}
                 />
                 <select className="inputSelect" id="hiddendrop" style={{display: "none"}} onChange={e => {setProvider(e.target.value);}}>
-                    <option>  </option>
+                    <option value="" disable selected hidden>Select a provider </option>
                     <option value="@vtext.com"> Verizon</option>
                     <option value="@txt.att.net"> AT&T</option>
                     <option value="@tmomail.net"> T-Mobile</option>
@@ -197,7 +195,8 @@ const InputReminder=()=>{
                   Submit Reminder
                 </Button>
                 <Button variant="contained" color="primary" onClick={DeleteReminder}>Delete Reminders</Button>
-            </form>
+            </div>
+            <Footer/>
         </div>
     )
 } // the form that is displayed when input reminders page is called

@@ -82,9 +82,8 @@ const InputGoal=()=>{
     };
 
     return(
-        <div>
+        <div className="app-container">
             <Header/>
-            <Footer/>
             <div className="input-container">
                 <h1>Input Goal Information</h1>
                 <input
@@ -109,6 +108,7 @@ const InputGoal=()=>{
                 <Button variant="contained" onClick={onSubmit} style={{marginRight:"125px"}}>Submit Goal</Button>
                 <Button variant="contained" onClick={ChangeGoal} >Change Goal</Button>
             </div>
+            <Footer/>
         </div>
     )
 }

@@ -58,6 +58,7 @@ const Analytics=()=>{
                 chart1
                     .render(document.getElementById('chart1'))
                     .catch(() => window.alert('Reload the page (Ctrl+R)'));
+                //chart1.bringToBack();
             }else{
                 chart2
                     .render(document.getElementById('chart2'))
@@ -78,9 +79,8 @@ const Analytics=()=>{
     });
 
     return(
-        <div>
+        <div className="app-container">
             <Header/>
-            <Footer/>
             <h1><form style={{ maxWidth: "350px", margin: "auto" }}>Your Analytics</form></h1>
             <div className="row">
                 <div style={{ flex: "10%"}} >
@@ -100,7 +100,7 @@ const Analytics=()=>{
                     <div id={chartType} className="chart"></div>
                 </div>
             </div>
-            
+            <Footer/>
         </div>
     )
 }

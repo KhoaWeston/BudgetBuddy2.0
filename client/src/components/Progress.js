@@ -127,9 +127,8 @@ const Progress=()=>{
     });
     
     return(
-        <div>
+        <div className="app-container">
             <Header/>
-            <Footer/>
             <form style={{ maxWidth: "400px", margin: "auto" }}><h2>User Income per month: ${currentIncome}</h2></form>
             <div className="row">
                 <div className="column">
@@ -161,6 +160,7 @@ const Progress=()=>{
                 <Button variant="contained" href="/input-goal">Change Goal</Button>
                 </form>
             </div>
+            <Footer/>
         </div>
     )
 }

@@ -62,10 +62,8 @@ const InputDebt = () => {
     };
   
     return(
-        <div>
+        <div className="app-container">
           <Header/>
-          <Footer/>
-          
           <div className="input-container">
             <h1>Input Debt Information </h1>
             <input
@@ -96,6 +94,7 @@ const InputDebt = () => {
               Submit Debt
             </Button>
           </div>
+          <Footer/>
         </div>
       );
     }

@@ -64,10 +64,8 @@ const InputIncome = () => {
     };
   
     return(
-        <div>
+        <div className="app-container">
           <Header/>
-          <Footer/>
-          
           <div className="input-container">
             <h1>Input Income Information </h1>
             <input
@@ -95,6 +93,7 @@ const InputIncome = () => {
               Submit Income
             </Button>
           </div>
+          <Footer/>
         </div>
       );
 }

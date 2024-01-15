@@ -51,9 +51,8 @@ const Profile=()=>{
     });
 
     return(
-        <div>
+        <div className="app-container">
             <Header/>
-            <Footer/>
             <div className="input-container">
                 <h1> Your Profile</h1>
                 <label>Email: {userEmail} </label>
@@ -67,6 +66,7 @@ const Profile=()=>{
                 </div>
                 <Button variant="contained" onClick={logOut}>Logout</Button>
             </div>
+            <Footer/>
         </div>
     )
 }
