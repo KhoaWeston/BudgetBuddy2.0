@@ -115,8 +115,17 @@ const InputReminder=()=>{
     const onSubmit = async (event) => { // the function that will run when submit reminders is pressed
       event.preventDefault();
       console.log(selectedperiod.length);
-      if (form.description.length === 0 || selectedperiod.length === 0) { // error checking that the form values are filled in
-        alert("You must enter all fields to submit a reminder");
+      if(remindertype === "Text" || remindertype === "Both"){ // checking the reminder type for correct error checking
+        if(isNaN(txtnum) || txtnum.length != 10){ // making sure they input an actual 10 digit number with no letters or characters
+          alert("Please input the phone number in the format provided");
+        }
+        if (txtnum.length=== 0 || provider.length===0){// error checking on the number and provider
+          alert("You must enter all fields to submit a reminder");
+          return;
+        }
+      }
+      else if (form.description.length === 0  || selectedperiod.length === 0 || remindertype.length === 0) { // error checking that the form values are filled in
+          alert("You must enter all fields to submit a reminder");
         return;
       }
       try {
