@@ -15,17 +15,17 @@ const Header=()=>{
                     <li><Link to="/">Home</Link></li>
                     <li className="dropdown-in">
                         <DropdownButton id="input-dropdown" title="Input">
-                            <Dropdown.Item href="/input-expenses">Expenses</Dropdown.Item>
+                            <Dropdown.Item> <Link to="/input-expenses">Expenses</Link> </Dropdown.Item>
                             <Dropdown.Divider />
-                            <Dropdown.Item href="/input-savings">Savings</Dropdown.Item>
+                            <Dropdown.Item><Link to="/input-savings">Savings</Link> </Dropdown.Item>
                             <Dropdown.Divider />
-                            <Dropdown.Item href="/input-income">Income</Dropdown.Item>
+                            <Dropdown.Item> <Link to="/input-income">Income</Link> </Dropdown.Item>
                             <Dropdown.Divider />
-                            <Dropdown.Item href="/input-debt">Debts</Dropdown.Item>
+                            <Dropdown.Item><Link to="/input-debt">Debts</Link> </Dropdown.Item>
                             <Dropdown.Divider />
-                            <Dropdown.Item href="/input-reminder">Reminders</Dropdown.Item>
+                            <Dropdown.Item> <Link to="/input-reminder">Reminders</Link> </Dropdown.Item>
                             <Dropdown.Divider />
-                            <Dropdown.Item href="/input-goal">Goals</Dropdown.Item>
+                            <Dropdown.Item> <Link to="/input-goal">Goals</Link> </Dropdown.Item>
                         </DropdownButton>
                     </li>
                     <li><Link to="/progress">Progress</Link></li>
