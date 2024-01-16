@@ -4,7 +4,7 @@ import React from 'react';
 const Footer=()=>{
     return(
         <div className="nav-footer">
-            <h2>2024 BudgetBuddy</h2>
+            <div style={{margin:"20px"}}>2024 BudgetBuddy</div>
         </div>
     )
 }

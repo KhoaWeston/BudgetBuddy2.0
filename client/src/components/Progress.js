@@ -129,7 +129,7 @@ const Progress=()=>{
     return(
         <div className="app-container">
             <Header/>
-            <h1><form style={{ maxWidth: "500px", margin: "auto", textAlign:"center"}}>User Progress</form></h1>
+            <form style={{ maxWidth: "500px", marginLeft: "auto", marginRight:"auto", textAlign:"center"}}><h1 style={{marginBottom:"0px"}}>User Progress</h1></form>
             <div className="comp-container" style={{margin:"20px"}}>
                 <h2 style={{marginLeft:"20px", marginTop:"0px", marginBottom:"5px"}}>User Income per Month: ${currentIncome}</h2>
                 <div className="row">
@@ -137,7 +137,7 @@ const Progress=()=>{
                         <h3>Recommended Spending According to the 50/30/20 Monthly Budget:</h3>
                     </div>
                     <div className="column">
-                        <h3>Actual Monthly Spending:</h3>
+                        <h3>This Month's Spending:</h3>
                     </div>
                 </div>
                 <div className="row">

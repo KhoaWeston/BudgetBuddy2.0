@@ -43,6 +43,10 @@ const Analytics=()=>{
         const toDateSelect = document.getElementById("date-to");
         const fromDate = new Date(fromDateSelect.value);
         const toDate = new Date(toDateSelect.value);
+        if(fromDate==="Invalid Date" || toDate==="Invalid Date"){
+            alert("Please fill both date fields.");
+            return;
+        }
         if(chartType === "chart1"){
             chart1.setFilter({author: {'$oid': user.id}, createdAt: { $gte: fromDate,  $lt: toDate }});
         }else{
@@ -58,7 +62,6 @@ const Analytics=()=>{
                 chart1
                     .render(document.getElementById('chart1'))
                     .catch(() => window.alert('Reload the page (Ctrl+R)'));
-                //chart1.bringToBack();
             }else{
                 chart2
                     .render(document.getElementById('chart2'))
