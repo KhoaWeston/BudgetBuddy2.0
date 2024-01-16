@@ -19,49 +19,49 @@ const InputReminder=()=>{
     const app = new App(APP_ID); // Creating a Realm App Instance
 
     const startReminders = async() =>{ // sets up the the reminders to be executed
-    const schedule = require('node-schedule');
-    let scheduledperiod ="";
-    if (selectedperiod ==="Once a day"){ // setting the string to the time period we want the reminders to run on
-      scheduledperiod ='0 0 * * *';
-    } else if(selectedperiod ==="Every Other day"){
-      scheduledperiod ='0 0 */2 * *';
-    } else if(selectedperiod ==="Once a Month"){
-      scheduledperiod ='0 0 1 * *';
-    } else {
-      scheduledperiod ='0 0 1 1 *'; // once a year
-    }
+      const schedule = require('node-schedule');
+      let scheduledperiod ="";
+      if (selectedperiod ==="Once a day"){ // setting the string to the time period we want the reminders to run on
+        scheduledperiod ='0 0 * * *';
+      } else if(selectedperiod ==="Every Other day"){
+        scheduledperiod ='0 0 */2 * *';
+      } else if(selectedperiod ==="Once a Month"){
+        scheduledperiod ='0 0 1 * *';
+      } else {
+        scheduledperiod ='0 0 1 1 *'; // once a year
+      }
 
-    if (remindertype==="Email"){ // will send a reminder in the version they want
-      schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an email at the scheduled period
-        emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the email to a user
-               message: form.description,
-               to_name: app.currentUser.profile.email
-               }, 'e9ffixOE5GbV8xB6_');
-       });
-    }else if ( remindertype==="Text"){
-      var email = txtnum+provider;
-      schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an text at the scheduled period
-        emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the text to a user
-              message: form.description,
-              to_name: email,
-              }, 'e9ffixOE5GbV8xB6_');
+      if (remindertype==="Email"){ // will send a reminder in the version they want
+        schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an email at the scheduled period
+          emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the email to a user
+            message: form.description,
+            to_name: app.currentUser.profile.email
+          }, 'e9ffixOE5GbV8xB6_');
         });
-    }
-    else{
-      var email = txtnum+provider;
-      // same code as the above options.. just in one place
-      schedule.scheduleJob(scheduledperiod,function(){  
-        emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
-               message: form.description,
-               to_name: app.currentUser.profile.email
-               }, 'e9ffixOE5GbV8xB6_');
-       });
-      
-      schedule.scheduleJob(scheduledperiod,function(){  
-        emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
+      }else if ( remindertype==="Text"){
+        var email = txtnum+provider;
+        schedule.scheduleJob(scheduledperiod,function(){  // a function that will send an text at the scheduled period
+          emailjs.send("BudgetBuddy","template_ep4sf2p",{ // a template I made in email js that will give the text to a user
               message: form.description,
               to_name: email,
-              }, 'e9ffixOE5GbV8xB6_');
+            }, 'e9ffixOE5GbV8xB6_');
+        });
+      }
+      else{
+        var email = txtnum+provider;
+        // same code as the above options.. just in one place
+        schedule.scheduleJob(scheduledperiod,function(){  
+          emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
+            message: form.description,
+            to_name: app.currentUser.profile.email
+          }, 'e9ffixOE5GbV8xB6_');
+        });
+      
+        schedule.scheduleJob(scheduledperiod,function(){  
+          emailjs.send("BudgetBuddy","template_ep4sf2p",{ 
+            message: form.description,
+            to_name: email,
+          }, 'e9ffixOE5GbV8xB6_');
         });
       }
     }  
@@ -111,21 +111,21 @@ const InputReminder=()=>{
     // an Authorization Header with the request
     const headers = { Authorization: `Bearer ${user._accessToken}` };
   
-    // TODO: Add more error checking
     const onSubmit = async (event) => { // the function that will run when submit reminders is pressed
       event.preventDefault();
       console.log(selectedperiod.length);
       if(remindertype === "Text" || remindertype === "Both"){ // checking the reminder type for correct error checking
-        if(isNaN(txtnum) || txtnum.length != 10){ // making sure they input an actual 10 digit number with no letters or characters
+        if(isNaN(txtnum) || txtnum.length !== 10){ // making sure they input an actual 10 digit number with no letters or characters
           alert("Please input the phone number in the format provided");
+          return;
         }
-        if (txtnum.length=== 0 || provider.length===0){// error checking on the number and provider
+        if (txtnum.length === 0 || provider.length ===0){// error checking on the number and provider
           alert("You must enter all fields to submit a reminder");
           return;
         }
       }
-      else if (form.description.length === 0  || selectedperiod.length === 0 || remindertype.length === 0) { // error checking that the form values are filled in
-          alert("You must enter all fields to submit a reminder");
+      if (form.description.length === 0  || selectedperiod.length === 0 || remindertype.length === 0) { // error checking that the form values are filled in
+        alert("You must enter all fields to submit a reminder");
         return;
       }
       try {

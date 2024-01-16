@@ -16,7 +16,7 @@ export default function Home() {
       <div className="row">
         <div className="column" style={{ textAlign:"center"}}>
           <div className="comp-container" style={{ maxWidth: "500px", margin: "auto", padding: "10px"}}>
-            <img style={{height:"150px"}} src={khoaImage} alt="[insert img]" />
+            <img style={{height:"150px", borderRadius:"5px"}} src={khoaImage} alt="[insert img]" />
             <div>Khoa Weston</div>
             <div>Major(s): Electrical and Computer Engineering</div>
             <div>Enjoys playing pickleball and weightlifting</div>
@@ -24,7 +24,7 @@ export default function Home() {
         </div>
         <div className="column" style={{ textAlign:"center"}}>
           <div className="comp-container"  style={{ maxWidth: "500px", margin: "auto", padding: "10px"}}>
-            <img style={{height:"150px"}} src={chekaImage} alt="[insert img]" />
+            <img style={{height:"150px", borderRadius:"5px"}} src={chekaImage} alt="[insert img]" />
             <div>Cheka Queary</div>
             <div>Major(s): Software Engineering</div>
             <div>Spends her time playing volleyball for Trine University</div>
