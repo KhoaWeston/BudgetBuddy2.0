@@ -16,8 +16,9 @@ Authenticate Chart -    https://www.mongodb.com/docs/charts/embed-chart-stitch-a
 Filtering Dates -       https://www.youtube.com/watch?v=VXA7cLxKZpQ
 Responsive Height -     https://blog.logrocket.com/developing-responsive-layouts-with-react-hooks/ 
 Date Mongth Ago -       https://www.thiscodeworks.com/get-one-month-ago-date-javascript-date/623a3611b878bc0015d43cdb
+Popup window -          https://www.youtube.com/watch?v=SuqU904ZHA4
 
 
 Cheka to INSTALL: 
 -----------------------------
-nothing
+npm i framer-motion

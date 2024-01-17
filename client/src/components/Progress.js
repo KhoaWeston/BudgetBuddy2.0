@@ -5,6 +5,9 @@ import "./Progress.css";
 import { Button } from '@mui/material'
 import { App } from "realm-web";
 import { APP_ID } from "../contexts/realm/constants.js";
+import { motion, AnimatePresence } from 'framer-motion';
+import Modal from './Modal/index';
+
 
 const Progress=()=>{
     const app = new App(APP_ID); // Creating a Realm App Instance
@@ -15,11 +18,16 @@ const Progress=()=>{
     const [actualSaving, setActualSaving] = useState(0);
     const [currentIncome, setIncome] = useState(0);
     const [goalAmount, setGoalAmount] = useState(0);
+    const [modalOpen, setModalOpen] = useState(false);
     const today = new Date();
     const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
     let ctr_goal = 0;
     let ctr_income = 0;
     
+    const close = () => setModalOpen(false);
+    const open = () => setModalOpen(true);
+
+
     // Sums all the user's expenses in the database
     const calculateWant = async() =>{
         const expenses = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Expenses');
@@ -162,6 +170,15 @@ const Progress=()=>{
                 </div>
                 <div className="progress-label">{progress_num.toFixed(0)}% towards your goal!</div>
                 <Button variant="contained" href="/input-goal">Change Goal</Button>
+                <Button
+    
+                    onClick={() => (modalOpen ? close() : open())}
+                >
+                    Popup
+                </Button>
+                
+                {modalOpen && <Modal modalOpen={modalOpen} handleClose={close} />}
+
                 </form>
             </div>
             <Footer/>
