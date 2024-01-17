@@ -25,6 +25,15 @@ const dropIn = {
     },
 }
 
+const ModalText = ({ text }) => (
+    <div className="modal-text">
+      <h3>{text}</h3>
+      <h1 style={{ marginBottom: "0"}}>
+        Congratulations!
+      </h1>
+    </div>
+  );
+
 const Modal = ({ handleClose, text }) => {
     return (
         <Backdrop onClick={handleClose}>
@@ -36,8 +45,9 @@ const Modal = ({ handleClose, text }) => {
                 animate="visible"
                 exit="exit"
             >
-                <p>{text}</p>
-                <Button variant="contained" onClick={handleClose}>Close</Button>
+                <ModalText text={text} />
+                <h2>You have completed your goal!</h2>
+                <label>Click anywhere outside the box to exit</label>
             </motion.div>
         </Backdrop>
     );

@@ -25,7 +25,7 @@ const Analytics=()=>{
     const chart1 = sdk.createChart({
         chartId: '655fc617-5768-4074-84c3-e714d5e34c62',
         width: "90%",
-        height: chartHeight/2,
+        height: chartHeight/1.8,
         filter: {"author":{'$oid': user.id}} // filters the chart by user
     });
 
@@ -94,7 +94,7 @@ const Analytics=()=>{
                             <option value="chart1"> Bar</option>
                         </select>
                     </div>
-                    <div className="comp-container">
+                    <div className="comp-container" style={{ marginBottom:"50px "}}>
                         <div>Show data </div>
                         <div style={{ textAlign: "right" }} >
                             <label>from: <input className="inputDate" type="date" id="date-from" /></label>

@@ -17,8 +17,9 @@ Filtering Dates -       https://www.youtube.com/watch?v=VXA7cLxKZpQ
 Responsive Height -     https://blog.logrocket.com/developing-responsive-layouts-with-react-hooks/ 
 Date Mongth Ago -       https://www.thiscodeworks.com/get-one-month-ago-date-javascript-date/623a3611b878bc0015d43cdb
 Popup window -          https://www.youtube.com/watch?v=SuqU904ZHA4
-
+Confetti -              https://www.youtube.com/watch?v=8VGIsLF5LCw
 
 Cheka to INSTALL: 
 -----------------------------
 npm i framer-motion
+npm install react-confetti

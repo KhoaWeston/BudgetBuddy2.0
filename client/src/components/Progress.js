@@ -5,7 +5,6 @@ import "./Progress.css";
 import { Button } from '@mui/material'
 import { App } from "realm-web";
 import { APP_ID } from "../contexts/realm/constants.js";
-import { motion, AnimatePresence } from 'framer-motion';
 import Modal from './Modal/index';
 
 
@@ -19,6 +18,7 @@ const Progress=()=>{
     const [currentIncome, setIncome] = useState(0);
     const [goalAmount, setGoalAmount] = useState(0);
     const [modalOpen, setModalOpen] = useState(false);
+    const [ctr_congrat, setCounter] = useState(0);
     const today = new Date();
     const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
     let ctr_goal = 0;
@@ -26,7 +26,6 @@ const Progress=()=>{
     
     const close = () => setModalOpen(false);
     const open = () => setModalOpen(true);
-
 
     // Sums all the user's expenses in the database
     const calculateWant = async() =>{
@@ -116,6 +115,10 @@ const Progress=()=>{
     }
 
     const progress_num = (currentGoalProgress / goalAmount *100);
+    if (progress_num >= 100 && ctr_congrat < 1 ){
+        setCounter(1);
+        modalOpen ? close() : open();
+    };
     // Changes the color of the progress bar depending on percentage
     const getColor=()=>{
         if(progress_num < 40){
@@ -162,7 +165,7 @@ const Progress=()=>{
                     </div>
                 </div>
             </div>
-            <div><form className="comp-container" style={{ margin: "20px", padding: "10px", textAlign:"center"}}>
+            <div><form className="comp-container" style={{ margin: "20px", padding: "10px", textAlign:"center", marginBottom: "50px" }}>
                 <h2 style={{marginLeft:"20px", marginTop:"0px", marginBottom:"5px"}}>Goal Progress Bar:</h2>
                 <div className="progress-label">Your goal is to have ${goalAmount} in your {goalCat}. You currently have ${currentGoalProgress}.</div>
                 <div className="progress-bar">
@@ -170,15 +173,7 @@ const Progress=()=>{
                 </div>
                 <div className="progress-label">{progress_num.toFixed(0)}% towards your goal!</div>
                 <Button variant="contained" href="/input-goal">Change Goal</Button>
-                <Button
-    
-                    onClick={() => (modalOpen ? close() : open())}
-                >
-                    Popup
-                </Button>
-                
                 {modalOpen && <Modal modalOpen={modalOpen} handleClose={close} />}
-
                 </form>
             </div>
             <Footer/>
