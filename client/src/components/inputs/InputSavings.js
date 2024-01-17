@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import './Input.css';
 import { UserContext } from "../../contexts/user.context";
 import { gql, request } from "graphql-request";
 import { GRAPHQL_ENDPOINT } from "../../contexts/realm/constants";

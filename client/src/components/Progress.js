@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from './Header.js';
 import Footer from './Footer.js';
+import "./Progress.css";
 import { Button } from '@mui/material'
 import { App } from "realm-web";
 import { APP_ID } from "../contexts/realm/constants.js";

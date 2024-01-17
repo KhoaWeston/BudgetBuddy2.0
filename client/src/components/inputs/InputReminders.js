@@ -1,6 +1,7 @@
 import React from "react";
 import Header from '../Header.js';
 import Footer from '../Footer.js';
+import './Input.css';
 import { useContext, useState} from "react";
 import { UserContext } from "../../contexts/user.context";
 import { gql, request } from "graphql-request";
