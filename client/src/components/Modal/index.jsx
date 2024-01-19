@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import Backdrop from "../Backdrop";
 import './Modal.css';
-import { Button } from '@mui/material'
 
 
 const dropIn = {
@@ -25,16 +24,15 @@ const dropIn = {
     },
 }
 
-const ModalText = ({ text }) => (
-    <div className="modal-text">
-      <h3>{text}</h3>
+const ModalText = () => (
+    <div>
       <h1 style={{ marginBottom: "0"}}>
         Congratulations!
       </h1>
     </div>
   );
 
-const Modal = ({ handleClose, text }) => {
+const Modal = ({ handleClose }) => {
     return (
         <Backdrop onClick={handleClose}>
             <motion.div
@@ -45,9 +43,9 @@ const Modal = ({ handleClose, text }) => {
                 animate="visible"
                 exit="exit"
             >
-                <ModalText text={text} />
+                <ModalText/>
                 <h2>You have completed your goal!</h2>
-                <label>Click anywhere outside the box to exit</label>
+                <label>Click anywhere outside the box to exit.</label>
             </motion.div>
         </Backdrop>
     );

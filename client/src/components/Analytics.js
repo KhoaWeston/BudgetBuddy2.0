@@ -43,7 +43,8 @@ const Analytics=()=>{
         const toDateSelect = document.getElementById("date-to");
         const fromDate = new Date(fromDateSelect.value);
         const toDate = new Date(toDateSelect.value);
-        if(fromDate==="Invalid Date" || toDate==="Invalid Date"){
+        console.log(toDate);
+        if(fromDate=="Invalid Date" || toDate=="Invalid Date"){
             alert("Please fill both date fields.");
             return;
         }

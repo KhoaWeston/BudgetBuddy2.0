@@ -9,6 +9,8 @@ import Footer from '../Footer.js';
 import { Button } from '@mui/material'
 import { App } from "realm-web";
 import { APP_ID } from "../../contexts/realm/constants.js";
+import { Popup } from 'semantic-ui-react';
+import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 
 
 const InputGoal=()=>{
@@ -86,6 +88,7 @@ const InputGoal=()=>{
         <div className="app-container">
             <Header/>
             <div className="input-container">
+                <div style={{ textAlign:"right" }}><Popup content=<HelpText/> trigger={<HelpCenterIcon color="disabled" />} /></div>
                 <h1>Input Goal Information</h1>
                 <input
                     className="inputBox"
@@ -113,5 +116,12 @@ const InputGoal=()=>{
         </div>
     )
 }
+
+const HelpText = () => (
+  <div>
+      Fill each field to log your expenses... 
+  </div>
+);
+
 // the form that is displayed when input goal page is called
 export default InputGoal

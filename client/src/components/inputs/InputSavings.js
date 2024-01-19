@@ -6,6 +6,8 @@ import { GRAPHQL_ENDPOINT } from "../../contexts/realm/constants";
 import { Button } from '@mui/material';
 import Header from '../Header.js';
 import Footer from '../Footer.js';
+import { Popup } from 'semantic-ui-react';
+import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 
 const InputSavings = () => {
   const { user } = useContext(UserContext);
@@ -67,6 +69,7 @@ const InputSavings = () => {
     <div className="app-container">
       <Header/>
       <div className="input-container">
+        <div style={{ textAlign:"right" }}><Popup content=<HelpText/> trigger={<HelpCenterIcon color="disabled" />} /></div>
         <h1>Input Savings Information </h1>
         <input
           className="inputBox"
@@ -95,7 +98,14 @@ const InputSavings = () => {
     </div>
   );
 }
-  // the form that is displayed when the input savings screen is clicked on
-  export default InputSavings;
+
+const HelpText = () => (
+  <div>
+      Fill each field to log your expenses... 
+  </div>
+);
+
+// the form that is displayed when the input savings screen is clicked on
+export default InputSavings;
     
     

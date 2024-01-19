@@ -6,6 +6,8 @@ import { GRAPHQL_ENDPOINT } from "../../contexts/realm/constants";
 import { Button } from '@mui/material';
 import Header from '../Header.js';
 import Footer from '../Footer.js';
+import { Popup } from 'semantic-ui-react';
+import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 
 const InputDebt = () => {
     const { user } = useContext(UserContext);
@@ -66,6 +68,7 @@ const InputDebt = () => {
         <div className="app-container">
           <Header/>
           <div className="input-container">
+            <div style={{ textAlign:"right" }}><Popup content=<HelpText/> trigger={<HelpCenterIcon color="disabled" />} /></div>
             <h1>Input Debt Information </h1>
             <input
               className="inputBox"
@@ -99,7 +102,14 @@ const InputDebt = () => {
         </div>
       );
     }
-  // the form that is displayed when input debt page is called
-    export default InputDebt;
+
+const HelpText = () => (
+  <div>
+      Fill each field to log your expenses... 
+  </div>
+);
+    
+// the form that is displayed when input debt page is called
+export default InputDebt;
     
     

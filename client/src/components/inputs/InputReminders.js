@@ -10,6 +10,8 @@ import { Button } from '@mui/material';
 import emailjs from '@emailjs/browser';
 import { App } from "realm-web";
 import { APP_ID } from "../../contexts/realm/constants.js";
+import { Popup } from 'semantic-ui-react';
+import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 
 const InputReminder=()=>{
     const { user } = useContext(UserContext);
@@ -152,6 +154,7 @@ const InputReminder=()=>{
         <div className="app-container">
             <Header/>
             <div className="input-container">
+                <div style={{ textAlign:"right" }}><Popup content=<HelpText/> trigger={<HelpCenterIcon color="disabled" />} /></div>
                 <h1>Input Reminder Information</h1>
                 <input
                     className="inputBox"
@@ -209,5 +212,13 @@ const InputReminder=()=>{
             <Footer/>
         </div>
     )
-} // the form that is displayed when input reminders page is called
+} 
+
+const HelpText = () => (
+  <div>
+      Fill each field to log your expenses... 
+  </div>
+);
+
+// the form that is displayed when input reminders page is called
 export default InputReminder

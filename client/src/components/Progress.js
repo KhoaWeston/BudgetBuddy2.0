@@ -6,7 +6,9 @@ import { Button } from '@mui/material'
 import { App } from "realm-web";
 import { APP_ID } from "../contexts/realm/constants.js";
 import Modal from './Modal/index';
-
+import { AnimatePresence } from 'framer-motion';
+import { Popup } from 'semantic-ui-react';
+import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 
 const Progress=()=>{
     const app = new App(APP_ID); // Creating a Realm App Instance
@@ -37,7 +39,7 @@ const Progress=()=>{
                 total = total + expense[i].amount;
             }
         }
-        setActualWant(total.toFixed(2));
+        setActualWant(total);
     }
 
     // Sums all the user's debts in the database
@@ -50,7 +52,7 @@ const Progress=()=>{
                 total = total + debt[i].amount;
             }
         }
-        setActualNeed(total.toFixed(2));
+        setActualNeed(total);
     }
 
     // Sums the user's savings from all categories
@@ -69,25 +71,26 @@ const Progress=()=>{
                 total = total + saving[i].amount;
             }
         }
-        setActualSaving(total.toFixed(2));
-        setCurrentGoalProgress(specificTotal.toFixed(2));
+        setActualSaving(total);
+        setCurrentGoalProgress(specificTotal);
     }
 
     // Calculates the user's income in amount per month
     const getIncome = async()=>{
         const income = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Income');
         try{
-            const payment = await income.findOne();
+            const payments = await income.find();
+            let payment = payments[payments.length - 1];
             if (payment.period === "Weekly"){
-                setIncome((payment.amount*4.3).toFixed(2));
+                setIncome((payment.amount*4.3));
             } else if (payment.period === "Every Other Week"){
-                setIncome((payment.amount*2.17).toFixed(2));
+                setIncome((payment.amount*2.17));
             } else if (payment.period === "Twice a Month"){
-                setIncome((payment.amount/2).toFixed(2));
+                setIncome((payment.amount/2));
             } else if (payment.period === "Once a Month"){
-                setIncome((payment.amount).toFixed(2));
+                setIncome((payment.amount));
             } else if (payment.period === "Once a Year"){
-                setIncome((payment.amount/12).toFixed(2));
+                setIncome((payment.amount/12));
             } else {
                 setIncome(0);
             } 
@@ -104,7 +107,7 @@ const Progress=()=>{
         const goals = app.currentUser.mongoClient('mongodb-atlas').db('BudgetBuddyDB').collection('Goals');
         try{
             const goal = await goals.findOne();
-            setGoalAmount((goal.amount).toFixed(2));
+            setGoalAmount((goal.amount));
             setGoalCat(goal.category);
         }catch(error){
             if(ctr_goal < 1){
@@ -130,6 +133,12 @@ const Progress=()=>{
         }
     }
 
+    const options = {
+        style: 'decimal',  // Other options: 'currency', 'percent', etc.
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      };
+
     useEffect(() => {
         getGoalAmount();
         getIncome(); 
@@ -143,7 +152,8 @@ const Progress=()=>{
             <Header/>
             <form style={{ maxWidth: "500px", marginLeft: "auto", marginRight:"auto", textAlign:"center"}}><h1 style={{marginBottom:"0px"}}>User Progress</h1></form>
             <div className="comp-container" style={{margin:"20px"}}>
-                <h2 style={{marginLeft:"20px", marginTop:"0px", marginBottom:"5px"}}>User Income per Month: ${currentIncome}</h2>
+                <div style={{ textAlign:"right" }}><Popup content=<HelpText1/> trigger={<HelpCenterIcon color="disabled" />} /></div>
+                <h2 style={{marginLeft:"20px", marginTop:"0px", marginBottom:"5px"}}>User Income per Month: ${currentIncome.toLocaleString('en-US', options)}</h2>
                 <div className="row">
                     <div className="column">
                         <h3>Recommended Spending According to the 50/30/20 Monthly Budget:</h3>
@@ -154,30 +164,50 @@ const Progress=()=>{
                 </div>
                 <div className="row">
                     <div className="column">
-                        <div>Needs: ${(currentIncome*0.5).toFixed(2)}</div>
-                        <div>Wants: ${(currentIncome*0.3).toFixed(2)}</div>
-                        <div>Savings: ${(currentIncome*0.2).toFixed(2)}</div>
+                        <div>Needs: ${(currentIncome*0.5).toLocaleString('en-US', options)}</div>
+                        <div>Wants: ${(currentIncome*0.3).toLocaleString('en-US', options)}</div>
+                        <div>Savings: ${(currentIncome*0.2).toLocaleString('en-US', options)}</div>
                     </div>
                     <div className="column">
-                        <div>Wants: ${actualWant}</div>
-                        <div>Needs: ${actualNeed}</div>
-                        <div>Savings: ${actualSaving}</div>
+                        <div>Wants: ${actualWant.toLocaleString('en-US', options)}</div>
+                        <div>Needs: ${actualNeed.toLocaleString('en-US', options)}</div>
+                        <div>Savings: ${actualSaving.toLocaleString('en-US', options)}</div>
                     </div>
                 </div>
             </div>
             <div><form className="comp-container" style={{ margin: "20px", padding: "10px", textAlign:"center", marginBottom: "50px" }}>
+                <div style={{ textAlign:"right" }}><Popup content=<HelpText2/> trigger={<HelpCenterIcon color="disabled" />} /></div>
                 <h2 style={{marginLeft:"20px", marginTop:"0px", marginBottom:"5px"}}>Goal Progress Bar:</h2>
-                <div className="progress-label">Your goal is to have ${goalAmount} in your {goalCat}. You currently have ${currentGoalProgress}.</div>
+                <div className="progress-label">Your goal is to have ${goalAmount.toLocaleString('en-US', options)} in your {goalCat}. You currently have ${currentGoalProgress.toLocaleString('en-US', options)}.</div>
                 <div className="progress-bar">
                     <div className="progress-bar-fill" style={{ maxWidth: "100%", width: `${progress_num}%`, backgroundColor: getColor() }}></div>
                 </div>
                 <div className="progress-label">{progress_num.toFixed(0)}% towards your goal!</div>
                 <Button variant="contained" href="/input-goal">Change Goal</Button>
-                {modalOpen && <Modal modalOpen={modalOpen} handleClose={close} />}
+                <AnimatePresence
+                    initial={false}
+                    wait={true}
+                    onExitComplete={() => null}
+                >
+                    {modalOpen && <Modal modalOpen={modalOpen} handleClose={close} />}
+                </AnimatePresence>
                 </form>
             </div>
             <Footer/>
         </div>
     )
 }
+
+const HelpText1 = () => (
+  <div>
+      Fill each field to log your expenses... 
+  </div>
+);
+
+const HelpText2 = () => (
+    <div>
+        Fill each field to log your expenses... 
+    </div>
+  );
+
 export default Progress
