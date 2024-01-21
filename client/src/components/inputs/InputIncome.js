@@ -104,7 +104,7 @@ const InputIncome = () => {
 
 const HelpText = () => (
   <div>
-      Fill each field to log your expenses... 
+      Fill each field to log your income... 
   </div>
 );
 

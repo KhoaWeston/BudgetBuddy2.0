@@ -22,6 +22,4 @@ Hover popup -           https://react.semantic-ui.com/modules/popup/#types-popup
 
 Cheka to INSTALL: 
 -----------------------------
-npm i framer-motion
-npm install react-confetti
-npm install semantic-ui-react
+done 
