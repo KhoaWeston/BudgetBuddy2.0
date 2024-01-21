@@ -10,5 +10,7 @@
     align-items: center;
     background: rgb(0, 229, 0);
     justify-content: center;
+
+    position:fixed;
   }
   

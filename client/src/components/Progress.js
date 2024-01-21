@@ -152,13 +152,19 @@ const Progress=()=>{
             <Header/>
             <form style={{ maxWidth: "500px", marginLeft: "auto", marginRight:"auto", textAlign:"center"}}><h1 style={{marginBottom:"0px"}}>User Progress</h1></form>
             <div className="comp-container" style={{margin:"20px"}}>
-                <div style={{ textAlign:"right" }}><Popup content=<HelpText1/> trigger={<HelpCenterIcon color="disabled" />} /></div>
-                <h2 style={{marginLeft:"20px", marginTop:"0px", marginBottom:"5px"}}>User Income per Month: ${currentIncome.toLocaleString('en-US', options)}</h2>
                 <div className="row">
                     <div className="column">
-                        <h3>Recommended Spending According to the 50/30/20 Monthly Budget:</h3>
+                        <h2 style={{marginTop:"0px", marginBottom:"5px"}}>User Income per Month: ${currentIncome.toLocaleString('en-US', options)}</h2>
                     </div>
                     <div className="column">
+                        <div style={{ textAlign:"right" }}><Popup content=<HelpText1/> trigger={<HelpCenterIcon color="disabled" />} /></div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="column" style={{ borderTop:"1px solid", paddingTop:"5px"}}>
+                        <h3>Recommended Spending According to the 50/30/20 Monthly Budget:</h3>
+                    </div>
+                    <div className="column" style={{ borderTop:"1px solid", borderLeft:"1px solid", paddingLeft: "20px", paddingTop:"5px"}}>
                         <h3>This Month's Spending:</h3>
                     </div>
                 </div>
@@ -168,16 +174,22 @@ const Progress=()=>{
                         <div>Wants: ${(currentIncome*0.3).toLocaleString('en-US', options)}</div>
                         <div>Savings: ${(currentIncome*0.2).toLocaleString('en-US', options)}</div>
                     </div>
-                    <div className="column">
+                    <div className="column" style={{ borderLeft:"1px solid", paddingLeft: "20px"}}>
                         <div>Wants: ${actualWant.toLocaleString('en-US', options)}</div>
                         <div>Needs: ${actualNeed.toLocaleString('en-US', options)}</div>
                         <div>Savings: ${actualSaving.toLocaleString('en-US', options)}</div>
                     </div>
                 </div>
             </div>
-            <div><form className="comp-container" style={{ margin: "20px", padding: "10px", textAlign:"center", marginBottom: "50px" }}>
-                <div style={{ textAlign:"right" }}><Popup content=<HelpText2/> trigger={<HelpCenterIcon color="disabled" />} /></div>
-                <h2 style={{marginLeft:"20px", marginTop:"0px", marginBottom:"5px"}}>Goal Progress Bar:</h2>
+            <div><form className="comp-container" style={{ margin: "20px", padding: "15px", textAlign:"center", marginBottom: "50px" }}>
+                <div className="row">
+                    <div style={{ flex:"95%"}}>
+                        <h2 style={{ marginTop:"0px", marginBottom:"0px" }}>Goal Progress Bar:</h2>
+                    </div>
+                    <div style={{ flex:"5%" }}>
+                        <div style={{ textAlign:"right" }}><Popup content=<HelpText2/> trigger={<HelpCenterIcon color="disabled" />} /></div>
+                    </div>
+                </div>
                 <div className="progress-label">Your goal is to have ${goalAmount.toLocaleString('en-US', options)} in your {goalCat}. You currently have ${currentGoalProgress.toLocaleString('en-US', options)}.</div>
                 <div className="progress-bar">
                     <div className="progress-bar-fill" style={{ maxWidth: "100%", width: `${progress_num}%`, backgroundColor: getColor() }}></div>
