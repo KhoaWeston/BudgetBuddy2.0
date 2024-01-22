@@ -119,7 +119,7 @@ const InputGoal=()=>{
 
 const HelpText = () => (
   <div>
-      Fill each field to log your goal... 
+      Fill each field to log your goal. 
   </div>
 );
 

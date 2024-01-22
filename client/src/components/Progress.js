@@ -212,13 +212,15 @@ const Progress=()=>{
 
 const HelpText1 = () => (
   <div>
-      Fill each field to log your expenses... 
+      This field calculates your monthly after-tax income and splits it three ways according to the 50/30/20 approach. 
+      This simple method suggests you put 50% towards things you need, 30% towards things you want, and 20% towards your savings. 
+      On the right is your actual spending in those three categories in the past month. 
   </div>
 );
 
 const HelpText2 = () => (
     <div>
-        Fill each field to log your expenses... 
+        This field shows you your progress towards reaching the goal you inputted. Make sure to set reminders to help you reach it!
     </div>
   );
 

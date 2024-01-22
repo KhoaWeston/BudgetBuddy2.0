@@ -101,7 +101,9 @@ const InputSavings = () => {
 
 const HelpText = () => (
   <div>
-      Fill each field to log your savings... 
+      Fill each field to log your savings. This includes money 
+      you save for future goals, such as an emergenency fund, vacation, or 
+      retirement. 
   </div>
 );
 

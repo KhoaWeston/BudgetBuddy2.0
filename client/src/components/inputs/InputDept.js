@@ -105,7 +105,7 @@ const InputDebt = () => {
 
 const HelpText = () => (
   <div>
-      Fill each field to log your debts... 
+      Fill each field to log your debts. This may include housing, utilities, or student loan payements.
   </div>
 );
     

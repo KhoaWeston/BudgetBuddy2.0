@@ -123,7 +123,9 @@ const InputExpense = () => {
 
 const HelpText = () => (
   <div>
-      Fill each field to log your expenses... 
+      Fill each field to log your expenses. This includes 
+      things you can but back on or do without. Examples of this 
+      inlcude entertainment, clothing, or dining out. 
   </div>
 );
 

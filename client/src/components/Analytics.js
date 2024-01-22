@@ -58,6 +58,7 @@ const Analytics=()=>{
 
     // Renders the chart when user is on specific page
     const renderChart =()=>{
+        console.log(window.location.pathname);
         if (window.location.pathname === "/analytics") {
             if(chartType === "chart1"){
                 chart1

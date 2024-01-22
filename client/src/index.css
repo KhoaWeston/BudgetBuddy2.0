@@ -8,6 +8,7 @@ button {
   font-size: 16px;
   height: 40px;
   text-align: center;
+  font-family: 'Nunito', sans-serif;
 }
 
 /* For dropdown */
@@ -130,4 +131,5 @@ h3{
   border-radius: var(--border-radius);
   padding: 10px 20px;
   box-shadow: 0px 2px 8px -3px rgb(104, 104, 104);
+  max-width: 300px;
 }

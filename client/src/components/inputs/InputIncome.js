@@ -104,7 +104,8 @@ const InputIncome = () => {
 
 const HelpText = () => (
   <div>
-      Fill each field to log your income... 
+      Fill each field to log your after-tax income. This is the amount in 
+      your paycheck after taxes and other deductions are taken out.
   </div>
 );
 

@@ -14,6 +14,7 @@
 }
 
 .inputType {
+    font-family: 'Nunito', sans-serif;
     width: 150px;
     height: 30px;
     margin-bottom: 20px;
@@ -24,6 +25,8 @@
     border: 1px solid skyblue;
     width: 400px;
     margin-top: 0px;
+    font-family: 'Nunito', sans-serif;
+
 }
 
 .inputSelect {
@@ -31,9 +34,12 @@
     width: 416px;
     height: 30px;
     margin-bottom: 20px; 
+    font-family: 'Nunito', sans-serif;
+
 }
 
 .inputDate {
+    font-family: 'Nunito', sans-serif;
     width: 150px;
     height: 30px;
     font-size: 15px;  

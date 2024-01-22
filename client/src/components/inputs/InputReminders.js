@@ -216,7 +216,9 @@ const InputReminder=()=>{
 
 const HelpText = () => (
   <div>
-      Fill each field to log your reminders... 
+      Fill each field to log your reminders. BudgetBuddy can help you 
+      keep to your goals by notifying you periodically to stay on path
+      your goal via email or message. 
   </div>
 );
 
